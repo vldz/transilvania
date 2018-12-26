@@ -22,7 +22,7 @@ public class Creature implements Action {
 
     public Creature(String name, int hp, double strength, double dexterity, int accuracy, int defence, String color) {
         this.name = name;
-        this.defence = 0;
+        this.defence = defence;
 
         this.hp = hp;
         this.maxHp = this.hp;
@@ -36,22 +36,27 @@ public class Creature implements Action {
 
     @Override
     public void attack(Creature creature) {
-        int damage = (int) (this.strength * this.dexterity * generateAccuracy());
-        System.out.printf("%s%s done %s%d%s damage. ", this.color, this.name, damagedHPColor, damage, this.color);
+        int damage = (int) ((this.strength * this.dexterity * generateAccuracy())) * (1 - creature.defence / 100 );
+
+        System.out.printf(this.color + "%s done %s%d%s damage to %s%s(%d hp, %s shield)%s. ", this.name, damagedHPColor, damage, this.color, creature.color, creature.getName().toLowerCase(), creature.getHp(), creature.defence, this.color);
         creature.takeDamege(damage);
     }
 
     @Override
     public void takeDamege(double damage) {
 
-        //TODO: If has defence make coefficient to reduce damage
+        this.hp -= (int) damage;
+        this.defence = defence * defence/100;
 
-        int hpAfterAttack = this.hp - (int) damage;
-        this.hp = hpAfterAttack;
+        if (this.defence == 0) {
+            System.out.printf(this.color + "\nShield of %s was broken.", this.getName().toLowerCase());
+            // how to see this once?
+        }
+
         if (isAlive()) {
-            System.out.printf("\n%s%s is now %s%d hp%s.\n", this.color, this.name, healedHPColor, this.hp, this.color);
+            System.out.printf(this.color + "%n%s is now %s%d hp%s.%n", this.name, healedHPColor, this.hp, this.color);
         } else {
-            System.out.format("\n%s%s is dead.", this.color, this.name);
+            System.out.format(this.color + "%n%s is dead.", this.name);
         }
     }
 
@@ -61,14 +66,13 @@ public class Creature implements Action {
 
         this.hp = (totalHP > maxHp) ? maxHp : totalHP;
 
-        System.out.printf("%s%s %s+%d hp%s with a medkit.", this.color, this.name, healedHPColor, medkit, this.color);
+        System.out.printf(this.color + "%n%s %s+%d hp%s with a medkit.", this.name, healedHPColor, medkit, this.color);
     }
 
     @Override
     public double generateAccuracy() {
         double totalAccuracy = ( (Math.random() * 100)) + this.accuracy;
         return totalAccuracy/100;
-
 //        System.out.print(CreatureColor.ANSI_RESET);
 //        if (totalAccuracy < 15) {
 //            //System.out.println("Weak attack. ");
@@ -93,8 +97,19 @@ public class Creature implements Action {
         return this.hp > 0;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public int getHp() {
+        return hp;
+    }
+
     //TODO: For Hero make ability to find out have many health points has character
     //TODO: Do smth if Creature is dead (disability to perform on It attacks, or It cant perform attacks)
     //TODO: is there more colors?
+    //TODO: make method to sout info of damage
+    //TODO: Dealer to buy levelUp, medkits, shield.
+    //TODO: Remake defence 
 
 }
