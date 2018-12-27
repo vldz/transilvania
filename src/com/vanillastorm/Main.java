@@ -1,23 +1,30 @@
 package com.vanillastorm;
 
-import com.vanillastorm.Util.CreatureColor;
+import com.vanillastorm.creatures.evilCreatures.Villain;
+import com.vanillastorm.creatures.goodCreatures.Hero;
+import com.vanillastorm.util.CreatureColor;
 
 public class Main {
 
     public static void main(String[] args) {
-        Creature vlad = new Creature("Detective", 100, 10, 7, 1, 10, CreatureColor.CYAN);
-        Creature warewolf = new Creature("Warewolf", 100, 5, 10, 1, 20, CreatureColor.PURPLE);
+        Hero vlad = new Hero("Detective");
+        Villain werewolf = new Villain("Werewolf", 50, 1,10,  3, 50, CreatureColor.PURPLE);
 
-        while (vlad.isAlive() && warewolf.isAlive()) {
+        while (vlad.isAlive() && werewolf.isAlive()) {
             if (vlad.isAlive()) {
-                vlad.attack(warewolf);
+                vlad.attack(werewolf);
             }
 
-            if (warewolf.isAlive()) {
-                warewolf.attack(vlad);
-
+            if (werewolf.isAlive()) {
+                werewolf.attack(vlad);
             }
 
         }
     }
 }
+
+//TODO: Hero money, Creature gives money after defeat(longer battle = more money?)
+//TODO: Do smth if Creature is dead (disability to perform on It attacks, or It cant perform attacks)
+
+//TODO: Dealer to buy levelUp, medkits, shield.
+

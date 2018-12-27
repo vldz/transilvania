@@ -1,8 +1,8 @@
-package com.vanillastorm;
+package com.vanillastorm.creatures;
 
 public interface Action {
     void attack(Creature creature);
-    void takeDamege(double damage);
+    void takeDamage(double damage);
 
     void heal(Creature creature, int medkit);
 

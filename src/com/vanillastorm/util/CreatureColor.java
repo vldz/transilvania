@@ -1,4 +1,4 @@
-package com.vanillastorm.Util;
+package com.vanillastorm.util;
 
 public class CreatureColor {
     public static final String ANSI_RESET = "\u001B[0m";
@@ -10,4 +10,5 @@ public class CreatureColor {
     public static final String PURPLE = "\u001B[35m";
     public static final String CYAN = "\u001B[36m";
     public static final String WHITE = "\u001B[37m";
+
 }
