@@ -1,6 +1,6 @@
 package com.vanillastorm.creatures;
 
-import com.vanillastorm.util.CreatureColor;
+import com.vanillastorm.util.Color;
 
 public class Creature implements Action {
 
@@ -15,8 +15,8 @@ public class Creature implements Action {
 
     private String color;
 
-    private String damagedHPColor = CreatureColor.RED;
-    private String healedHPColor = CreatureColor.GREEN;
+    private String damagedHPColor = Color.RED;
+    private String healedHPColor = Color.GREEN;
 
     public Creature(String name, int hp, int level, double strength, int accuracy, int defence, String color) {
         this.name = name;
@@ -36,7 +36,7 @@ public class Creature implements Action {
     public void attack(Creature creature) {
         int damage = (int) ((this.level * this.strength * generateAccuracy())) * (1 - (creature.defence / 200));
         printInfoDamage(creature, damage);
-        this.takeDamage(damage);
+        creature.takeDamage(damage);
     }
 
     @Override
@@ -70,7 +70,7 @@ public class Creature implements Action {
     public double generateAccuracy() {
         double totalAccuracy = ((Math.random() * 100)) + this.accuracy;
         return totalAccuracy / 100;
-//        System.out.print(CreatureColor.ANSI_RESET);
+//        System.out.print(Color.ANSI_RESET);
 //        if (totalAccuracy < 15) {
 //            //System.out.println("Weak attack. ");
 //            return 0.1;

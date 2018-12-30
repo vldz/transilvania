@@ -1,4 +1,4 @@
-package com.vanillastorm.creatures.evilCreatures;
+package com.vanillastorm.creatures.antagonists;
 
 import com.vanillastorm.creatures.Creature;
 

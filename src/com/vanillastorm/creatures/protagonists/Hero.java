@@ -1,14 +1,14 @@
-package com.vanillastorm.creatures.goodCreatures;
+package com.vanillastorm.creatures.protagonists;
 
 import com.vanillastorm.creatures.Creature;
-import com.vanillastorm.util.CreatureColor;
+import com.vanillastorm.util.Color;
 
 public class Hero extends Creature {
     private int gold;
     //private Backpack backpack;
 
     public Hero(String name) {
-        super(name, 100, 1, 10, 5, 100, CreatureColor.CYAN);
+        super(name, 100, 1, 10, 5, 100, Color.CYAN);
         this.gold = 5;
     //    this.backpack = backpack;
     }

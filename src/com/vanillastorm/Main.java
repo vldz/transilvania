@@ -1,14 +1,15 @@
 package com.vanillastorm;
 
-import com.vanillastorm.creatures.evilCreatures.Villain;
-import com.vanillastorm.creatures.goodCreatures.Hero;
-import com.vanillastorm.util.CreatureColor;
+import com.vanillastorm.creatures.antagonists.Villain;
+import com.vanillastorm.creatures.protagonists.Hero;
+import com.vanillastorm.creatures.protagonists.stuff.Backpack;
+import com.vanillastorm.util.Color;
 
 public class Main {
 
     public static void main(String[] args) {
         Hero vlad = new Hero("Detective");
-        Villain werewolf = new Villain("Werewolf", 50, 1,10,  3, 50, CreatureColor.PURPLE);
+        Villain werewolf = new Villain("Werewolf", 50, 1,10,  3, 50, Color.PURPLE);
 
         while (vlad.isAlive() && werewolf.isAlive()) {
             if (vlad.isAlive()) {
@@ -20,6 +21,14 @@ public class Main {
             }
 
         }
+
+
+        Backpack backpack = new Backpack();
+
+        backpack.addItem("small medkit");
+        backpack.addItem("big medkit");
+        backpack.addItem("small medkit");
+        backpack.printItems();
     }
 }
 

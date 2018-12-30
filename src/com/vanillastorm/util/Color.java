@@ -1,6 +1,6 @@
 package com.vanillastorm.util;
 
-public class CreatureColor {
+public class Color {
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String BLACK = "\u001B[30m";
     public static final String RED = "\u001B[31m";
