@@ -2,20 +2,20 @@ package com.vanillastorm;
 
 import com.vanillastorm.creatures.antagonists.Villain;
 import com.vanillastorm.creatures.protagonists.Hero;
+import com.vanillastorm.creatures.protagonists.characters.Detective;
 import com.vanillastorm.creatures.protagonists.stuff.Backpack;
 import com.vanillastorm.util.Color;
 
 public class Main {
 
     public static void main(String[] args) {
-        Hero vlad = new Hero("Detective");
-        Villain werewolf = new Villain("Werewolf", 50, 1,10,  3, 50, Color.PURPLE);
+        Hero vlad = new Detective();
+        Villain werewolf = new Villain("Werewolf", 30, 2,10,  3);
 
         while (vlad.isAlive() && werewolf.isAlive()) {
             if (vlad.isAlive()) {
                 vlad.attack(werewolf);
             }
-
             if (werewolf.isAlive()) {
                 werewolf.attack(vlad);
             }
@@ -23,12 +23,13 @@ public class Main {
         }
 
 
-        Backpack backpack = new Backpack();
+        Backpack.addItem("small medkit");
+        Backpack.addItem("sword");
+        Backpack.printItems();
 
-        backpack.addItem("small medkit");
-        backpack.addItem("big medkit");
-        backpack.addItem("small medkit");
-        backpack.printItems();
+        vlad.useMedkit("small medkit");
+        vlad.useMedkit("big medkit");
+
     }
 }
 

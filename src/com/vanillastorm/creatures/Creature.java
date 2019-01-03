@@ -15,12 +15,13 @@ public class Creature implements Action {
 
     private String color;
 
-    private String damagedHPColor = Color.RED;
-    private String healedHPColor = Color.GREEN;
+    private String damageColor = Color.RED;
+    private String hpColor = Color.GREEN;
 
-    public Creature(String name, int hp, int level, double strength, int accuracy, int defence, String color) {
+    public Creature(String name, int hp, int level, double strength, int accuracy, String color) {
         this.name = name;
-        this.defence = defence;
+
+        this.defence = 0;
 
         this.hp = hp;
         this.maxHp = this.hp;
@@ -52,7 +53,7 @@ public class Creature implements Action {
         }
 
         if (isAlive()) {
-            System.out.printf(this.color + "%n%s is now %s%d hp%s.%n", this.name, healedHPColor, this.hp, this.color);
+            System.out.printf(this.color + "%n%s is now %s%d hp%s.%n", this.name, hpColor, this.hp, this.color);
         } else {
             System.out.format(this.color + "%n%s is dead.\n", this.name);
         }
@@ -62,8 +63,6 @@ public class Creature implements Action {
     public void heal(Creature creature, int medkit) {
         int totalHP = this.hp += medkit;
         this.hp = (totalHP > maxHp) ? maxHp : totalHP;
-
-        System.out.printf(this.color + "%n%s %s+%d hp%s with a medkit.", this.name, healedHPColor, medkit, this.color);
     }
 
     @Override
@@ -89,19 +88,30 @@ public class Creature implements Action {
 //        }
     }
 
-    @Override
-    public boolean isAlive() {
-        return this.hp > 0;
-    }
-
     public void printInfoDamage(Creature anotherCreature, int damage) {
         System.out.printf(
                 this.color +
-                        this.name + " done " +
-                        damagedHPColor + damage +
-                        this.color + " damage to " +
-                        anotherCreature.color + anotherCreature.getName().toLowerCase() + "(" + anotherCreature.getHp() + " hp, " + anotherCreature.defence + " shield)" +
-                        this.color + ".");
+                this.name + " done " +
+                        damageColor + "-" + damage +
+                this.color + " damage to " +
+                anotherCreature.color + anotherCreature.getName().toLowerCase() + "(" + anotherCreature.getHp() + " hp, " + anotherCreature.defence + " shield)" +
+                this.color + ".");
+    }
+
+    public void printHealUsage(String item, int amountOfHealedHP) {
+        System.out.println(
+                this.color +
+                this.name + " heals " +
+                this.hpColor + "+" + amountOfHealedHP + " hp " + this.color +
+                "with a " + item + ".");
+        System.out.println(
+                this.name + " is now " + this.hpColor + this.hp + " hp" + this.color + ".\n"
+        );
+    }
+
+    @Override
+    public boolean isAlive() {
+        return this.hp > 0;
     }
 
     public String getName() {
