@@ -69,4 +69,4 @@ public class Backpack {
     }
 
 }
-//TODO: max size of backpack
+//TODO: max size of backpack, weight of the items?

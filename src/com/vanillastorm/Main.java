@@ -4,13 +4,14 @@ import com.vanillastorm.creatures.antagonists.Villain;
 import com.vanillastorm.creatures.protagonists.Hero;
 import com.vanillastorm.creatures.protagonists.characters.Detective;
 import com.vanillastorm.creatures.protagonists.stuff.Backpack;
+import com.vanillastorm.creatures.protagonists.stuff.Shield;
 import com.vanillastorm.util.Color;
 
 public class Main {
 
     public static void main(String[] args) {
         Hero vlad = new Detective();
-        Villain werewolf = new Villain("Werewolf", 30, 2,10,  3);
+        Villain werewolf = new Villain("Werewolf", 100, 2,20,  5);
 
         while (vlad.isAlive() && werewolf.isAlive()) {
             if (vlad.isAlive()) {
@@ -24,6 +25,7 @@ public class Main {
 
 
         Backpack.addItem("small medkit");
+        Backpack.addItem("big medkit");
         Backpack.addItem("sword");
         Backpack.printItems();
 
@@ -36,5 +38,7 @@ public class Main {
 //TODO: Hero money, Creature gives money after defeat(longer battle = more money?)
 //TODO: Do smth if Creature is dead (disability to perform on It attacks, or It cant perform attacks)
 
-//TODO: Dealer to buy levelUp, medkits, shield.
+//TODO: mana?
+//TODO: -defence formula
+
 

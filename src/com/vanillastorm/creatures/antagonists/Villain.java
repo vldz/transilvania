@@ -7,7 +7,7 @@ public class Villain extends Creature {
     private int moneyAfterDeath;
 
     public Villain(String name, int hp, int level, double strength, int accuracy) {
-        super(name, hp, level, strength, accuracy, Color.PURPLE);
+        super(name, hp, level, strength, accuracy, "Wooden", Color.PURPLE);
         this.moneyAfterDeath = 2;
 
     }

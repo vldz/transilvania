@@ -5,6 +5,6 @@ import com.vanillastorm.creatures.protagonists.stuff.Backpack;
 
 public class Detective extends Hero {
     public Detective() {
-        super("Detective Lenь", 100, 1, 10, 5, 5);
+        super("Detective Len", 100, 1, 25, 5, "Kevlar and Helmet",5);
     }
 }

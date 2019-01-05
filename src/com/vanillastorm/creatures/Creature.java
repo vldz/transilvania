@@ -1,5 +1,6 @@
 package com.vanillastorm.creatures;
 
+import com.vanillastorm.creatures.protagonists.stuff.Shield;
 import com.vanillastorm.util.Color;
 
 public class Creature implements Action {
@@ -11,17 +12,20 @@ public class Creature implements Action {
 
     private double strength;
     private int accuracy;
-    private int defence;
+
+    private double maxDefencePoints;
+    private double defencePoints;
 
     private String color;
 
     private String damageColor = Color.RED;
     private String hpColor = Color.GREEN;
 
-    public Creature(String name, int hp, int level, double strength, int accuracy, String color) {
+    public Creature(String name, int hp, int level, double strength, int accuracy, String shieldName, String color) {
         this.name = name;
 
-        this.defence = 0;
+        this.maxDefencePoints = Shield.getMaxDefencePoints(shieldName);
+        this.defencePoints = maxDefencePoints;
 
         this.hp = hp;
         this.maxHp = this.hp;
@@ -35,7 +39,7 @@ public class Creature implements Action {
 
     @Override
     public void attack(Creature creature) {
-        int damage = (int) ((this.level * this.strength * generateAccuracy())) * (1 - (creature.defence / 200));
+        int damage = (int) (((this.strength * generateAccuracy())) * (1 - (creature.defencePoints / 150)));
         printInfoDamage(creature, damage);
         creature.takeDamage(damage);
     }
@@ -44,10 +48,11 @@ public class Creature implements Action {
     public void takeDamage(double damage) {
 
         this.hp -= (int) damage;
-        this.defence -= (int) damage / (1 - defence / 200);
+        // TODO: defencePoints formula
+        this.defencePoints -= (int) damage; // ???
 
-        if (this.defence <= 0) {
-            this.defence = 0;
+        if (this.defencePoints <= 0) {
+            this.defencePoints = 0;
             System.out.printf(this.color + "\nShield of %s is broken.", this.getName().toLowerCase());
             // how to see this once?
         }
@@ -68,24 +73,24 @@ public class Creature implements Action {
     @Override
     public double generateAccuracy() {
         double totalAccuracy = ((Math.random() * 100)) + this.accuracy;
-        return totalAccuracy / 100;
-//        System.out.print(Color.ANSI_RESET);
-//        if (totalAccuracy < 15) {
-//            //System.out.println("Weak attack. ");
-//            return 0.1;
-//        } else if (totalAccuracy >= 15 && totalAccuracy < 30) {
-//            //System.out.println("Nice attack. ");
-//            return 0.25;
-//        } else if (totalAccuracy >= 30 && totalAccuracy < 65) {
-//            //System.out.println("OK attack. ");
-//            return 0.5;
-//        } else if (totalAccuracy >= 65 && totalAccuracy < 90) {
-//            //System.out.println("Almost perfect attack. ");
-//            return 0.75;
-//        } else {
-//            //System.out.println("Amazing attack! ");
-//            return 0.99;
-//        }
+        //return totalAccuracy / 100;
+        System.out.print(Color.ANSI_RESET + "\n");
+        if (totalAccuracy < 15) {
+            System.out.println("Pussy attack. ");
+            return 0.1;
+        } else if (totalAccuracy >= 15 && totalAccuracy < 30) {
+            System.out.println("Weak attack. ");
+            return 0.25;
+        } else if (totalAccuracy >= 30 && totalAccuracy < 65) {
+            System.out.println("O.K. attack. ");
+            return 0.5;
+        } else if (totalAccuracy >= 65 && totalAccuracy < 90) {
+            System.out.println("Noooooice attack. ");
+            return 0.75;
+        } else {
+            System.out.println("IN YOUR FACE.");
+            return 0.99;
+        }
     }
 
     public void printInfoDamage(Creature anotherCreature, int damage) {
@@ -94,7 +99,7 @@ public class Creature implements Action {
                 this.name + " done " +
                         damageColor + "-" + damage +
                 this.color + " damage to " +
-                anotherCreature.color + anotherCreature.getName().toLowerCase() + "(" + anotherCreature.getHp() + " hp, " + anotherCreature.defence + " shield)" +
+                anotherCreature.color + anotherCreature.getName().toLowerCase() + "(" + anotherCreature.getHp() + " hp, " + (int) anotherCreature.defencePoints + " shield)" +
                 this.color + ".");
     }
 
@@ -120,5 +125,9 @@ public class Creature implements Action {
 
     public int getHp() {
         return hp;
+    }
+
+    public int getMaxHp() {
+        return maxHp;
     }
 }
