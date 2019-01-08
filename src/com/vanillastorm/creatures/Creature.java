@@ -16,12 +16,14 @@ public class Creature implements Action {
     private double maxDefencePoints;
     private double defencePoints;
 
+    private int gold;
+
     private String color;
 
     private String damageColor = Color.RED;
     private String hpColor = Color.GREEN;
 
-    public Creature(String name, int hp, int level, double strength, int accuracy, String shieldName, String color) {
+    public Creature(String name, int hp, int level, double strength, int accuracy, String shieldName, int gold, String color) {
         this.name = name;
 
         this.maxDefencePoints = Shield.getMaxDefencePoints(shieldName);
@@ -34,6 +36,8 @@ public class Creature implements Action {
         this.strength = strength;
         this.accuracy = accuracy;
 
+        this.gold = gold;
+
         this.color = color;
     }
 
@@ -42,6 +46,10 @@ public class Creature implements Action {
         int damage = (int) (((this.strength * generateAccuracy())) * (1 - (creature.defencePoints / 150)));
         printInfoDamage(creature, damage);
         creature.takeDamage(damage);
+        if (!creature.isAlive()) {
+            this.getEnemysGold(creature);
+            System.out.println(this.color + this.getName() + " earns " + Color.YELLOW + "+" + creature.getGold() + this.color + " gold(" + Color.YELLOW + this.getGold() + this.color + ").");
+        }
     }
 
     @Override
@@ -130,4 +138,15 @@ public class Creature implements Action {
     public int getMaxHp() {
         return maxHp;
     }
+
+    public int getGold() {
+        return gold;
+    }
+
+    public int getEnemysGold(Creature creature) {
+        this.gold += creature.getGold();
+        return this.gold;
+    }
+
+
 }

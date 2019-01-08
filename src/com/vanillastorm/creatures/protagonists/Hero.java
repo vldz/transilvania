@@ -4,23 +4,11 @@ import com.vanillastorm.creatures.Creature;
 import com.vanillastorm.creatures.protagonists.stuff.Backpack;
 import com.vanillastorm.util.Color;
 
-import java.sql.SQLOutput;
-
 public class Hero extends Creature {
     private int gold;
 
     public Hero(String name, int hp, int level, double strength, int accuracy, String shield, int gold) {
-        super(name, hp, level, strength, accuracy, shield, Color.CYAN);
-
-        this.gold = gold;
-    }
-
-    public void setGold(int gold) {
-        this.gold += gold;
-    }
-
-    public int getGold() {
-        return gold;
+        super(name, hp, level, strength, accuracy, shield, gold, Color.CYAN);
     }
 
     @Override
@@ -53,3 +41,5 @@ public class Hero extends Creature {
         }
     }
 }
+
+//TODO: add mana to hero, restore mana with alcohol

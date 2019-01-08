@@ -8,15 +8,20 @@ import java.util.Map;
 
 public class Backpack {
     private static Map<String, Integer> itemsInBackpack = new LinkedHashMap<>();;
-    private int maxSizeOfBackpack = 5;
+
+    private static int maxSizeOfBackpack = 10;
+    private static int currentSize = 0;
 
     private static String color = Color.BLUE;
 
-
-
     public static void addItem(String item) {
-        Integer current = itemsInBackpack.getOrDefault(item, 0);
-        itemsInBackpack.put(item, current + 1);
+        int weight = Items.getWeithtOfItem(item);
+        if (isEnoughSpace(weight)) {
+            Integer current = itemsInBackpack.getOrDefault(item, 0);
+            itemsInBackpack.put(item, current + 1);
+        } else {
+            System.out.println(color + "Cannot add " + item +"(" + weight + "), backpack is full.");
+        }
     }
 
     public static void printItems() {
@@ -31,7 +36,7 @@ public class Backpack {
             }
         }
 
-        System.out.println(color + "\n----------------------");
+        System.out.println(color + "\n-----------------------");
         if (size == 0) {
             System.out.println("In backpack 0 items.");
         } else if (size == 1 && maxAmountOfOneTypeItem < 2) {
@@ -39,13 +44,15 @@ public class Backpack {
         } else {
             System.out.println("There are in backpack: ");
         }
-        System.out.println("----------------------");
+        System.out.println("-----------------------");
 
         for (Map.Entry<String, Integer> entry : itemsInBackpack.entrySet()) {
             s = (entry.getValue() > 1) ? "s" : "";
-            System.out.println("* " + entry.getValue() + " " + entry.getKey() + s);
+            System.out.println("* " + entry.getValue() + " " + entry.getKey() + s + "(" + Items.getWeithtOfItem(entry.getKey()) * entry.getValue() + ")");
         }
-        System.out.println("----------------------\n");
+        System.out.println("-----------------------");
+        System.out.println("Weight curr(" + currentSize + "), max(" + maxSizeOfBackpack + ")");
+        System.out.println("-----------------------\n");
     }
 
     public static boolean isInBackpack(String itemToFind) {
@@ -62,11 +69,21 @@ public class Backpack {
     }
 
     public static void remove(String item) {
-        Integer current = itemsInBackpack.get(item);
-        if (current != 1) {
-            itemsInBackpack.put(item, current - 1);
+        int weight = Items.getWeithtOfItem(item);
+        Integer currentAmount = itemsInBackpack.get(item);
+        if (currentAmount != 1) {
+            itemsInBackpack.put(item, currentAmount - 1);
+            currentSize -= weight;
         } else itemsInBackpack.remove(item);
     }
 
+    public static boolean isEnoughSpace(int weightOfItem) {
+        int resultSize = currentSize + weightOfItem;
+        if (resultSize <= maxSizeOfBackpack) {
+            currentSize = resultSize;
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
-//TODO: max size of backpack, weight of the items?
