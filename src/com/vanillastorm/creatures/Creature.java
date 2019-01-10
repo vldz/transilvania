@@ -1,5 +1,7 @@
 package com.vanillastorm.creatures;
 
+import com.vanillastorm.creatures.protagonists.stuff.Backpack;
+import com.vanillastorm.creatures.protagonists.stuff.Items.Item;
 import com.vanillastorm.creatures.protagonists.stuff.Shield;
 import com.vanillastorm.util.Color;
 
@@ -78,11 +80,42 @@ public class Creature implements Action {
         this.hp = (totalHP > maxHp) ? maxHp : totalHP;
     }
 
+    //TODO: make usage of different items
+
+    public void useMedkit (String itemFromBackpack) {
+        int healedHP = 0;
+        if (Backpack.isInBackpack(itemFromBackpack)) {
+            if (this.getHp() != this.getMaxHp()) {
+                switch (itemFromBackpack) {
+                    case "small medkit":
+                        healedHP = 15;
+                        break;
+                    case "medium medkit":
+                        healedHP = 35;
+                        break;
+                    case "big medkit":
+                        healedHP = 50;
+                        break;
+                }
+                heal(this, healedHP);
+                printHealUsage(itemFromBackpack, healedHP);
+
+                Backpack.remove(itemFromBackpack);
+            } else {
+                System.out.println ("No need to heal. You're full hp.");
+            }
+        }
+    }
+
+    public void useItem (Item item) {
+
+    }
+
     @Override
     public double generateAccuracy() {
         double totalAccuracy = ((Math.random() * 100)) + this.accuracy;
         //return totalAccuracy / 100;
-        System.out.print(Color.ANSI_RESET + "\n");
+        System.out.print(Color.ANSI_RESET + "");
         if (totalAccuracy < 15) {
             System.out.println("Pussy attack. ");
             return 0.1;

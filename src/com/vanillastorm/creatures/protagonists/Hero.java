@@ -15,31 +15,6 @@ public class Hero extends Creature {
     public int getHp() {
         return super.getHp();
     }
-
-    public void useMedkit (String itemFromBackpack) {
-        int healedHP = 0;
-        if (Backpack.isInBackpack(itemFromBackpack)) {
-            if (this.getHp() != this.getMaxHp()) {
-                switch (itemFromBackpack) {
-                    case "small medkit":
-                        healedHP = 15;
-                        break;
-                    case "medium medkit":
-                        healedHP = 30;
-                        break;
-                    case "big medkit":
-                        healedHP = 50;
-                        break;
-                }
-                heal(this, healedHP);
-                printHealUsage(itemFromBackpack, healedHP);
-
-                Backpack.remove(itemFromBackpack);
-            } else {
-                System.out.println ("No need to heal. You're full hp.");
-            }
-        }
-    }
 }
 
 //TODO: add mana to hero, restore mana with alcohol
