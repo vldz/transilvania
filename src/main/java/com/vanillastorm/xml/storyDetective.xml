@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<chapters>
+    <chapter chapterId="1">
+        <paragraph paragraphId="1">
+            1960 year, world of full noir.
+            Detective Len had his usual nap in his noir cabinet.
+            Suddenly a noir lady came into his noir bureau and screamed:
+            - Detective Len?
+            - Not available now…
+            - But i really, reeeally need your help, cos you are the only one...
+            Detective continued to pretend that he was sleeping, but that never stopped that girl:
+            - Someone is after me, and, he... no, IT ... it is not look like ... human. No one will believe me ...
+            She started to noir cry:
+            - ... help me... please;(
+            - Look, this case is not 7/10, even not 5, ...
+            <option choice="1" next="1.1">... but ok, tell me how does it look like?</option>
+            <option choice="2" next="1.2">... sooo, can you live, please, you've interrupted my noir dream!</option>
+        </paragraph>
+
+        <paragraph paragraphId="1.1">
+            - Detective Len, you are amazing, i will pay for this, may be not even with money..
+        </paragraph>
+
+        <paragraph paragraphId="1.2">
+            - No save for me now, it is probably gg...
+        </paragraph>
+    </chapter>
+
+    <!--(Restart point)-->
+    <chapter chapterId="2">
+        <paragraph paragraphId="2.1">
+            After these words, Detective faded out, as he usually did in his Sudden Dream Attacks, but this time it was
+            much worse.
+
+            Detective woke up in living room in which he never was before, he heard squeak of a woman. He looked up. Fat
+            woman took a cane, she was ready to kick his ass.
+
+            *intense music starts*
+            "What the f...? I can jump through the window of fight club this bitch"
+
+            <option choice="2.1">
+                Detective Len jumped through the window. But it was not first floor, even not second. He perfectly lands on his head.
+                Detective Len - 0 hp.
+                R.I.P.
+                Restart?
+                <option choice="2.2" next="2">Yes</option>
+            </option>
+
+            <option choice="2.3">
+                *intense music continues*
+                Fight fight = new Fight(Detective Len, Fatty Kathy)
+            </option>
+
+        </paragraph>
+    </chapter>
+</chapters>
