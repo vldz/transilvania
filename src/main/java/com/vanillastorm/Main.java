@@ -8,10 +8,7 @@ import com.vanillastorm.creatures.protagonists.stuff.Items.medkits.BigMedkit;
 import com.vanillastorm.creatures.protagonists.stuff.Items.medkits.Medkit;
 import com.vanillastorm.creatures.protagonists.stuff.Items.medkits.SmallMedkit;
 import com.vanillastorm.gameplay.Fight;
-import com.vanillastorm.telegram.TransilvaniaProjectBot;
-import org.telegram.telegrambots.ApiContextInitializer;
-import org.telegram.telegrambots.meta.TelegramBotsApi;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import com.vanillastorm.gameplay.Game;
 
 public class Main {
 
@@ -25,20 +22,7 @@ public class Main {
 
         Backpack.addItem(small);
         Backpack.addItem(big);
-
-
-
-        // Initialize Api Context
-        ApiContextInitializer.init();
-
-        // Instantiate Telegram Bots API
-        TelegramBotsApi botsApi = new TelegramBotsApi();
-
-        try {
-            botsApi.registerBot(new TransilvaniaProjectBot());
-        } catch (TelegramApiException e) {
-            e.printStackTrace();
-        }
+        Game game = new Game();
         Fight fight = new Fight(vlad, werewolf);
     }
 

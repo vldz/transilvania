@@ -8,7 +8,7 @@ public class Shield {
         {
             put("None", 0.0);
             put("Lab coat", 8.5);
-            put("Kimono", 8.5);
+            put("Kimono", 13.0);
             put("Wooden", 10.0);
             put("Knight armour", 50.0);
             put("Kevlar", 90.0);
@@ -23,5 +23,9 @@ public class Shield {
             System.out.println("No shield such as " + shieldName);
             return 0;
         }
+    }
+
+    public void getNameShield (String name) {
+        
     }
 }

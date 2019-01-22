@@ -1,28 +1,101 @@
 package com.vanillastorm.telegram;
 
+import com.vanillastorm.gameplay.story.Story;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TransilvaniaProjectBot extends TelegramLongPollingBot {
 
+    private Story creatureStory;
+
+    // Create ReplyKeyboardMarkup object
+    private ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
+
     @Override
     public void onUpdateReceived(Update update) {
+        String message_text = update.getMessage().getText();
+        long chat_id = update.getMessage().getChatId();
         // We check if the update has a message and the message has text
         if (update.hasMessage() && update.getMessage().hasText()) {
-            // Set variables
-            String message_text = update.getMessage().getText();
-            long chat_id = update.getMessage().getChatId();
+            SendMessage message;
+            if (message_text.equals("/start")) {
+                message = new SendMessage() // Create a message object object
+                        .setChatId(chat_id)
+                        .setText("Choose story:" +
+                                "\n * Detective Len noir story." +
+//                                "\n * 100 hp" +
+//                                "\n * 25 strength" +
+//                                "\n * 7 accuracy" +
+//                                "\n * No shield\n" +
 
-            SendMessage message = new SendMessage() // Create a message object object
-                    .setChatId(chat_id)
-                    .setText(message_text);
+                                "\n * Mad Scientist mathematical story." +
+//                                "\n * 125 hp" +
+//                                "\n * 10 strength" +
+//                                "\n * 15 accuracy" +
+//                                "\n * Lab coat\n" +
+
+                                "\n * Ronin Muramatsu Takanao samurai story."
+//                                "\n * 80 hp" +
+//                                "\n * 33 strength" +
+//                                "\n * 13 accuracy" +
+//                                "\n * Kimono"
+                                );
+
+                // Create the keyboard (list of keyboard rows)
+                List<KeyboardRow> keyboard = new ArrayList<>();
+
+                KeyboardRow row = new KeyboardRow();
+                row.add("Detective Len");
+                keyboard.add(row);
+
+                row = new KeyboardRow();
+                row.add("Mad Scientist");
+                keyboard.add(row);
+
+                row = new KeyboardRow();
+                row.add("Ronin");
+                keyboard.add(row);
+
+                // Set the keyboard to the markup
+                keyboardMarkup.setKeyboard(keyboard);
+                // Add it to the message
+                message.setReplyMarkup(keyboardMarkup);
+
+
+            } else if (message_text.equals("/description")) {
+                message_text = "Transilvania project is a adventure text game.\n" +
+                        "During the story you have to fight different creatures, make dicisions and see where your choices will take you.";
+                message = new SendMessage() // Create a message object object
+                        .setChatId(chat_id)
+                        .setText(message_text);
+
+            } else if (message_text.equals("Detective Len") || message_text.equals("Mad Scientist") || message_text.equals("Ronin")) {
+                creatureStory = new Story(message_text);
+                message = new SendMessage() // Create a message object object
+                        .setChatId(chat_id)
+                        .setText(Story.loadFirstChapter());
+
+            } else {
+                message_text ="not an option";
+                message = new SendMessage()
+                        .setChatId(chat_id)
+                        .setText(message_text);
+
+            }
+
             try {
-                execute(message); // Sending our message object to user
+                execute(message); // Call method to send the photo
             } catch (TelegramApiException e) {
                 e.printStackTrace();
             }
+
         }
     }
 
@@ -35,4 +108,11 @@ public class TransilvaniaProjectBot extends TelegramLongPollingBot {
     public String getBotUsername() {
         return "TransilvaniaProjectBot";
     }
+
 }
+
+
+
+//    remove keyboard
+//    ReplyKeyboardRemove keyboardMarkupremove = new ReplyKeyboardRemove();
+//    message.setReplyMarkup(keyboardMarkupremove);
