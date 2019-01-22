@@ -11,6 +11,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +41,11 @@ public class Story {
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
-            Document document = builder.parse(new File("/Users/vladyslav/IdeaProjects/Transilvania/src/main/java/com/vanillastorm/xml/" + Story.storyName));
+
+            InputStream inputStream = ClassLoader.getSystemClassLoader().
+                    getSystemResourceAsStream("com/vanillastorm/xml/" + Story.storyName);
+            Document document = builder.parse(inputStream);
+
             document.getDocumentElement().normalize();
 
             NodeList chaptersList = document.getElementsByTagName("chapter");
@@ -79,7 +84,8 @@ public class Story {
             }
 
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println(e); //Logery dlya vivoda exception
+            e.printStackTrace();
         }
 
         return chapters;

@@ -22,8 +22,10 @@ public class Main {
 
         Backpack.addItem(small);
         Backpack.addItem(big);
+        System.out.println("init game");
         Game game = new Game();
-        Fight fight = new Fight(vlad, werewolf);
+        System.out.println("initgame fin");
+        //Fight fight = new Fight(vlad, werewolf);
     }
 
 // TODO: Story telling

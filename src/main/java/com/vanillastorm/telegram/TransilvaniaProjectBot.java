@@ -21,6 +21,7 @@ public class TransilvaniaProjectBot extends TelegramLongPollingBot {
     @Override
     public void onUpdateReceived(Update update) {
         String message_text = update.getMessage().getText();
+        System.out.println("res update " + message_text);
         long chat_id = update.getMessage().getChatId();
         // We check if the update has a message and the message has text
         if (update.hasMessage() && update.getMessage().hasText()) {
