@@ -2,9 +2,7 @@ package com.vanillastorm.gameplay.story;
 
 // extra dialog or redirect on chapter
 public class Result {
-    private double resultID;
     private int nextChapterID;
-
     private String text;
 
     public String getText() {
@@ -15,16 +13,8 @@ public class Result {
         this.text = text;
     }
 
-    public double getResultID() {
-        return resultID;
-    }
-
-    public void setResultID(double resultID) {
-        this.resultID = resultID;
-    }
-
     public int getNextChapterID() {
-        return nextChapterID;
+        return this.nextChapterID;
     }
 
     public void setNextChapterID(int nextChapterID) {

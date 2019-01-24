@@ -22,9 +22,9 @@ public class Main {
 
         Backpack.addItem(small);
         Backpack.addItem(big);
-        System.out.println("init game");
+        System.out.println("Game initialisation");
         Game game = new Game();
-        System.out.println("initgame fin");
+        System.out.println("Game initialisation finish");
         //Fight fight = new Fight(vlad, werewolf);
     }
 

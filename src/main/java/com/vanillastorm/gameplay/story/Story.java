@@ -27,14 +27,11 @@ public class Story {
         }
         catch (Exception e) {
             System.out.println("Bad things are happened:(");
+            e.printStackTrace();
         }
     }
 
-    public static String loadFirstChapter () {
-        return chapters.get(1).getText();
-    }
-
-    private static List<Chapter> parseChapters() throws ParserConfigurationException, SAXException, IOException {
+    private static List<Chapter> parseChapters() {
         List<Chapter> chapters = new ArrayList<>();
         Chapter chapter = null;
 
@@ -55,8 +52,6 @@ public class Story {
                     Element chapterElement = (Element) chaptersList.item(temp);
                     chapter = new Chapter();
 
-                    chapter.setChapterID(Integer.parseInt(chapterElement.getAttribute("chapterID")));
-
                     NodeList text = chapterElement.getElementsByTagName("text");
                     Element textElement = (Element) text.item(0);
                     chapter.setText(textElement.getTextContent());
@@ -65,8 +60,10 @@ public class Story {
                     for (int i = 0; i < options.getLength(); i++) {
                         Element optionElement = (Element) options.item(i);
                         Option option = new Option();
-                        option.setResultID(Double.parseDouble(optionElement.getAttribute("resultID")));
-                        option.setTextOnButton(optionElement.getTextContent());
+
+                        option.setResultId(Integer.parseInt(optionElement.getAttribute("resultID")));
+                        option.setText(optionElement.getTextContent());
+
                         chapter.addOption(option);
                     }
 
@@ -75,7 +72,6 @@ public class Story {
                         Element resultElement = (Element) results.item(i);
                         Result result = new Result();
                         result.setText(resultElement.getTextContent());
-                        result.setResultID(Double.parseDouble(resultElement.getAttribute("resultID")));
                         result.setNextChapterID(Integer.parseInt(resultElement.getAttribute("nextChapterID")));
                         chapter.addResult(result);
                     }
@@ -84,7 +80,7 @@ public class Story {
             }
 
         } catch (Exception e) {
-            System.out.println(e); //Logery dlya vivoda exception
+            System.out.println(e); //Loggers for exception
             e.printStackTrace();
         }
 
@@ -99,5 +95,25 @@ public class Story {
         } else {
             return "storyRonin.xml";
         }
+    }
+
+    public static String loadChapterText (int chapterNumber) {
+        return chapters.get(chapterNumber).getText();
+    }
+
+    public static String getOptionName(int buttonNum, int chapterNumber) {
+        return chapters.get(chapterNumber).optionText(buttonNum);
+    }
+
+    public static int getAmountOfResult(int chapterNumber) {
+        return chapters.get(chapterNumber).getResultAmount();
+    }
+
+    public static int getNextChapterNumber(int oldChapter, String oldMessage) {
+        return chapters.get(oldChapter).getNextChapter(oldMessage);
+    }
+
+    public static String getAnswer(int chapterNumber, String message) {
+        return chapters.get(chapterNumber).getAnswerResult(message);
     }
 }

@@ -1,69 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <chapters>
-    <chapter chapterID="0">
-        <text> Restart? </text>
-
-        <option resultID="0.1">Yes, please</option>
-        <option resultID="0.2">No, please, stop it</option>
-
-        <result resultID="0.1" nextChapterID="0">gl hf</result>
-        <result resultID="0.2" nextChapterID="0">bad for you</result>
-    </chapter>
-
-    <chapter chapterID="1">
+    <chapter chapterID="">
         <text>
-            1960 year, world of full noir.
-            Detective Len had his usual nap in his noir cabinet.
-            Suddenly a noir lady came into his noir bureau and screamed:
-            - Detective Len?
-            - Not available now…
-            - But i really, reeeally need your help, cos you are the only one...
-            Detective continued to pretend that he was sleeping, but that never stopped that girl:
-            - Someone is after me, and, he... no, IT ... it is not look like ... human. No one will believe me ...
-            She started to noir cry:
-            - ... help me... please;(
-            - Look, this case is not 7/10, even not 5, ...
+Ronin story
         </text>
 
-        <option resultID="1.1">... but ok, tell me how does it look like?</option>
-        <option resultID="1.2">... sooo, can you leave, please, you've interrupted my noir dream!</option>
+        <option> </option>
+        <option> </option>
 
-        <result resultID="1.1" nextChapterID="2">Detective Len, you are amazing, i will pay for this, may be not even with money.. </result>
-        <result resultID="1.2" nextChapterID="2">No save for me now, it is probably gg...</result>
-    </chapter>
-
-    <!--(Restart point)-->
-    <chapter chapterID="2">
-        <text>
-            After these words, Detective faded out, as he usually did in his Sudden Dream Attacks, but this time it
-            was
-            much worse.
-
-            Detective woke up in living room in which he never was before, he heard squeak of a woman. He looked up.
-            Fat
-            woman took a cane, she was ready to kick his ass.
-
-            *intense music starts*
-            "What the f...? I can jump through the window of fight club this bitch"
-        </text>
-
-        <option resultID="2.1"> Jump through the window </option>
-        <option resultID="2.2"> Fight club this bitch </option>
-
-        <result resultID="2.1" nextChapterID="0">
-            Detective Len jumped through the window. But it was not first floor, even not second. He perfectly lands
-            on his head.
-            Detective Len - 0 hp.
-            R.I.P.
-        </result>
-
-        <result resultID="2.2" nextChapterID="3">
-            *intense music continues*
-        </result>
-    </chapter>
-
-    <chapter chapterID="3">
-        Fight fight = new Fight(Detective Len, Fatty Kathy)
+        <result resultID="0" nextChapterID=""> </result>
+        <result resultID="1" nextChapterID=""> </result>
     </chapter>
 </chapters>

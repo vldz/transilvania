@@ -1,23 +1,18 @@
 package com.vanillastorm.gameplay.story;
 
-//button text
 public class Option {
-    private double resultID;
-    private String textOnButton;
+    private String text;
+    private int resultId;
 
-    public double getResultID() {
-        return resultID;
+    public void setText(String text) {
+        this.text = text;
     }
 
-    public void setResultID(double resultID) {
-        this.resultID = resultID;
+    public void setResultId(int resultId) {
+        this.resultId = resultId;
     }
 
-    public String getTextOnButton() {
-        return textOnButton;
-    }
-
-    public void setTextOnButton(String textOnButton) {
-        this.textOnButton = textOnButton;
+    public String getText() {
+        return text;
     }
 }
