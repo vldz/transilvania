@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <chapters>
-    <chapter chapterID="0">
+    <chapter chapterID="0" isRestart="true">
         <text>
 Restart?
         </text>
 
-        <option resultID="0">Yes, please</option>
+        <option resultID="0">Restart, please</option>
         <option resultID="1">No, please, stop it</option>
 
-        <result nextChapterID="2">Gl Hf</result>
+        <result nextChapterID="0">Gl Hf</result>
         <!--to end of the game-->
-        <result nextChapterID="3">Bad for you</result>
+        <result nextChapterID="5">Bad for you</result>
     </chapter>
 
-    <chapter chapterID="1">
+    <chapter chapterID="1" isRestart="false">
         <text>
             1960 year, world of full noir.
             Detective Len had his usual nap in his noir cabinet.
@@ -37,7 +37,7 @@ Restart?
     </chapter>
 
     <!--(Restart point)-->
-    <chapter chapterID="2">
+    <chapter chapterID="2" isRestart="true">
         <text>
             After these words, Detective faded out, as he usually did in his Sudden Dream Attacks, but this time it was much worse.
             Detective woke up in living room in which he never was before, he heard squeak of a woman. He looked up.
@@ -61,7 +61,7 @@ R.I.P.
         </result>
     </chapter>
 
-    <chapter chapterID="3">
+    <chapter chapterID="3" isRestart="true">
         <text>
 Chapter 3
 Chapter 4?
@@ -70,10 +70,10 @@ Chapter 4?
         <option resultID="1">No, please, stop it</option>
 
         <result nextChapterID="4">gl hf</result>
-        <result nextChapterID="4">bad for you</result>
+        <result nextChapterID="0">bad for you</result>
     </chapter>
 
-    <chapter chapterID="4">
+    <chapter chapterID="4" isRestart="false">
         <text>
   Chapter 4
   Chapter 5?

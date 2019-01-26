@@ -14,7 +14,8 @@ import java.util.List;
 public class TransilvaniaProjectBot extends TelegramLongPollingBot {
 
     private Story creatureStory;
-    private int chapterNumber = 1;
+    private int chapterNumber;
+    private int restartChapter;
 
     // Create ReplyKeyboardMarkup object
     private ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
@@ -67,6 +68,8 @@ public class TransilvaniaProjectBot extends TelegramLongPollingBot {
                 row.add("Ronin");
                 keyboard.add(row);
 
+                this.chapterNumber = 1;
+
             } else if (message_text.equals("/description")) {
                 message_text = "Transilvania project is a adventure text game.\n" +
                         "During the story you have to fight different creatures, make dicisions and see where your choices will take you.";
@@ -86,10 +89,29 @@ public class TransilvaniaProjectBot extends TelegramLongPollingBot {
                     keyboard.add(row);
                 }
 
+            }else if (message_text.equals("Restart, please")){
+                message_text = Story.getAnswer(chapterNumber, message_text); // after button "option text" pressed - loads (result text)
+                this.chapterNumber = Story.getNextChapterNumber(restartChapter, message_text); // finds <next chapter> thro optionText -> resultID -> nextChapter
+
+                message = new SendMessage()
+                        .setChatId(chat_id)
+                        .setText(message_text + "\n" + Story.loadChapterText(restartChapter)); // result text + next chapter <text>
+
+                for (int buttonNo = 0; buttonNo < Story.getAmountOfResult(chapterNumber); buttonNo++) {
+                    KeyboardRow row = new KeyboardRow();
+                    row.add(Story.getOptionName(buttonNo, chapterNumber));  // option text +
+                    keyboard.add(row);
+                }
+
             } else {
                 String oldMessageText = message_text;
                 message_text = Story.getAnswer(chapterNumber, oldMessageText); // after button "option text" pressed - loads (result text)
                 this.chapterNumber = Story.getNextChapterNumber(chapterNumber, oldMessageText); // finds <next chapter> thro optionText -> resultID -> nextChapter
+
+                if (Story.isRestartChapterN(chapterNumber)) {
+                    restartChapter = chapterNumber;
+                    Story.loadChapterByNumber(0).getResultN(0).setNextChapterID(restartChapter);
+                }
 
                 message = new SendMessage()
                         .setChatId(chat_id)

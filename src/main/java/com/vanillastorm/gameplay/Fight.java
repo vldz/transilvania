@@ -1,7 +1,7 @@
 package com.vanillastorm.gameplay;
 
 import com.vanillastorm.creatures.Creature;
-import com.vanillastorm.creatures.protagonists.stuff.Backpack;
+import com.vanillastorm.creatures.stuff.Backpack;
 import com.vanillastorm.util.Color;
 
 import java.util.Scanner;

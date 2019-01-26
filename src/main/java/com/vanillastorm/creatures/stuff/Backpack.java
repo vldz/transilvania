@@ -1,7 +1,7 @@
-package com.vanillastorm.creatures.protagonists.stuff;
+package com.vanillastorm.creatures.stuff;
 
 
-import com.vanillastorm.creatures.protagonists.stuff.Items.Item;
+import com.vanillastorm.creatures.stuff.Items.Item;
 import com.vanillastorm.util.Color;
 
 import java.util.ArrayList;

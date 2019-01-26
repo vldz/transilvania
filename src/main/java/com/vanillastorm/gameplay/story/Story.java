@@ -52,6 +52,8 @@ public class Story {
                     Element chapterElement = (Element) chaptersList.item(temp);
                     chapter = new Chapter();
 
+                    chapter.setRestart(Boolean.parseBoolean(chapterElement.getAttribute("isRestart")));
+
                     NodeList text = chapterElement.getElementsByTagName("text");
                     Element textElement = (Element) text.item(0);
                     chapter.setText(textElement.getTextContent());
@@ -89,12 +91,16 @@ public class Story {
 
     private static String checkStory(String storyName) {
         if (storyName.equals("Detective Len")) {
-            return "storyDetective.xml";
+            return "detectiveStory.xml";
         } else if (storyName.equals("Mad Scientist")) {
-            return "storyScientist.xml";
+            return "scientistStory.xml";
         } else {
-            return "storyRonin.xml";
+            return "roninStory.xml";
         }
+    }
+
+    public static Chapter loadChapterByNumber (int chapterNumber) {
+        return chapters.get(chapterNumber);
     }
 
     public static String loadChapterText (int chapterNumber) {
@@ -115,5 +121,9 @@ public class Story {
 
     public static String getAnswer(int chapterNumber, String message) {
         return chapters.get(chapterNumber).getAnswerResult(message);
+    }
+
+    public static boolean isRestartChapterN(int chapterNumber) {
+        return loadChapterByNumber(chapterNumber).isRestart();
     }
 }

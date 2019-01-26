@@ -7,6 +7,7 @@ public class Chapter {
     private List<Result> results = new ArrayList<>();
 
     private String text;
+    private boolean isRestart;
 
     public void addOption(Option option) {
         this.options.add(option);
@@ -22,6 +23,14 @@ public class Chapter {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public boolean isRestart() {
+        return isRestart;
+    }
+
+    public void setRestart(boolean restart) {
+        isRestart = restart;
     }
 
     public String optionText(int optionNumber) {
@@ -42,6 +51,10 @@ public class Chapter {
             }
         }
         return 0;
+    }
+
+    public Result getResultN (int n) {
+        return results.get(n);
     }
 
     public String getResultText(int resultId) {

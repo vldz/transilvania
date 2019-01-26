@@ -1,4 +1,4 @@
-package com.vanillastorm.creatures.protagonists.stuff;
+package com.vanillastorm.creatures.stuff;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package com.vanillastorm.creatures.protagonists.stuff.Items.medkits;
+package com.vanillastorm.creatures.stuff.Items.medkits;
 
 public class SmallMedkit extends Medkit {
     public SmallMedkit() {

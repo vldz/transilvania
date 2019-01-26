@@ -1,6 +1,6 @@
-package com.vanillastorm.creatures.protagonists.stuff.Items.medkits;
+package com.vanillastorm.creatures.stuff.Items.medkits;
 
-import com.vanillastorm.creatures.protagonists.stuff.Items.Item;
+import com.vanillastorm.creatures.stuff.Items.Item;
 
 public class Medkit extends Item{
     private int healPoints;

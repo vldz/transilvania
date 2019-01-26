@@ -1,4 +1,4 @@
-package com.vanillastorm.creatures.protagonists.stuff.Items;
+package com.vanillastorm.creatures.stuff.Items;
 
 
 public class Item {
