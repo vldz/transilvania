@@ -52,8 +52,6 @@ public class Story {
                     Element chapterElement = (Element) chaptersList.item(temp);
                     chapter = new Chapter();
 
-                    chapter.setRestart(Boolean.parseBoolean(chapterElement.getAttribute("isRestart")));
-
                     NodeList text = chapterElement.getElementsByTagName("text");
                     Element textElement = (Element) text.item(0);
                     chapter.setText(textElement.getTextContent());
@@ -75,6 +73,7 @@ public class Story {
                         Result result = new Result();
                         result.setText(resultElement.getTextContent());
                         result.setNextChapterID(Integer.parseInt(resultElement.getAttribute("nextChapterID")));
+
                         chapter.addResult(result);
                     }
                     chapters.add(chapter);
@@ -123,7 +122,8 @@ public class Story {
         return chapters.get(chapterNumber).getAnswerResult(message);
     }
 
-    public static boolean isRestartChapterN(int chapterNumber) {
-        return loadChapterByNumber(chapterNumber).isRestart();
+    public static void setCheckpoint(int checkPoint) {
+        chapters.get(0).getFirstResult().setNextChapterID(checkPoint);
     }
+
 }

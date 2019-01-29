@@ -1,25 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <chapters>
-        <chapter chapterID="0">
-            <text>Restart?</text>
+    <chapter chapterID="0">
+        <text>
+            Restart?
+        </text>
 
-            <option resultID="0">Yes, please</option>
-            <option resultID="1">No, please, stop it</option>
+        <option resultID="0">Yes, restart, please</option>
+        <option resultID="1">No, please, stop it</option>
 
-            <result nextChapterID="1">gl hf</result>
-            <result nextChapterID="1">bad for you</result>
-        </chapter>
+        <result nextChapterID="0">Restarting from checkpoint...</result>
+        <!--to end of the game-->
+        <result nextChapterID="4">Bad for you:(</result>
+    </chapter>
 
-        <chapter chapterID="1">
-            <text>
-Scientist story
-            </text>
+    <chapter chapterID="1">
+        <text>
+            Scientist story
+        </text>
 
-            <option resultID="0">yeap</option>
-            <option resultID="1">nope</option>
+        <option resultID="0">yeap</option>
+        <option resultID="1">nope</option>
 
-            <result nextChapterID="0">Scientist decided to fap</result>
-            <result nextChapterID="0">Scientist decided to eat</result>
-        </chapter>
+        <result nextChapterID="0">Scientist decided to fap</result>
+        <result nextChapterID="0">Scientist decided to eat</result>
+    </chapter>
 </chapters>

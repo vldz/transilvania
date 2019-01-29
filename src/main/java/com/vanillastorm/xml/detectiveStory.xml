@@ -6,12 +6,12 @@
 Restart?
         </text>
 
-        <option resultID="0">Restart, please</option>
+        <option resultID="0">Yes, restart, please</option>
         <option resultID="1">No, please, stop it</option>
 
-        <result nextChapterID="0">Gl Hf</result>
+        <result nextChapterID="0">Restarting from checkpoint...</result>
         <!--to end of the game-->
-        <result nextChapterID="5">Bad for you</result>
+        <result nextChapterID="4">Bad for you:(</result>
     </chapter>
 
     <chapter chapterID="1" isRestart="false">
@@ -73,16 +73,22 @@ Chapter 4?
         <result nextChapterID="0">bad for you</result>
     </chapter>
 
-    <chapter chapterID="4" isRestart="false">
-        <text>
-  Chapter 4
-  Chapter 5?
-        </text>
-        <option resultID="0">Yes, please</option>
-        <option resultID="1">No, please, stop it</option>
 
-        <result nextChapterID="0">gl hf</result>
-        <result nextChapterID="0">bad for you</result>
+
+
+
+
+
+
+    <chapter chapterID="4">
+        <text>
+This is the end.
+        </text>
+        <option resultID="0">Characters story list</option>
+        <option resultID="1">I will never play this game anymore.</option>
+
+        <result nextChapterID="0">Loading character list...</result>
+        <result nextChapterID="4">Suck it, noob, play minecraft.</result>
     </chapter>
 
 </chapters>

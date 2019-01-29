@@ -161,65 +161,6 @@ public class Creature implements Action {
         return this.gold;
     }
 
-    public static class CreatureBuilder {
-        private String name;
-        private int hp;
-        private int level;
-
-        private double strength;
-        private int accuracy;
-
-        private String shieldName;
-
-        private int gold;
-
-        private String color;
-
-        public CreatureBuilder withName(String name) {
-            this.name = name;
-            return this;
-        }
-
-        public CreatureBuilder withHp(int hp) {
-            this.hp = hp;
-            return this;
-        }
-
-        public CreatureBuilder withLevel(int level) {
-            this.level = level;
-            return this;
-        }
-
-        public CreatureBuilder withStrength(int strength) {
-            this.strength = strength;
-            return this;
-        }
-
-        public CreatureBuilder withAccuracy(int accuracy) {
-            this.accuracy = accuracy;
-            return this;
-        }
-
-        public CreatureBuilder withShieldName(String shieldName) {
-            this.shieldName = shieldName;
-            return this;
-        }
-
-        public CreatureBuilder withGold(int gold) {
-            this.gold = gold;
-            return this;
-        }
-
-        public CreatureBuilder withColor(String color) {
-            this.color = color;
-            return this;
-        }
-
-        public Creature build() {
-           return new Creature(name, hp, level, strength, accuracy, shieldName, gold, color);
-        }
-    }
-
 }
 
 //TODO: poison, bleed effects(steps), mana

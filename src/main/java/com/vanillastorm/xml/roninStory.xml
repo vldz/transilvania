@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <chapters>
+    <chapter chapterID="0">
+        <text>
+            Restart?
+        </text>
+
+        <option resultID="0">Yes, restart, please</option>
+        <option resultID="1">No, please, stop it</option>
+
+        <result nextChapterID="0">Restarting from checkpoint...</result>
+        <!--to end of the game-->
+        <result nextChapterID="4">Bad for you:(</result>
+    </chapter>
+
     <chapter chapterID="">
         <text>
 Ronin story

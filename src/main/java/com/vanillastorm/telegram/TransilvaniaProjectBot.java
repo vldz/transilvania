@@ -14,8 +14,8 @@ import java.util.List;
 public class TransilvaniaProjectBot extends TelegramLongPollingBot {
 
     private Story creatureStory;
+
     private int chapterNumber;
-    private int restartChapter;
 
     // Create ReplyKeyboardMarkup object
     private ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
@@ -33,27 +33,14 @@ public class TransilvaniaProjectBot extends TelegramLongPollingBot {
 
         if (update.hasMessage() && update.getMessage().hasText()) {
             SendMessage message;
-            if (message_text.equals("/start")) {
+
+            if (message_text.equals("/start") || message_text.equals("Characters story list")) {
                 message = new SendMessage() // Create a message object object
                         .setChatId(chat_id)
                         .setText("Choose story:" +
                                 "\n * Detective Len noir story." +
-//                                "\n * 100 hp" +
-//                                "\n * 25 strength" +
-//                                "\n * 7 accuracy" +
-//                                "\n * No shield\n" +
-
-                                "\n * Mad Scientist mathematical story." +
-//                                "\n * 125 hp" +
-//                                "\n * 10 strength" +
-//                                "\n * 15 accuracy" +
-//                                "\n * Lab coat\n" +
-
-                                "\n * Ronin Muramatsu Takanao samurai story."
-//                                "\n * 80 hp" +
-//                                "\n * 33 strength" +
-//                                "\n * 13 accuracy" +
-//                                "\n * Kimono"
+                                "\n * Scientist Mad mathematical story." +
+                                "\n * Ronin Nona Me samurai story."
                                 );
 
                 KeyboardRow row = new KeyboardRow();
@@ -65,10 +52,8 @@ public class TransilvaniaProjectBot extends TelegramLongPollingBot {
                 keyboard.add(row);
 
                 row = new KeyboardRow();
-                row.add("Ronin");
+                row.add("Ronin Nona Me ");
                 keyboard.add(row);
-
-                this.chapterNumber = 1;
 
             } else if (message_text.equals("/description")) {
                 message_text = "Transilvania project is a adventure text game.\n" +
@@ -77,7 +62,8 @@ public class TransilvaniaProjectBot extends TelegramLongPollingBot {
                         .setChatId(chat_id)
                         .setText(message_text);
 
-            } else if (message_text.equals("Detective Len") || message_text.equals("Mad Scientist") || message_text.equals("Ronin")) {
+            } else if (message_text.equals("Detective Len") || message_text.equals("Mad Scientist") || message_text.equals("Ronin Nona Me")) {
+                this.chapterNumber = 1;
                 creatureStory = new Story(message_text);
                 message = new SendMessage() // Create a message object object
                         .setChatId(chat_id)
@@ -88,30 +74,15 @@ public class TransilvaniaProjectBot extends TelegramLongPollingBot {
                     row.add(Story.getOptionName(i, chapterNumber));
                     keyboard.add(row);
                 }
-
-            }else if (message_text.equals("Restart, please")){
-                message_text = Story.getAnswer(chapterNumber, message_text); // after button "option text" pressed - loads (result text)
-                this.chapterNumber = Story.getNextChapterNumber(restartChapter, message_text); // finds <next chapter> thro optionText -> resultID -> nextChapter
-
-                message = new SendMessage()
-                        .setChatId(chat_id)
-                        .setText(message_text + "\n" + Story.loadChapterText(restartChapter)); // result text + next chapter <text>
-
-                for (int buttonNo = 0; buttonNo < Story.getAmountOfResult(chapterNumber); buttonNo++) {
-                    KeyboardRow row = new KeyboardRow();
-                    row.add(Story.getOptionName(buttonNo, chapterNumber));  // option text +
-                    keyboard.add(row);
-                }
-
             } else {
                 String oldMessageText = message_text;
                 message_text = Story.getAnswer(chapterNumber, oldMessageText); // after button "option text" pressed - loads (result text)
-                this.chapterNumber = Story.getNextChapterNumber(chapterNumber, oldMessageText); // finds <next chapter> thro optionText -> resultID -> nextChapter
 
-                if (Story.isRestartChapterN(chapterNumber)) {
-                    restartChapter = chapterNumber;
-                    Story.loadChapterByNumber(0).getResultN(0).setNextChapterID(restartChapter);
+                if (chapterNumber != 0) {
+                    Story.setCheckpoint(chapterNumber);
                 }
+
+                this.chapterNumber = Story.getNextChapterNumber(chapterNumber, oldMessageText); // finds <next chapter> thro optionText -> resultID -> nextChapter
 
                 message = new SendMessage()
                         .setChatId(chat_id)

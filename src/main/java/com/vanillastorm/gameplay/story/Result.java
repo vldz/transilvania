@@ -3,6 +3,7 @@ package com.vanillastorm.gameplay.story;
 // extra dialog or redirect on chapter
 public class Result {
     private int nextChapterID;
+
     private String text;
 
     public String getText() {

@@ -69,4 +69,8 @@ public class Chapter {
         int resultID = getResultIDByOptionText(text);
         return this.results.get(resultID).getNextChapterID();
     }
+
+    public Result getFirstResult(){
+        return results.get(0);
+    }
 }
