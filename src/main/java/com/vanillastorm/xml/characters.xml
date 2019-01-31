@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <characters>
-    <character name = "Detective Len">
+    <character name="Detective Len" characterID = "0">
         <hp>100</hp>
         <mana>10</mana>
         <level>1</level>
@@ -11,7 +11,7 @@
         <gold>5</gold>
     </character>
 
-    <character name = "Scientist Mad">
+    <character name="Scientist Mad" characterID = "1">
         <hp>100</hp>
         <mana>10</mana>
         <level>1</level>
@@ -21,7 +21,7 @@
         <gold>5</gold>
     </character>
 
-    <character name = "Ronin Nona Me">
+    <character name="Ronin Nona Me" characterID = "2">
         <hp>100</hp>
         <mana>10</mana>
         <level>1</level>
@@ -31,7 +31,7 @@
         <gold>5</gold>
     </character>
 
-    <character name = "Fatty Kathy">
+    <character name="Fatty Kathy" characterID = "3">
         <hp>75</hp>
         <mana>10</mana>
         <level>1</level>
@@ -39,5 +39,15 @@
         <accuracy>1</accuracy>
         <shield>None</shield>
         <gold>12</gold>
+    </character>
+
+    <character name="Unbeatable Robo-guard" characterID = "4">
+        <hp>300</hp>
+        <mana>10</mana>
+        <level>5</level>
+        <strength>20</strength>
+        <accuracy>20</accuracy>
+        <shield>Heavy armour</shield>
+        <gold>100</gold>
     </character>
 </characters>

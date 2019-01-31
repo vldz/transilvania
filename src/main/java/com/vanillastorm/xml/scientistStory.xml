@@ -3,7 +3,7 @@
 <chapters>
     <chapter chapterID="0">
         <text>
-            Restart?
+Restart?
         </text>
 
         <option resultID="0">Yes, restart, please</option>

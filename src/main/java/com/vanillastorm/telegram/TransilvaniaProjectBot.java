@@ -34,7 +34,7 @@ public class TransilvaniaProjectBot extends TelegramLongPollingBot {
         if (update.hasMessage() && update.getMessage().hasText()) {
             SendMessage message;
 
-            if (message_text.equals("/start") || message_text.equals("Characters story list")) {
+            if (message_text.equals("/start") || message_text.equals("Characters story list?")) {
                 message = new SendMessage() // Create a message object object
                         .setChatId(chat_id)
                         .setText("Choose story:" +

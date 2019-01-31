@@ -47,7 +47,7 @@ Restart?
             "What the f...? I can jump through the window of fight club this bitch"
         </text>
 
-        <option resultID="0">Jump through the window</option>
+        <option resultID="0">Pussy jump through the window</option>
         <option resultID="1">Fight club this bitch</option>
 
         <result nextChapterID="0">
@@ -84,7 +84,7 @@ Chapter 4?
         <text>
 This is the end.
         </text>
-        <option resultID="0">Characters story list</option>
+        <option resultID="0">Characters story list?</option>
         <option resultID="1">I will never play this game anymore.</option>
 
         <result nextChapterID="0">Loading character list...</result>
