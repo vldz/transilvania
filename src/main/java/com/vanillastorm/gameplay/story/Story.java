@@ -91,7 +91,7 @@ public class Story {
     private static String checkStory(String storyName) {
         if (storyName.equals("Detective Len")) {
             return "detectiveStory.xml";
-        } else if (storyName.equals("Mad Scientist")) {
+        } else if (storyName.equals("Scientist Mad")) {
             return "scientistStory.xml";
         } else {
             return "roninStory.xml";

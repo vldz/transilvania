@@ -48,7 +48,7 @@ public class TransilvaniaProjectBot extends TelegramLongPollingBot {
                 keyboard.add(row);
 
                 row = new KeyboardRow();
-                row.add("Mad Scientist");
+                row.add("Scientist Mad");
                 keyboard.add(row);
 
                 row = new KeyboardRow();
@@ -62,7 +62,7 @@ public class TransilvaniaProjectBot extends TelegramLongPollingBot {
                         .setChatId(chat_id)
                         .setText(message_text);
 
-            } else if (message_text.equals("Detective Len") || message_text.equals("Mad Scientist") || message_text.equals("Ronin Nona Me")) {
+            } else if (message_text.equals("Detective Len") || message_text.equals("Scientist Mad") || message_text.equals("Ronin Nona Me")) {
                 this.chapterNumber = 1;
                 creatureStory = new Story(message_text);
                 message = new SendMessage() // Create a message object object

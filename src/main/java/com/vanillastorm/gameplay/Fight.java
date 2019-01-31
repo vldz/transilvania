@@ -1,18 +1,18 @@
 package com.vanillastorm.gameplay;
 
-import com.vanillastorm.creatures.Creature;
+import com.vanillastorm.creatures.Character;
 import com.vanillastorm.creatures.stuff.Backpack;
 import com.vanillastorm.util.Color;
 
 import java.util.Scanner;
 
 public class Fight {
-    private Creature hero;
-    private Creature villain;
+    private Character hero;
+    private Character villain;
 
     private Scanner scanner = new Scanner(System.in);
 
-    public Fight(Creature hero, Creature villain) {
+    public Fight(Character hero, Character villain) {
         this.hero = hero;
         this.villain = villain;
 
@@ -31,7 +31,7 @@ public class Fight {
         }
     }
 
-    private boolean bothAlive(Creature hero, Creature villain) {
+    private boolean bothAlive(Character hero, Character villain) {
         if (hero.isAlive() && villain.isAlive()) {
             return true;
         } else return false;
@@ -41,7 +41,7 @@ public class Fight {
         boolean performedAction = false;
 
         while (!performedAction) {
-            printSuggestedAction();
+            printSuggestedAction(hero);
             int action = scanner.nextInt();
             switch (action) {
                 case 1:
@@ -49,6 +49,10 @@ public class Fight {
                     performedAction = true;
                     break;
                 case 2:
+                    hero.attackWithWeapon(villain);
+                    performedAction = true;
+                    break;
+                case 3:
                     Backpack.printItems();
                     printBackpackActions();
 
@@ -79,13 +83,13 @@ public class Fight {
         villain.attack(hero);
     }
 
-    private void printSuggestedAction() {
+    private void printSuggestedAction(Character hero) {
         System.out.println(Color.ANSI_RESET + "Chose an action:");
         System.out.println("-----------------------");
 
         System.out.println(Color.RED + "1.Simple attack");
-        //System.out.println("2.Strong attack attack");
-        System.out.println(Color.BLUE + "2.Backpack");
+        System.out.println("2.Attack with " + hero.getWeapon().getWeaponName().toLowerCase());
+        System.out.println(Color.BLUE + "3.Backpack");
 
         System.out.println(Color.PURPLE + "0.Skip move");
         System.out.println(Color.ANSI_RESET + "-----------------------");

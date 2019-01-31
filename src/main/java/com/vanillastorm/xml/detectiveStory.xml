@@ -11,7 +11,7 @@ Restart?
 
         <result nextChapterID="0">Restarting from checkpoint...</result>
         <!--to end of the game-->
-        <result nextChapterID="4">Bad for you:(</result>
+        <result nextChapterID="69">Bad for you:(</result>
     </chapter>
 
     <chapter chapterID="1" isRestart="false">
@@ -80,7 +80,7 @@ Chapter 4?
 
 
 
-    <chapter chapterID="4">
+    <chapter chapterID="69">
         <text>
 This is the end.
         </text>

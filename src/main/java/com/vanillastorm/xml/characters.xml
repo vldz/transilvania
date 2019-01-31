@@ -5,19 +5,21 @@
         <hp>100</hp>
         <mana>10</mana>
         <level>1</level>
-        <strength>25</strength>
-        <accuracy>5</accuracy>
+        <strength>20</strength>
+        <accuracy>1</accuracy>
+        <weapon>Knife</weapon>
         <shield>None</shield>
         <gold>5</gold>
     </character>
 
     <character name="Scientist Mad" characterID = "1">
         <hp>100</hp>
-        <mana>10</mana>
+        <mana>15</mana>
         <level>1</level>
-        <strength>25</strength>
+        <strength>15</strength>
         <accuracy>5</accuracy>
-        <shield>None</shield>
+        <weapon>Knife</weapon>
+        <shield>Lab coat</shield>
         <gold>5</gold>
     </character>
 
@@ -26,8 +28,9 @@
         <mana>10</mana>
         <level>1</level>
         <strength>25</strength>
-        <accuracy>5</accuracy>
-        <shield>None</shield>
+        <accuracy>10</accuracy>
+        <weapon>Knife</weapon>
+        <shield>Kimono</shield>
         <gold>5</gold>
     </character>
 
@@ -37,6 +40,7 @@
         <level>1</level>
         <strength>10</strength>
         <accuracy>1</accuracy>
+        <weapon>Knife</weapon>
         <shield>None</shield>
         <gold>12</gold>
     </character>
@@ -47,6 +51,7 @@
         <level>5</level>
         <strength>20</strength>
         <accuracy>20</accuracy>
+        <weapon>Knife</weapon>
         <shield>Heavy armour</shield>
         <gold>100</gold>
     </character>

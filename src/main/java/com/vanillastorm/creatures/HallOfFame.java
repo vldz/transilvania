@@ -1,5 +1,6 @@
 package com.vanillastorm.creatures;
 
+import com.vanillastorm.creatures.stuff.Weapon;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -22,9 +23,9 @@ public class HallOfFame {
         }
     }
 
-    private static List<Creature> parseCreatures() {
-        List<Creature> characters = new ArrayList<>();
-        Creature character = null;
+    private static List<Character> parseCreatures() {
+        List<Character> characters = new ArrayList<>();
+        Character character = null;
 
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -40,15 +41,16 @@ public class HallOfFame {
                 Node node = characterList.item(temp);
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
                     Element characterElement = (Element) characterList.item(temp);
-                    character = new Creature();
+                    character = new Character();
 
                     character.setName(characterElement.getAttribute("name"));
 
                     character.setMaxHp(Integer.parseInt(characterElement.getElementsByTagName("hp").item(0).getTextContent()));
-//                    character.setMana(Integer.parseInt(characterElement.getElementsByTagName("mana").item(0).getTextContent()))
+                    character.setMaxMana(Integer.parseInt(characterElement.getElementsByTagName("mana").item(0).getTextContent()));
                     character.setLevel(Integer.parseInt(characterElement.getElementsByTagName("level").item(0).getTextContent()));
                     character.setStrength(Integer.parseInt(characterElement.getElementsByTagName("strength").item(0).getTextContent()));
                     character.setAccuracy(Integer.parseInt(characterElement.getElementsByTagName("accuracy").item(0).getTextContent()));
+                    character.setWeapon(characterElement.getElementsByTagName("weapon").item(0).getTextContent());
                     character.setMaxDefencePointsByShieldName(characterElement.getElementsByTagName("shield").item(0).getTextContent());
                     character.setGold(Integer.parseInt(characterElement.getElementsByTagName("gold").item(0).getTextContent()));
 
@@ -63,7 +65,7 @@ public class HallOfFame {
         return characters;
     }
 
-    public static Creature getCharacter(int number) {
-        return (Creature) HallOfFame.characters.get(number);
+    public static Character getCharacter(int number) {
+        return (Character) HallOfFame.characters.get(number);
     }
 }

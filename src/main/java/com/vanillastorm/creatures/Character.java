@@ -4,13 +4,17 @@ import com.vanillastorm.creatures.stuff.Backpack;
 import com.vanillastorm.creatures.stuff.Items.Item;
 import com.vanillastorm.creatures.stuff.Items.medkits.Medkit;
 import com.vanillastorm.creatures.stuff.Shield;
+import com.vanillastorm.creatures.stuff.Weapon;
 import com.vanillastorm.util.Color;
 
-public class Creature implements Action {
+public class Character {
 
     private String name;
     private int maxHp;
     private int hp;
+
+    private int maxMana;
+    private int mana;
 
     private int level;
 
@@ -20,90 +24,87 @@ public class Creature implements Action {
     private double maxDefencePoints;
     private double defencePoints;
 
+    private Weapon weapon;
+
     private int gold;
 
-    private String color;
 
-    private String damageColor = Color.RED;
-    private String hpColor = Color.GREEN;
+    public Character() { }
 
-    public Creature() {
-        this.hp = maxHp;
+    public void attack(Character character) {
+        int damage = damageCulculation(character, 0);
+        printInfoDamage(character, damage);
+        character.takeDamage(damage);
+        isDead(character);
     }
 
-//    public Creature(String name, int hp, int level, double strength, int accuracy, int gold, String color) {
-//        this.name = name;
-//
-//        this.defencePoints = maxDefencePoints;
-//
-//        this.hp = hp;
-//        this.maxHp = this.hp;
-//        this.level = level;
-//
-//        this.strength = strength;
-//        this.accuracy = accuracy;
-//
-//        this.gold = gold;
-//
-//        this.color = color;
-//    }
-
-    @Override
-    public void attack(Creature creature) {
-        int damage = (int) (((this.strength * generateAccuracy())) * (1 - (creature.defencePoints / 150)));
-        printInfoDamage(creature, damage);
-        creature.takeDamage(damage);
-        if (!creature.isAlive()) {
-            this.getEnemysGold(creature);
-            System.out.println(this.getName() + " earns " + Color.YELLOW + "+" + creature.getGold() + " gold(" + Color.YELLOW + this.getGold() + ").");
-        }
-        System.out.println();
+    // mana check
+    public void attackWithWeapon(Character character) {
+        int damageWithWeapon = damageCulculation(character, 1) + this.weapon.getDamage();
+        this.mana -= this.weapon.getMinusManaAfterUsage();
+        printInfoDamage(character, damageWithWeapon);
+        character.takeDamage(damageWithWeapon);
+        isDead(character);
     }
 
-    @Override
-    public void takeDamage(double damage) {
+    public void superStrongAttack(Character character) {
 
+    }
+
+    private int damageCulculation(Character character, int weaponCoef) {
+        return (int) (((this.strength * generateAccuracy(weaponCoef))) * (1 - (character.defencePoints / 150)));
+    }
+
+    private void takeDamage(double damage) {
         this.hp -= (int) damage;
         // TODO: defencePoints formula
-        this.defencePoints -= (int) damage; // ???
-
-        if (this.defencePoints <= 0) {
-            this.defencePoints = 0;
-            System.out.printf("\nShield of %s is broken.", this.getName());
-            // how to see this once?
-        }
+        this.defencePoints -= (int) damage;
 
         if (isAlive()) {
-            System.out.printf("%n%s is now %d hp.\n", this.name, this.hp);
+            System.out.printf("%n%s is now %d hp", this.name, this.hp);
+            if (this.defencePoints <= 0) {
+                this.defencePoints = 0;
+                System.out.println(", no shield.");
+            } else {
+                System.out.println(", " + (int) this.defencePoints + " shield.");
+            }
         } else {
             System.out.format("%n%s is dead.\n", this.name);
         }
     }
 
-    @Override
-    public void heal(Creature creature, Medkit medkit) {
+    public void isDead(Character character) {
+        if (!character.isAlive()) {
+            this.getEnemysGold(character);
+            System.out.println(this.getName() + " earns " + Color.YELLOW + "+" + character.getGold() + " gold(" + Color.YELLOW + this.getGold() + ").");
+        }
+        System.out.println();
+    }
+
+    public void heal(Character character, Medkit medkit) {
         if (this.hp != this.maxHp) {
             int totalHP = this.hp += medkit.getHealPoints();
             this.hp = (totalHP > maxHp) ? maxHp : totalHP;
             Backpack.remove(medkit);
             printHealUsage(medkit);
         } else {
-            System.out.println("No need to heal, " + creature.getName() + " is full hp.");
+            System.out.println("No need to heal, " + character.getName() + " is full hp.");
         }
     }
 
     //TODO: make usage of different items
-
     public void useItem(Item item) {
         if (item instanceof Medkit) {
             heal(this, (Medkit) item);
         }
     }
 
-    @Override
-    public double generateAccuracy() {
+    public double generateAccuracy(int weaponCoef) {
         double totalAccuracy = ((Math.random() * 100)) + this.accuracy;
-        return totalAccuracy / 100;
+        // 1 for attacks with weapon
+        if (weaponCoef == 1) {
+            return totalAccuracy / 50;
+        } else return totalAccuracy /100;
 //        System.out.print(Color.ANSI_RESET + "");
 //        if (totalAccuracy < 15) {
 //            System.out.println("Pussy attack. ");
@@ -123,13 +124,13 @@ public class Creature implements Action {
 //        }
     }
 
-    public void printInfoDamage(Creature anotherCreature, int damage) {
+    public void printInfoDamage(Character anotherCharacter, int damage) {
         System.out.printf(
                         this.name + " done " +
                         "-" + damage
                         + " damage to "
-                        + anotherCreature.getName()
-                        + "(" + anotherCreature.getHp() + " hp, " + (int) anotherCreature.defencePoints + " shield).");
+                        + anotherCharacter.getName()
+                        + "(" + anotherCharacter.getHp() + " hp, " + (int) anotherCharacter.defencePoints + " shield).");
     }
 
     public void printHealUsage(Medkit medkit) {
@@ -141,7 +142,6 @@ public class Creature implements Action {
         );
     }
 
-    @Override
     public boolean isAlive() {
         return this.hp > 0;
     }
@@ -158,8 +158,8 @@ public class Creature implements Action {
         return gold;
     }
 
-    public int getEnemysGold(Creature creature) {
-        this.gold += creature.getGold();
+    public int getEnemysGold(Character character) {
+        this.gold += character.getGold();
         return this.gold;
     }
 
@@ -170,6 +170,11 @@ public class Creature implements Action {
     public void setMaxHp(int maxHp) {
         this.maxHp = maxHp;
         this.hp = maxHp;
+    }
+
+    public void setMaxMana(int maxMana) {
+        this.maxMana = maxMana;
+        this.mana = maxMana;
     }
 
     public void setLevel(int level) {
@@ -188,6 +193,14 @@ public class Creature implements Action {
         double def = Shield.getMaxDefencePoints(shieldName);
         this.maxDefencePoints = def;
         this.defencePoints = def;
+    }
+
+    public void setWeapon(String weapon) {
+        this.weapon = Weapon.getWeapon(weapon);
+    }
+
+    public Weapon getWeapon() {
+        return weapon;
     }
 
     public void setGold(int gold) {
