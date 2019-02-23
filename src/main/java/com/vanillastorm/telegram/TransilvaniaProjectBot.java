@@ -8,7 +8,6 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMar
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-import java.security.Key;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -72,7 +71,7 @@ public class TransilvaniaProjectBot extends TelegramLongPollingBot {
                     if (creatureStory.heroIsAlive()) {
                         if (message_text.equals("Casual attack")) {
                             message_text = creatureStory.simpleAttack();
-                        } else if (message_text.equals("Weapon attack(" + creatureStory.getWeaponManaUsage() + " mana)")) {
+                        } else if (message_text.equals(creatureStory.getWeaponName() + " attack(" + creatureStory.getWeaponManaUsage() + " mana)")) {
                             message_text = creatureStory.attackWithWeapon();
                         } else if (message_text.equals("Backpack")) {
                             //  message_text = creatureStory.showBackpack();
@@ -149,7 +148,7 @@ public class TransilvaniaProjectBot extends TelegramLongPollingBot {
         row.add("Casual attack");
         keyboard.add(row);
         row = new KeyboardRow();
-        row.add("Weapon attack(" + creatureStory.getWeaponManaUsage() + " mana)");
+        row.add(creatureStory.getWeaponName() + " attack(" + creatureStory.getWeaponManaUsage() + " mana)");
         keyboard.add(row);
 
         row = new KeyboardRow();

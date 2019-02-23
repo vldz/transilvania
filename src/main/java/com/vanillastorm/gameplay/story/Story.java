@@ -182,4 +182,8 @@ public class Story {
     public String getWeaponManaUsage() {
         return hero.weaponMana();
     }
+
+    public String getWeaponName() {
+        return hero.weaponName();
+    }
 }

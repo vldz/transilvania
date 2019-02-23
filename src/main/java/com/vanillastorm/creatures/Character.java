@@ -219,6 +219,10 @@ public class Character {
     public String weaponMana(){
         return "" + this.weapon.getMinusManaAfterUsage();
     }
+
+    public String weaponName() {
+        return "" + this.weapon.getWeaponName();
+    }
 }
 
 //TODO: poison, bleed effects(steps), mana
