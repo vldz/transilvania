@@ -12,6 +12,7 @@ public class Weapon {
         {
             add(new Weapon("Knife", 3, 7));
             add(new Weapon("Katana", 5, 10));
+            add(new Weapon("Nunchacks", 2, 4));
         }
     };
 

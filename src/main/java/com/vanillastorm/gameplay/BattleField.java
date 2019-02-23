@@ -6,13 +6,13 @@ import com.vanillastorm.util.Color;
 
 import java.util.Scanner;
 
-public class Fight {
+public class BattleField {
     private Character hero;
     private Character villain;
 
     private Scanner scanner = new Scanner(System.in);
 
-    public Fight(Character hero, Character villain) {
+    public BattleField(Character hero, Character villain) {
         this.hero = hero;
         this.villain = villain;
 

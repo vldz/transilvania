@@ -7,16 +7,12 @@ import com.vanillastorm.creatures.stuff.Items.medkits.BigMedkit;
 import com.vanillastorm.creatures.stuff.Items.medkits.Medkit;
 import com.vanillastorm.creatures.stuff.Items.medkits.SmallMedkit;
 
-import com.vanillastorm.gameplay.Fight;
+import com.vanillastorm.gameplay.BattleField;
 import com.vanillastorm.gameplay.Game;
 
 public class Main {
 
     public static void main(String[] args) {
-        HallOfFame hallOfFame = new HallOfFame();
-        Character detective = HallOfFame.getCharacter(0);
-        Character kathy = HallOfFame.getCharacter(3);
-
         Medkit small = new SmallMedkit();
         Medkit big = new BigMedkit();
 
@@ -25,7 +21,7 @@ public class Main {
         System.out.println("Game initialisation");
         Game game = new Game();
         System.out.println("Game initialisation finish");
-        Fight fight = new Fight(detective, kathy);
+        //BattleField fight = new BattleField(detective, kathy);
     }
 
 // TODO: different attacks

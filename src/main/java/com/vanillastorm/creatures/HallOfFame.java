@@ -1,6 +1,5 @@
 package com.vanillastorm.creatures;
 
-import com.vanillastorm.creatures.stuff.Weapon;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -13,17 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HallOfFame {
-    private static List characters;
+    //private List characters;
 
-    public HallOfFame() {
-        try {
-            HallOfFame.characters = parseCreatures();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private static List<Character> parseCreatures() {
+    private static List<Character> parseCreatures(String charactersXml) {
         List<Character> characters = new ArrayList<>();
         Character character = null;
 
@@ -32,7 +23,7 @@ public class HallOfFame {
             DocumentBuilder builder = factory.newDocumentBuilder();
 
             InputStream inputStream = ClassLoader.getSystemClassLoader().
-                    getSystemResourceAsStream("com/vanillastorm/xml/characters.xml");
+                    getSystemResourceAsStream("com/vanillastorm/xml/characters/" + charactersXml);
             Document document = builder.parse(inputStream);
 
             document.getDocumentElement().normalize();
@@ -65,7 +56,14 @@ public class HallOfFame {
         return characters;
     }
 
-    public static Character getCharacter(int number) {
-        return (Character) HallOfFame.characters.get(number);
+    public static List storyCharacters(String charactersName) {
+        List<Character> characters = new ArrayList<>();
+        try {
+            characters = parseCreatures(charactersName + "Characters.xml");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return characters;
     }
+
 }

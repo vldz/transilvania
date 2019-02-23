@@ -13,7 +13,7 @@ public class Shield {
             put("Knight armour", 50.0);
             put("Kevlar", 90.0);
             put("Kevlar and Helmet", 100.0);
-            put("Heavy armour", 500.0);
+            put("Heavy armour", 300.0);
         }
     };
 

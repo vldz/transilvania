@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<characters>
+    <character name="Detective Len" characterID = "0">
+        <hp>100</hp>
+        <mana>10</mana>
+        <level>1</level>
+        <strength>20</strength>
+        <accuracy>1</accuracy>
+        <weapon>Nunchacks</weapon>
+        <shield>None</shield>
+        <gold>5</gold>
+    </character>
+
+    <character name="Fatty Kathy" characterID = "1">
+        <hp>75</hp>
+        <mana>10</mana>
+        <level>1</level>
+        <strength>10</strength>
+        <accuracy>1</accuracy>
+        <weapon>Knife</weapon>
+        <shield>None</shield>
+        <gold>12</gold>
+    </character>
+</characters>

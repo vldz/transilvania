@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<characters>
+    <character name="Scientist Mad" characterID = "0">
+        <hp>100</hp>
+        <mana>15</mana>
+        <level>1</level>
+        <strength>15</strength>
+        <accuracy>10</accuracy>
+        <weapon>Knife</weapon>
+        <shield>Lab coat</shield>
+        <gold>5</gold>
+    </character>
+
+    <character name="Unbeatable Robo-guard" characterID = "1">
+        <hp>300</hp>
+        <mana>10</mana>
+        <level>5</level>
+        <strength>35</strength>
+        <accuracy>20</accuracy>
+        <weapon>Knife</weapon>
+        <shield>Heavy armour</shield>
+        <gold>100</gold>
+    </character>
+</characters>
