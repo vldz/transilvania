@@ -26,6 +26,7 @@ public class Character {
     private Weapon weapon;
 
     private int gold;
+    private String shieldName;
 
     public String attack(Character character) {
         String m = "";
@@ -38,10 +39,15 @@ public class Character {
     // mana check
     public String attackWithWeapon(Character character) {
         String m = "";
-        int damageWithWeapon = damageCulculation(character, 1) + this.weapon.getDamage();
-        this.mana -= this.weapon.getMinusManaAfterUsage();
-        m += printInfoDamage(character, damageWithWeapon, this.weapon.getWeaponName());
-        m += character.takeDamage(damageWithWeapon);
+        int manaCulc = this.mana - this.weapon.getMinusManaAfterUsage();
+        if (manaCulc >= 0) {
+            int damageWithWeapon = damageCulculation(character, 1) + this.weapon.getDamage();
+            this.mana -= this.weapon.getMinusManaAfterUsage();
+            m += printInfoDamage(character, damageWithWeapon, this.weapon.getWeaponName());
+            m += character.takeDamage(damageWithWeapon);
+        } else {
+            m = "Not enough mana, chiiil dude.";
+        }
         return m;
     }
 
@@ -86,6 +92,17 @@ public class Character {
             printHealUsage(medkit);
         } else {
             System.out.println("No need to heal, " + character.getName() + " is full hp.");
+        }
+    }
+
+    public String restoreMana(int manaAmount) {
+        int totalMana = this.mana + manaAmount;
+        if (totalMana >= this.maxMana) {
+            this.mana = this.maxMana;
+            return "Mana is full(" + this.mana + ").";
+        } else {
+            this.mana = totalMana;
+            return "Mana restored for " + manaAmount + ".";
         }
     }
 
@@ -151,6 +168,18 @@ public class Character {
         );
     }
 
+    public String character() {
+        String characterInfo = "---Character INFO---\n";
+        characterInfo += "Name: " + this.getName() + "\n";
+        characterInfo += "Shield: " + this.getShieldName() + "(" + this.getDefencePoints() + ")" + "\n";
+        characterInfo += "Hp: " + this.getHp() + "\n";
+        characterInfo += "Mana: " + this.getMana() + "\n";
+        characterInfo += "Weapon: " + this.weaponName() + "\n";
+        characterInfo += "Gold: " + this.getGold() + "\n";
+        characterInfo += "---Character INFO---\n";
+        return characterInfo;
+    }
+
     public boolean isAlive() {
         return this.hp > 0;
     }
@@ -199,6 +228,7 @@ public class Character {
     }
 
     public void setMaxDefencePointsByShieldName(String shieldName) {
+        this.shieldName = shieldName;
         double def = Shield.getMaxDefencePoints(shieldName);
         this.maxDefencePoints = def;
         this.defencePoints = def;
@@ -222,6 +252,18 @@ public class Character {
 
     public String weaponName() {
         return "" + this.weapon.getWeaponName();
+    }
+
+    public String getMana() {
+        return "" + this.mana;
+    }
+
+    public String getShieldName() {
+        return this.shieldName;
+    }
+
+    public String getDefencePoints() {
+        return "" + this.defencePoints;
     }
 }
 

@@ -45,7 +45,7 @@ public class Story {
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
                     Element chapterElement = (Element) chaptersList.item(temp);
                     chapter = new Chapter();
-                    
+
                     chapter.setFightChapter(Boolean.parseBoolean(chapterElement.getAttribute("isFight")));
 
                     NodeList text = chapterElement.getElementsByTagName("text");
@@ -108,6 +108,10 @@ public class Story {
     }
 
     // Story
+    public String characterInfo() {
+        return hero.character() + "to see statistics: /stats\n";
+    }
+
     public String loadChapterText() {
         return chapters.get(this.chapterNumber).getText();
     }
@@ -176,7 +180,7 @@ public class Story {
     }
 
     public String attackWithWeapon() {
-        return "\n" + hero.attackWithWeapon(currentVillaine);
+        return "" + hero.attackWithWeapon(currentVillaine);
     }
 
     public String getWeaponManaUsage() {
@@ -185,5 +189,13 @@ public class Story {
 
     public String getWeaponName() {
         return hero.weaponName();
+    }
+
+    public String skipMove() {
+        return hero.restoreMana(1);
+    }
+
+    public String showBackpack() {
+        return "";
     }
 }

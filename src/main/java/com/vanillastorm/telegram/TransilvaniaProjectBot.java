@@ -49,6 +49,12 @@ public class TransilvaniaProjectBot extends TelegramLongPollingBot {
 
                 keyboard = charactersKeyboard();
 
+            } else if(message_text.equals("/stats")) {
+                message = new SendMessage()
+                        .setChatId(chat_id)
+                        .setText(creatureStory.characterInfo());
+
+                keyboard = storyKeyboard(creatureStory);
             } else if (message_text.equals("/description")) {
                 message_text = "Transilvania project is a adventure text game.\n" +
                         "During the story you have to fight different creatures, make dicisions and see where your choices will take you.";
@@ -62,28 +68,34 @@ public class TransilvaniaProjectBot extends TelegramLongPollingBot {
 
                 message = new SendMessage()
                         .setChatId(chat_id)
-                        .setText(creatureStory.loadChapterText());
+                        .setText(creatureStory.characterInfo() + creatureStory.loadChapterText());
 
                 keyboard = storyKeyboard(creatureStory);
 
             } else {
                 if (creatureStory.checkForFight()) {
+                    boolean moveWasMade = false;
                     if (creatureStory.heroIsAlive()) {
                         if (message_text.equals("Casual attack")) {
                             message_text = creatureStory.simpleAttack();
+                            moveWasMade = true;
                         } else if (message_text.equals(creatureStory.getWeaponName() + " attack(" + creatureStory.getWeaponManaUsage() + " mana)")) {
                             message_text = creatureStory.attackWithWeapon();
+                            moveWasMade = !message_text.equals("Not enough mana, chiiil dude.");
                         } else if (message_text.equals("Backpack")) {
-                            //  message_text = creatureStory.showBackpack();
+                            // message_text = creatureStory.showBackpack();
                         } else {
-                            //creatureStory.skipMove();
+                            message_text = creatureStory.skipMove();
+                            moveWasMade = true;
                         }
                     } else {
                         //  creatureStory.restart();
                     }
 
                     if (creatureStory.villainIsAlive()) {
-                        message_text += "\n" + creatureStory.villainAttack();
+                        if (moveWasMade) {
+                            message_text += "\n" + creatureStory.villainAttack();
+                        }
                         keyboard = fightKeyboard();
                     } else {
                         message_text = creatureStory.villaneIsDead();

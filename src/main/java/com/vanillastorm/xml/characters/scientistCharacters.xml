@@ -7,7 +7,7 @@
         <level>1</level>
         <strength>15</strength>
         <accuracy>10</accuracy>
-        <weapon>Knife</weapon>
+        <weapon>Microscope</weapon>
         <shield>Lab coat</shield>
         <gold>5</gold>
     </character>
@@ -18,7 +18,7 @@
         <level>5</level>
         <strength>35</strength>
         <accuracy>20</accuracy>
-        <weapon>Knife</weapon>
+        <weapon>Shocker</weapon>
         <shield>Heavy armour</shield>
         <gold>100</gold>
     </character>

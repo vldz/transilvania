@@ -9,7 +9,7 @@
         <accuracy>1</accuracy>
         <weapon>Nunchacks</weapon>
         <shield>None</shield>
-        <gold>5</gold>
+        <gold>0</gold>
     </character>
 
     <character name="Fatty Kathy" characterID = "1">
@@ -18,7 +18,7 @@
         <level>1</level>
         <strength>10</strength>
         <accuracy>1</accuracy>
-        <weapon>Knife</weapon>
+        <weapon>Cane</weapon>
         <shield>None</shield>
         <gold>12</gold>
     </character>
