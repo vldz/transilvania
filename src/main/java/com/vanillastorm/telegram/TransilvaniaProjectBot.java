@@ -94,7 +94,7 @@ public class TransilvaniaProjectBot extends TelegramLongPollingBot {
 
                     if (creatureStory.villainIsAlive()) {
                         if (moveWasMade) {
-                            message_text += "\n" + creatureStory.villainAttack();
+                            message_text += "\n" + creatureStory.villainMove();
                         }
                         keyboard = fightKeyboard();
                     } else {

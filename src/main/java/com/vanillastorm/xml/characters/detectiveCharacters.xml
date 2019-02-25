@@ -8,7 +8,7 @@
         <strength>20</strength>
         <accuracy>1</accuracy>
         <weapon>Nunchacks</weapon>
-        <shield>None</shield>
+        <shield>Wooden</shield>
         <gold>0</gold>
     </character>
 

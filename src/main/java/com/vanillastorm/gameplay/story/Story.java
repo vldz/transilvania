@@ -2,6 +2,7 @@ package com.vanillastorm.gameplay.story;
 
 import com.vanillastorm.creatures.Character;
 import com.vanillastorm.creatures.HallOfFame;
+import com.vanillastorm.creatures.stuff.Items.medkits.SmallMedkit;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -171,8 +172,20 @@ public class Story {
         return hero.attack(this.currentVillaine);
     }
 
-    public String villainAttack() {
-        return "\n" + currentVillaine.attack(this.hero);
+    public String villainMove() {
+        String m = "\n";
+        int rMove = (int) (Math.random() * 100);
+        if (rMove <= 50) {
+            m += currentVillaine.attack(this.hero);
+        } else if (rMove > 51 && rMove < 86) {
+            m += currentVillaine.attackWithWeapon(this.hero);
+        } else {
+            m += currentVillaine.healVillaine(10 * currentVillaine.getLevel());
+        }
+        if (m.equals("\nNot enough mana, chiiil, dude.") || m.equals("No heal")) {
+            m = "\n" + currentVillaine.attack(this.hero);
+        }
+        return m;
     }
 
     public String villaneIsDead() {

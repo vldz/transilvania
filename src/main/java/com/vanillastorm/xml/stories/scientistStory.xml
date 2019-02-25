@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <chapters>
-    <chapter isFight="false" chapterID="0">
+    <chapter chapterID="0" isFight="false" isRestart="false">
         <text>
 Restart?
         </text>
@@ -14,7 +14,7 @@ Restart?
         <result nextChapterID="69">Bad for you:(</result>
     </chapter>
 
-    <chapter isFight="false" chapterID="1">
+    <chapter chapterID="1" isFight="false" isRestart="false">
         <text>
     3108 year. World of full science progress.
     Scientist Mad came into a room where was a girl.
@@ -29,10 +29,10 @@ Restart?
 
         <result nextChapterID="2">
     OK then. Flashback to museum.</result>
-        <result nextChapterID="3">- We have no time, Betty, you're dying, so forget...</result>
+        <result nextChapterID="4">- We have no time, Betty, you're dying, so forget...</result>
     </chapter>
 
-    <chapter isFight="true" chapterID="2">
+    <chapter chapterID="2" isFight="true" isRestart="true">
         <text>
     69 minutes flashbackward.
 
@@ -42,7 +42,7 @@ Restart?
 
     </chapter>
 
-    <chapter isFight="false" chapterID="3">
+    <chapter chapterID="3" isFight="false" isRestart="false">
         <text>
     Robots surrounded scientist.
     After knockdown, scientist stood up, took first what he could, it was the Vishivanka, and his last chance was to run to the window.
@@ -60,7 +60,7 @@ Restart?
         </result>
     </chapter>
 
-    <chapter isFight="false" chapterID="4">
+    <chapter chapterID="4" isFight="false" isRestart="false">
         <text>
 -... but its ok, i will time travel and whatever it takes get S.A.L.O.. Is our time travel machine still somewhere in the garage?
 - Yes, it is in a garage, but how the Vishivanka will help ypu with that?
@@ -75,7 +75,7 @@ Restart?
         <result nextChapterID="5">- I'm coming, 21 century Ukraine!</result>
     </chapter>
 
-    <chapter isFight="false" chapterID="4">
+    <chapter  chapterID="5" isFight="false" isRestart="false">
         <text>
 
     ....time traveling pew pew....

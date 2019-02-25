@@ -30,9 +30,12 @@ public class Character {
 
     public String attack(Character character) {
         String m = "";
-        int damage = damageCulculation(character, 0);
-        m += printInfoDamage(character, damage);
-        m += character.takeDamage(damage);
+        int fullDamage = damageCulculation(character, 0);
+        int damageWithArmour = (int) (fullDamage * (1 - (character.defencePoints / 150)));
+
+        m += printInfoDamage(character, damageWithArmour);
+
+        m += character.takeDamage(character, fullDamage);
         return m;
     }
 
@@ -41,12 +44,15 @@ public class Character {
         String m = "";
         int manaCulc = this.mana - this.weapon.getMinusManaAfterUsage();
         if (manaCulc >= 0) {
-            int damageWithWeapon = damageCulculation(character, 1) + this.weapon.getDamage();
+            int fullDamageWithWeapon = damageCulculation(character, 1) + this.weapon.getDamage();
+            int damageWithArmour = (int) (fullDamageWithWeapon * (1 - (character.defencePoints / 150)));
             this.mana -= this.weapon.getMinusManaAfterUsage();
-            m += printInfoDamage(character, damageWithWeapon, this.weapon.getWeaponName());
-            m += character.takeDamage(damageWithWeapon);
+
+            m += printInfoDamage(character, damageWithArmour, this.weapon.getWeaponName());
+
+            m += character.takeDamage(character, fullDamageWithWeapon);
         } else {
-            m = "Not enough mana, chiiil dude.";
+            m = "Not enough mana, chiiil, dude.";
         }
         return m;
     }
@@ -56,17 +62,25 @@ public class Character {
     }
 
     private int damageCulculation(Character character, int weaponCoef) {
-        return (int) (((this.strength * generateAccuracy(weaponCoef))) * (1 - (character.defencePoints / 300)));
+        return (int) ((this.strength * generateAccuracy(weaponCoef)));
     }
 
-    private String takeDamage(double damage) {
+    private String takeDamage(Character character, int damage) {
         String m = "";
-        this.hp -= (int) damage;
-        // TODO: defencePoints formula
-        this.defencePoints -= (int) damage;
+//        System.out.println(character.getName() + ": ");
+//        System.out.println("full damage "+ damage);
+        int hpDamage = (int) (damage * (1 - (character.defencePoints / 150)));
+//        System.out.println("hpDamage " + hpDamage);
+        int armourDamage = damage - hpDamage ;
+//        System.out.println("-----------------");
+//        System.out.println("armourDamage " + armourDamage);
+
+        this.hp -= hpDamage;
+        this.defencePoints -= armourDamage;
 
         if (isAlive()) {
-            m += "\n" + this.name + " is now " + this.hp + " hp";
+            m = "\n-----------------------------------------";
+            m += "\n" + this.name + ": " + this.hp + " hp, " + this.mana + " mana";
             if (this.defencePoints <= 0) {
                 this.defencePoints = 0;
                 m += ", no shield.";
@@ -81,12 +95,12 @@ public class Character {
 
     public String killed(Character character) {
         this.getEnemysGold(character);
-        return this.getName() + " earns " + "+" + character.getGold() + " gold(" + this.getGold() + ").";
+        return character.getName() + " is downed and looted. \n" + this.getName() + " earns " + "+" + character.getGold() + " gold(" + this.getGold() + ").";
     }
 
     public void heal(Character character, Medkit medkit) {
         if (this.hp != this.maxHp) {
-            int totalHP = this.hp += medkit.getHealPoints();
+            int totalHP = this.hp + medkit.getHealPoints();
             this.hp = (totalHP > maxHp) ? maxHp : totalHP;
             Backpack.remove(medkit);
             printHealUsage(medkit);
@@ -102,8 +116,20 @@ public class Character {
             return "Mana is full(" + this.mana + ").";
         } else {
             this.mana = totalMana;
-            return "Mana restored for " + manaAmount + ".";
+            return "Mana restored for " + manaAmount + "(" + this.mana + ").";
         }
+    }
+
+    public String healVillaine(int amount) {
+        String m = "";
+        if (this.hp != this.maxHp) {
+            int totalHP = this.hp + amount;
+            this.hp = (totalHP > maxHp) ? maxHp : totalHP;
+            m = this.getName() + " heals " + amount + " hp(" + this.getHp() + ").";
+        } else {
+            m = "No heal";
+        }
+        return m;
     }
 
     //TODO: make usage of different items
@@ -117,46 +143,25 @@ public class Character {
         double totalAccuracy = ((Math.random() * 100)) + this.accuracy;
         // 1 for attacks with weapon
         if (weaponCoef == 1) {
-            return totalAccuracy / 50;
+            return totalAccuracy / 80;
         } else {
             return totalAccuracy / 100;
         }
-//        System.out.print(Color.ANSI_RESET + "");
-//        if (totalAccuracy < 15) {
-//            System.out.println("Pussy attack. ");
-//            return 0.1;
-//        } else if (totalAccuracy >= 15 && totalAccuracy < 30) {
-//            System.out.println("Weak attack. ");
-//            return 0.25;
-//        } else if (totalAccuracy >= 30 && totalAccuracy < 65) {
-//            System.out.println("O.K. attack. ");
-//            return 0.5;
-//        } else if (totalAccuracy >= 65 && totalAccuracy < 90) {
-//            System.out.println("Noooooice attack. ");
-//            return 0.75;
-//        } else {
-//            System.out.println("IN YOUR FACE.");
-//            return 0.99;
-//        }
     }
 
     public String printInfoDamage(Character anotherCharacter, int damage) {
         return
-                this.name + " done " +
-                        "-" + damage
-                        + " damage to "
-                        + anotherCharacter.getName()
-                        + "(" + anotherCharacter.getHp() + " hp, " + (int) anotherCharacter.defencePoints + " shield).";
+                this.name + " done "
+                        + damage
+                        + " damage.";
     }
 
     public String printInfoDamage(Character anotherCharacter, int damage, String weaponName) {
         return
-                this.name + " done with "
-                        + weaponName.toLowerCase()
-                        + " -" + damage
-                        + " damage to "
-                        + anotherCharacter.getName()
-                        + "(" + anotherCharacter.getHp() + " hp, " + (int) anotherCharacter.defencePoints + " shield).";
+                this.name + " done "
+                        + damage
+                        + " damage with "
+                        + weaponName.toUpperCase() + ".";
     }
 
     public void printHealUsage(Medkit medkit) {
@@ -264,6 +269,10 @@ public class Character {
 
     public String getDefencePoints() {
         return "" + this.defencePoints;
+    }
+
+    public int getLevel() {
+        return this.level;
     }
 }
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <chapters>
-    <chapter isFight="false" chapterID="0" isRestart="true">
+    <chapter chapterID="0" isFight="false" isRestart="true">
         <text>
 Restart?
         </text>
@@ -14,7 +14,7 @@ Restart?
         <result nextChapterID="5">Bad for you:(</result>
     </chapter>
 
-    <chapter isFight="false" chapterID="1" isRestart="false">
+    <chapter chapterID="1" isFight="false" isRestart="false">
         <text>
     1960 year, world of full noir.
     Detective Len had his usual nap in his noir cabinet. Suddenly a noir lady came into his noir bureau and screamed:
@@ -36,7 +36,7 @@ Restart?
     </chapter>
 
     <!--(Restart point)-->
-    <chapter isFight="false" chapterID="2" isRestart="true" >
+    <chapter chapterID="2" isFight="false" isRestart="true" >
         <text>
     After these words, Detective faded out, as he usually did in his Sudden Dream Attacks, but this time it was much worse.
     Detective woke up in living room in which he never was before, he heard squeak of a woman. He looked up. Fat woman took a cane, she was ready to kick his ass.
@@ -58,14 +58,14 @@ R.I.P.
         <result nextChapterID="3">*intense music continues*</result>
     </chapter>
 
-    <chapter isFight="true" chapterID="3" isRestart="true">
+    <chapter chapterID="3" isFight="true" isRestart="true">
         <text>
 Detective Len vs. Fatty Kathy.
         </text>
 
     </chapter>
 
-    <chapter isFight="false" chapterID="4" isRestart="false" >
+    <chapter chapterID="4" isFight="false" isRestart="false">
         <text>
 after fight
         </text>
@@ -83,7 +83,7 @@ after fight
     </chapter>
 
 
-    <chapter isFight="false" chapterID="69">
+    <chapter  chapterID="69" isFight="false">
         <text>
 This is the end.
         </text>
