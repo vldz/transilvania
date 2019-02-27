@@ -49,7 +49,7 @@ public class TransilvaniaProjectBot extends TelegramLongPollingBot {
 
                 keyboard = charactersKeyboard();
 
-            } else if(message_text.equals("/stats")) {
+            } else if (message_text.equals("/stats")) {
                 message = new SendMessage()
                         .setChatId(chat_id)
                         .setText(creatureStory.characterInfo());
@@ -75,6 +75,8 @@ public class TransilvaniaProjectBot extends TelegramLongPollingBot {
             } else {
                 if (creatureStory.checkForFight()) {
                     boolean moveWasMade = false;
+                    boolean openBackpack = false;
+
                     if (creatureStory.heroIsAlive()) {
                         if (message_text.equals("Casual attack")) {
                             message_text = creatureStory.simpleAttack();
@@ -83,10 +85,20 @@ public class TransilvaniaProjectBot extends TelegramLongPollingBot {
                             message_text = creatureStory.attackWithWeapon();
                             moveWasMade = !message_text.equals("Not enough mana, chiiil dude.");
                         } else if (message_text.equals("Backpack")) {
-                            // message_text = creatureStory.showBackpack();
-                        } else {
+                            message_text = creatureStory.showBackpack();
+                            openBackpack = true;
+                        } else if (message_text.equals("<-Back")) {
+                            message_text = "Back from BACK pack.";
+                        } else if (message_text.equals("Skip and 1 mana")) {
                             message_text = creatureStory.skipMove();
                             moveWasMade = true;
+                        } else {
+                            String[] backpackMessage = message_text.split(" ");
+                            if (backpackMessage[0].equals("Use")) {
+                                String[] itemWithoutUse = message_text.split("Use ");
+                                message_text = creatureStory.useItem(itemWithoutUse[1]);
+                                moveWasMade = !message_text.equals("No need to heal, chiiil.");
+                            }
                         }
                     } else {
                         //  creatureStory.restart();
@@ -96,7 +108,7 @@ public class TransilvaniaProjectBot extends TelegramLongPollingBot {
                         if (moveWasMade) {
                             message_text += "\n" + creatureStory.villainMove();
                         }
-                        keyboard = fightKeyboard();
+                        keyboard = (openBackpack) ? backpackKeyboard() : fightKeyboard();
                     } else {
                         message_text = creatureStory.villaneIsDead();
                         message_text += "\n" + creatureStory.loadNextChapter();
@@ -141,6 +153,28 @@ public class TransilvaniaProjectBot extends TelegramLongPollingBot {
             }
 
         }
+    }
+
+    private List<KeyboardRow> backpackKeyboard() {
+        List<KeyboardRow> keyboard = new ArrayList<>();
+
+        int amountOfButtons = creatureStory.amountOfBackpackItems();
+        if (amountOfButtons == 0) {
+            KeyboardRow row = new KeyboardRow();
+            row.add("<-Back");
+            keyboard.add(row);
+        } else {
+            for (int i = 0; i < amountOfButtons; i++) {
+                KeyboardRow row = new KeyboardRow();
+                row.add("Use " + creatureStory.getItemName(i));
+                keyboard.add(row);
+            }
+            KeyboardRow row = new KeyboardRow();
+            row.add("<-Back");
+            keyboard.add(row);
+        }
+
+        return keyboard;
     }
 
     private List<KeyboardRow> storyKeyboard(Story creatureStory) {

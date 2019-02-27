@@ -6,8 +6,6 @@ public class Chapter {
     private List<Option> options = new ArrayList<>();
     private List<Result> results = new ArrayList<>();
 
-//    private List<String> fighters = new ArrayList<>();
-
     private String text;
     private boolean isFightChapter;
 
@@ -18,10 +16,6 @@ public class Chapter {
     public void addResult(Result result) {
         this.results.add(result);
     }
-
-//    public void addFighter(String nameOfFighter) {
-//        this.fighters.add(nameOfFighter);
-//    }
 
     public boolean isFightChapter() {
         return this.isFightChapter;
@@ -72,13 +66,6 @@ public class Chapter {
     }
 
     public int getNextChapter (String text) {
-//        if (this.fighters.size() == 0) {
-//            System.out.println("null fighters");
-//        } else {
-//            for (int i = 0; i < fighters.size(); i++) {
-//                System.out.println("fighter " + i + ": " + fighters.get(i));
-//            }
-//        }
         int resultID = getResultIDByOptionText(text);
         return this.results.get(resultID).getNextChapterID();
     }

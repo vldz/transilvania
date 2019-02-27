@@ -2,7 +2,7 @@ package com.vanillastorm.creatures;
 
 import com.vanillastorm.creatures.stuff.Backpack;
 import com.vanillastorm.creatures.stuff.Items.Item;
-import com.vanillastorm.creatures.stuff.Items.medkits.Medkit;
+import com.vanillastorm.creatures.stuff.Items.Items;
 import com.vanillastorm.creatures.stuff.Shield;
 import com.vanillastorm.creatures.stuff.Weapon;
 
@@ -28,27 +28,34 @@ public class Character {
     private int gold;
     private String shieldName;
 
+    private Backpack backpack;
+
+    public Character() {
+        this.backpack = new Backpack();
+        backpack.addItem(Items.getItem(0));
+        backpack.addItem(Items.getItemByName("bandage"));
+    }
+
     public String attack(Character character) {
         String m = "";
-        int fullDamage = damageCulculation(character, 0);
+        int fullDamage = damageCalculation(character, 0);
         int damageWithArmour = (int) (fullDamage * (1 - (character.defencePoints / 150)));
 
-        m += printInfoDamage(character, damageWithArmour);
+        m += printInfoDamage(damageWithArmour);
 
         m += character.takeDamage(character, fullDamage);
         return m;
     }
 
-    // mana check
     public String attackWithWeapon(Character character) {
         String m = "";
-        int manaCulc = this.mana - this.weapon.getMinusManaAfterUsage();
-        if (manaCulc >= 0) {
-            int fullDamageWithWeapon = damageCulculation(character, 1) + this.weapon.getDamage();
+        int manaCalc = this.mana - this.weapon.getMinusManaAfterUsage();
+        if (manaCalc >= 0) {
+            int fullDamageWithWeapon = damageCalculation(character, 1) + this.weapon.getDamage();
             int damageWithArmour = (int) (fullDamageWithWeapon * (1 - (character.defencePoints / 150)));
             this.mana -= this.weapon.getMinusManaAfterUsage();
 
-            m += printInfoDamage(character, damageWithArmour, this.weapon.getWeaponName());
+            m += printInfoDamage(damageWithArmour, this.weapon.getWeaponName());
 
             m += character.takeDamage(character, fullDamageWithWeapon);
         } else {
@@ -61,19 +68,14 @@ public class Character {
 
     }
 
-    private int damageCulculation(Character character, int weaponCoef) {
+    private int damageCalculation(Character character, int weaponCoef) {
         return (int) ((this.strength * generateAccuracy(weaponCoef)));
     }
 
     private String takeDamage(Character character, int damage) {
         String m = "";
-//        System.out.println(character.getName() + ": ");
-//        System.out.println("full damage "+ damage);
         int hpDamage = (int) (damage * (1 - (character.defencePoints / 150)));
-//        System.out.println("hpDamage " + hpDamage);
         int armourDamage = damage - hpDamage ;
-//        System.out.println("-----------------");
-//        System.out.println("armourDamage " + armourDamage);
 
         this.hp -= hpDamage;
         this.defencePoints -= armourDamage;
@@ -98,14 +100,14 @@ public class Character {
         return character.getName() + " is downed and looted. \n" + this.getName() + " earns " + "+" + character.getGold() + " gold(" + this.getGold() + ").";
     }
 
-    public void heal(Character character, Medkit medkit) {
+    public String heal(Item medkit) {
         if (this.hp != this.maxHp) {
-            int totalHP = this.hp + medkit.getHealPoints();
+            int totalHP = this.hp + medkit.getImpactPoints();
             this.hp = (totalHP > maxHp) ? maxHp : totalHP;
-            Backpack.remove(medkit);
-            printHealUsage(medkit);
+            this.backpack.remove(medkit);
+            return printHealUsage(medkit);
         } else {
-            System.out.println("No need to heal, " + character.getName() + " is full hp.");
+            return "No need to heal, chiiil.";
         }
     }
 
@@ -116,7 +118,7 @@ public class Character {
             return "Mana is full(" + this.mana + ").";
         } else {
             this.mana = totalMana;
-            return "Mana restored for " + manaAmount + "(" + this.mana + ").";
+            return "Mana restored for " + manaAmount + "(" + this.mana + ") mana points.";
         }
     }
 
@@ -127,16 +129,16 @@ public class Character {
             this.hp = (totalHP > maxHp) ? maxHp : totalHP;
             m = this.getName() + " heals " + amount + " hp(" + this.getHp() + ").";
         } else {
-            m = "No heal";
+            m = "No heal.";
         }
         return m;
     }
 
     //TODO: make usage of different items
-    public void useItem(Item item) {
-        if (item instanceof Medkit) {
-            heal(this, (Medkit) item);
-        }
+    public String useItem(String item) {
+        if (Items.getItemByName(item).isMedicine()) {
+            return this.heal(Items.getItemByName(item));
+        } else return "";
     }
 
     public double generateAccuracy(int weaponCoef) {
@@ -149,40 +151,34 @@ public class Character {
         }
     }
 
-    public String printInfoDamage(Character anotherCharacter, int damage) {
-        return
-                this.name + " done "
+    public String printInfoDamage(int damage) {
+        return this.name + " done "
                         + damage
                         + " damage.";
     }
 
-    public String printInfoDamage(Character anotherCharacter, int damage, String weaponName) {
-        return
-                this.name + " done "
+    public String printInfoDamage(int damage, String weaponName) {
+        return this.name + " done "
                         + damage
                         + " damage with "
                         + weaponName.toUpperCase() + ".";
     }
 
-    public void printHealUsage(Medkit medkit) {
-        System.out.println(
-                this.name + " heals " + "+" + medkit.getHealPoints() + " hp " +
-                        "with a " + medkit.getName() + ".");
-        System.out.println(
-                this.name + " is now " + this.hp + " hp."
-        );
+    public String printHealUsage(Item medkit) {
+        return this.name + " heals " + "+" + medkit.getImpactPoints() + " hp(" + this.hp + ") with a " + medkit.getName() + "."
+                + "\n";
+
     }
 
     public String character() {
-        String characterInfo = "---Character INFO---\n";
-        characterInfo += "Name: " + this.getName() + "\n";
-        characterInfo += "Shield: " + this.getShieldName() + "(" + this.getDefencePoints() + ")" + "\n";
-        characterInfo += "Hp: " + this.getHp() + "\n";
-        characterInfo += "Mana: " + this.getMana() + "\n";
-        characterInfo += "Weapon: " + this.weaponName() + "\n";
-        characterInfo += "Gold: " + this.getGold() + "\n";
-        characterInfo += "---Character INFO---\n";
-        return characterInfo;
+        return "---Character INFO---\n" +
+                "Name: " + this.getName() + "\n" +
+                "Shield: " + this.getShieldName() + "(" + this.getDefencePoints() + ")" + "\n" +
+                "Hp: " + this.getHp() + "\n" +
+                "Mana: " + this.getMana() + "\n" +
+                "Weapon: " + this.weaponName() + "\n" +
+                "Gold: " + this.getGold() + "\n" +
+                "---Character INFO---\n";
     }
 
     public boolean isAlive() {
@@ -243,10 +239,6 @@ public class Character {
         this.weapon = Weapon.getWeapon(weapon);
     }
 
-    public Weapon getWeapon() {
-        return weapon;
-    }
-
     public void setGold(int gold) {
         this.gold = gold;
     }
@@ -273,6 +265,18 @@ public class Character {
 
     public int getLevel() {
         return this.level;
+    }
+
+    public String printBackpackItems() {
+        return this.backpack.printItems();
+    }
+
+    public int amountOfItemsInBackpack() {
+        return this.backpack.getSize();
+    }
+
+    public String getItemName(int i) {
+        return this.backpack.getItem(i);
     }
 }
 

@@ -2,7 +2,7 @@ package com.vanillastorm.gameplay.story;
 
 import com.vanillastorm.creatures.Character;
 import com.vanillastorm.creatures.HallOfFame;
-import com.vanillastorm.creatures.stuff.Items.medkits.SmallMedkit;
+import com.vanillastorm.creatures.stuff.Items.Items;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -182,7 +182,8 @@ public class Story {
         } else {
             m += currentVillaine.healVillaine(10 * currentVillaine.getLevel());
         }
-        if (m.equals("\nNot enough mana, chiiil, dude.") || m.equals("No heal")) {
+
+        if (m.equals("\nNot enough mana, chiiil, dude.") || m.equals("No heal.")) {
             m = "\n" + currentVillaine.attack(this.hero);
         }
         return m;
@@ -208,7 +209,20 @@ public class Story {
         return hero.restoreMana(1);
     }
 
+    //Backpack
     public String showBackpack() {
-        return "";
+        return hero.printBackpackItems();
+    }
+
+    public int amountOfBackpackItems() {
+        return hero.amountOfItemsInBackpack();
+    }
+
+    public String getItemName(int i) {
+        return hero.getItemName(i);
+    }
+
+    public String useItem(String name) {
+        return hero.useItem(name);
     }
 }
