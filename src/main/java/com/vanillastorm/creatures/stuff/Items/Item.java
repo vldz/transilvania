@@ -32,6 +32,10 @@ public class Item {
     public boolean isMedicine() {
         return (this.getItemId() == 0) || (this.getItemId() == 1) || (this.getItemId() == 2);
     }
+
+    public boolean isManaBooster() {
+        return (this.getItemId() == 3) || (this.getItemId() == 4) || (this.getItemId() == 5);
+    }
 }
 
 //TODO: add items objects

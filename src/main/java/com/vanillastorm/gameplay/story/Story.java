@@ -2,7 +2,7 @@ package com.vanillastorm.gameplay.story;
 
 import com.vanillastorm.creatures.Character;
 import com.vanillastorm.creatures.HallOfFame;
-import com.vanillastorm.creatures.stuff.Items.Items;
+import com.vanillastorm.util.SavedCharacter;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -22,6 +22,8 @@ public class Story {
     private List characters;
     private Character hero;
     private Character currentVillaine;
+    private SavedCharacter savedCharacter = new SavedCharacter();
+    private SavedCharacter savedVillaine = new SavedCharacter();
 
     private int checkPoint;
     private int chapterNumber;
@@ -147,11 +149,28 @@ public class Story {
     }
 
     public boolean checkForFight() {
-        return chapters.get(this.chapterNumber).isFightChapter();
+        if (chapters.get(this.chapterNumber).isFightChapter()) {
+            this.checkPoint = this.chapterNumber;
+            return true;
+        } else return false;
     }
 
     public int getAmountOfOptions() {
         return chapters.get(chapterNumber).getOptionsAmount();
+    }
+
+    public String restart(String text) {
+        this.savedCharacter.loadCharacter(this.hero);
+        this.savedVillaine.loadCharacter(this.currentVillaine);
+        if (text.equals("Yes, i want la revanche!")) {
+            return "\n" + text + loadChapterText();
+        } else {
+            return "\nNo, you are a huge pussy!" + "\n" + finish();
+        }
+    }
+
+    public String finish() {
+        return chapters.get(chapters.size() - 1).getText();
     }
 
     // Fight
@@ -207,6 +226,11 @@ public class Story {
 
     public String skipMove() {
         return hero.restoreMana(1);
+    }
+
+    public void saveCharacters() {
+        this.savedCharacter.saveCharacter(this.hero);
+        this.savedVillaine.saveCharacter(this.currentVillaine);
     }
 
     //Backpack

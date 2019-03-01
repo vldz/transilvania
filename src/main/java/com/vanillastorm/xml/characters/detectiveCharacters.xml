@@ -16,7 +16,7 @@
         <hp>75</hp>
         <mana>10</mana>
         <level>1</level>
-        <strength>10</strength>
+        <strength>100</strength>
         <accuracy>1</accuracy>
         <weapon>Cane</weapon>
         <shield>None</shield>

@@ -2,6 +2,7 @@ package com.vanillastorm.creatures.stuff;
 
 
 import com.vanillastorm.creatures.stuff.Items.Item;
+import com.vanillastorm.creatures.stuff.Items.Items;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -20,7 +21,9 @@ public class Backpack {
         if (isEnoughSpace(weight)) {
             Integer current = itemsInBackpack.getOrDefault(item, 0);
             itemsInBackpack.put(item, current + 1);
-            itemNames.add(item.getName());
+            if (!itemNames.contains(item.getName())) {
+                itemNames.add(item.getName());
+            }
         } else {
             System.out.println("Cannot add " + item.getName() + "(" + weight + "), backpack is full.");
         }
@@ -48,9 +51,15 @@ public class Backpack {
         }
         m += "\n-----------------------";
 
+        String ind = "";
         for (Map.Entry<Item, Integer> entry : itemsInBackpack.entrySet()) {
+            if (Items.getItem(entry.getKey().getName()).isMedicine()) {
+                ind = "hp";
+            } else if (Items.getItem(entry.getKey().getName()).isManaBooster()) {
+                ind = "mp";
+            }
             s = (entry.getValue() > 1) ? "s" : "";
-            m += "\n* " + entry.getValue() + " " + entry.getKey().getName() + s + "(" + entry.getValue() * entry.getKey().getWeight() + ")";
+            m += "\n* " + entry.getValue() + " " + entry.getKey().getName() + s + "(+"+ Items.getItem(entry.getKey().getName()).getImpactPoints() + ind + ")";
         }
         m += "\n-----------------------";
         m += "\nWeight curr(" + currentSize + "), max(" + maxSizeOfBackpack + ")\n";
@@ -64,7 +73,10 @@ public class Backpack {
         if (currentAmount != 1) {
             itemsInBackpack.put(item, currentAmount - 1);
             currentSize -= weight;
-        } else itemsInBackpack.remove(item);
+        } else {
+            itemsInBackpack.remove(item);
+            itemNames.remove(item.getName());
+        }
     }
 
     private boolean isEnoughSpace(int weightOfItem) {

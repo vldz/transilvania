@@ -33,7 +33,10 @@ public class Character {
     public Character() {
         this.backpack = new Backpack();
         backpack.addItem(Items.getItem(0));
-        backpack.addItem(Items.getItemByName("bandage"));
+        backpack.addItem(Items.getItem(0));
+        backpack.addItem(Items.getItem(1));
+        backpack.addItem(Items.getItem(2));
+        backpack.addItem(Items.getItem(3));
     }
 
     public String attack(Character character) {
@@ -111,6 +114,18 @@ public class Character {
         }
     }
 
+    public String restoreMana(Item manaItem) {
+        int totalMana = this.mana + manaItem.getImpactPoints();
+        if (totalMana >= this.maxMana) {
+            this.mana = this.maxMana;
+            return "Mana is full(" + this.mana + ").";
+        } else {
+            this.mana = totalMana;
+            this.backpack.remove(manaItem);
+            return "Mana restored for " + manaItem.getImpactPoints() + "(" + this.mana + ") mana points.";
+        }
+    }
+
     public String restoreMana(int manaAmount) {
         int totalMana = this.mana + manaAmount;
         if (totalMana >= this.maxMana) {
@@ -136,8 +151,10 @@ public class Character {
 
     //TODO: make usage of different items
     public String useItem(String item) {
-        if (Items.getItemByName(item).isMedicine()) {
-            return this.heal(Items.getItemByName(item));
+        if (Items.getItem(item).isMedicine()) {
+            return this.heal(Items.getItem(item));
+        } else if(Items.getItem(item).isManaBooster()) {
+            return this.restoreMana(Items.getItem(item));
         } else return "";
     }
 
@@ -202,6 +219,14 @@ public class Character {
         return this.gold;
     }
 
+    public void setMana(int mana) {
+        this.mana = mana;
+    }
+
+    public void setDefencePoints(double defencePoints) {
+        this.defencePoints = defencePoints;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -216,12 +241,24 @@ public class Character {
         this.mana = maxMana;
     }
 
+    public int getMaxMana() {
+        return maxMana;
+    }
+
     public void setLevel(int level) {
         this.level = level;
     }
 
     public void setStrength(double strength) {
         this.strength = strength;
+    }
+
+    public double getStrength() {
+        return strength;
+    }
+
+    public int getAccuracy() {
+        return accuracy;
     }
 
     public void setAccuracy(int accuracy) {
@@ -243,6 +280,14 @@ public class Character {
         this.gold = gold;
     }
 
+    public Backpack getBackpack() {
+        return backpack;
+    }
+
+    public Weapon getWeapon() {
+        return weapon;
+    }
+
     public String weaponMana(){
         return "" + this.weapon.getMinusManaAfterUsage();
     }
@@ -257,6 +302,14 @@ public class Character {
 
     public String getShieldName() {
         return this.shieldName;
+    }
+
+    public double getMaxDefencePoints() {
+        return maxDefencePoints;
+    }
+
+    public double getDefenceP() {
+        return defencePoints;
     }
 
     public String getDefencePoints() {
@@ -277,6 +330,22 @@ public class Character {
 
     public String getItemName(int i) {
         return this.backpack.getItem(i);
+    }
+
+    public void setHp(int hp) {
+        this.hp = hp;
+    }
+
+    public void setWeapon(Weapon weapon) {
+        this.weapon = weapon;
+    }
+
+    public void setShieldName(String shieldName) {
+        this.shieldName = shieldName;
+    }
+
+    public void setBackpack(Backpack backpack) {
+        this.backpack = backpack;
     }
 }
 

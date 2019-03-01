@@ -12,7 +12,7 @@ public class Weapon {
         {
             add(new Weapon("Microscope", 6, 7));
             add(new Weapon("Katana", 5, 10));
-            add(new Weapon("Nunchacks", 2, 4));
+            add(new Weapon("Nunchacks", 4, 4));
             add(new Weapon("Cane", 5, 10));
             add(new Weapon("Shocker", 0, 50));
         }

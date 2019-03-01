@@ -17,7 +17,7 @@ public class Items {
         }
     };
 
-    public static Item getItemByName(String name) {
+    public static Item getItem(String name) {
         for (Item item : items) {
             if (item.getName().toLowerCase().equals(name.toLowerCase())) {
                 return item;
@@ -29,4 +29,7 @@ public class Items {
         return items.get(n);
     }
 
+    public static String getItemImpact(String name) {
+        return "" + getItem(name).getImpactPoints();
+    }
 }

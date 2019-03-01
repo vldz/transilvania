@@ -76,6 +76,7 @@ public class TransilvaniaProjectBot extends TelegramLongPollingBot {
                 if (creatureStory.checkForFight()) {
                     boolean moveWasMade = false;
                     boolean openBackpack = false;
+                    boolean denial = false;
 
                     if (creatureStory.heroIsAlive()) {
                         if (message_text.equals("Casual attack")) {
@@ -101,14 +102,25 @@ public class TransilvaniaProjectBot extends TelegramLongPollingBot {
                             }
                         }
                     } else {
-                        //  creatureStory.restart();
+                        denial = message_text.equals("No, im pussy.");
+                        message_text = "\n" + creatureStory.restart(message_text);
                     }
 
                     if (creatureStory.villainIsAlive()) {
                         if (moveWasMade) {
                             message_text += "\n" + creatureStory.villainMove();
                         }
-                        keyboard = (openBackpack) ? backpackKeyboard() : fightKeyboard();
+
+                        if (!creatureStory.heroIsAlive()) {
+                            message_text += "\nRestart?";
+                            keyboard = restartKeybpard(0);
+                        } else if (openBackpack) {
+                            keyboard = backpackKeyboard();
+                        } else if (denial) {
+                            keyboard = restartKeybpard(1);
+                        } else {
+                            keyboard = fightKeyboard();
+                        }
                     } else {
                         message_text = creatureStory.villaneIsDead();
                         message_text += "\n" + creatureStory.loadNextChapter();
@@ -138,6 +150,7 @@ public class TransilvaniaProjectBot extends TelegramLongPollingBot {
                     if (!creatureStory.checkForFight()) {
                         keyboard = storyKeyboard(creatureStory);
                     } else {
+                        creatureStory.saveCharacters();
                         keyboard = fightKeyboard();
                     }
                 }
@@ -155,6 +168,21 @@ public class TransilvaniaProjectBot extends TelegramLongPollingBot {
         }
     }
 
+    private List<KeyboardRow> restartKeybpard(int i) {
+        List<KeyboardRow> keyboard = new ArrayList<>();
+
+        KeyboardRow row = new KeyboardRow();
+        if (i == 0) {
+            row.add("Yes, i want la revanche!");
+            row.add("No, im pussy.");
+        } else {
+            row.add("Characters story list?");
+        }
+        keyboard.add(row);
+
+        return keyboard;
+    }
+
     private List<KeyboardRow> backpackKeyboard() {
         List<KeyboardRow> keyboard = new ArrayList<>();
 
@@ -167,6 +195,10 @@ public class TransilvaniaProjectBot extends TelegramLongPollingBot {
             for (int i = 0; i < amountOfButtons; i++) {
                 KeyboardRow row = new KeyboardRow();
                 row.add("Use " + creatureStory.getItemName(i));
+                if (i + 1 != amountOfButtons) {
+                    row.add("Use " + creatureStory.getItemName(i + 1));
+                    i++;
+                }
                 keyboard.add(row);
             }
             KeyboardRow row = new KeyboardRow();
