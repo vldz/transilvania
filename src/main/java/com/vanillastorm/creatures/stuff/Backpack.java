@@ -13,6 +13,9 @@ public class Backpack {
     private Map<Item, Integer> itemsInBackpack = new LinkedHashMap<>();
     private List<String> itemNames = new ArrayList<>();
 
+    private Map<Item, Integer> savedItems;
+    private List<String> savedItemNames;
+
     private int maxSizeOfBackpack = 10;
     private int currentSize = 0;
 
@@ -95,5 +98,29 @@ public class Backpack {
 
     public int getSize() {
         return itemsInBackpack.size();
+    }
+
+    public void saveItemsInBackPack() {
+        this.savedItems = new LinkedHashMap<>();
+        this.savedItemNames = new ArrayList<>();
+
+        this.savedItems.putAll(this.itemsInBackpack);
+        this.savedItemNames.addAll(this.itemNames);
+    }
+
+    public void setItemsInBackpack(Map<Item, Integer> itemsInBackpack) {
+        this.itemsInBackpack = itemsInBackpack;
+    }
+
+    public void setItemNames(List<String> itemNames) {
+        this.itemNames = itemNames;
+    }
+
+    public Map<Item, Integer> getSavedItems() {
+        return savedItems;
+    }
+
+    public List<String> getSavedItemNames() {
+        return savedItemNames;
     }
 }

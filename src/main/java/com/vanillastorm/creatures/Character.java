@@ -115,25 +115,24 @@ public class Character {
     }
 
     public String restoreMana(Item manaItem) {
-        int totalMana = this.mana + manaItem.getImpactPoints();
-        if (totalMana >= this.maxMana) {
-            this.mana = this.maxMana;
-            return "Mana is full(" + this.mana + ").";
-        } else {
-            this.mana = totalMana;
+        if (this.mana != this.maxMana) {
+            int totalMana = this.mana + manaItem.getImpactPoints();
+            this.mana = (totalMana > maxMana) ? maxMana : totalMana;
             this.backpack.remove(manaItem);
-            return "Mana restored for " + manaItem.getImpactPoints() + "(" + this.mana + ") mana points.";
+            return this.name + " restores " + "+" + manaItem.getImpactPoints() + " mp(" + this.mana + ") with a " + manaItem.getName() + "."
+                    + "\n";
+        } else {
+            return "No need to mana.";
         }
     }
 
     public String restoreMana(int manaAmount) {
-        int totalMana = this.mana + manaAmount;
-        if (totalMana >= this.maxMana) {
-            this.mana = this.maxMana;
-            return "Mana is full(" + this.mana + ").";
+        if (this.mana != this.maxMana) {
+            int totalMana = this.mana +manaAmount;
+            this.mana = (totalMana > maxMana) ? maxMana : totalMana;
+            return this.name + " restores " + "+" + manaAmount + " mp(" + this.mana + ")." + "\n";
         } else {
-            this.mana = totalMana;
-            return "Mana restored for " + manaAmount + "(" + this.mana + ") mana points.";
+            return "No need to mana.";
         }
     }
 
@@ -280,8 +279,8 @@ public class Character {
         this.gold = gold;
     }
 
-    public Backpack getBackpack() {
-        return backpack;
+    public void saveBackpack() {
+        this.backpack.saveItemsInBackPack();;
     }
 
     public Weapon getWeapon() {
@@ -302,10 +301,6 @@ public class Character {
 
     public String getShieldName() {
         return this.shieldName;
-    }
-
-    public double getMaxDefencePoints() {
-        return maxDefencePoints;
     }
 
     public double getDefenceP() {
@@ -344,8 +339,9 @@ public class Character {
         this.shieldName = shieldName;
     }
 
-    public void setBackpack(Backpack backpack) {
-        this.backpack = backpack;
+    public void loadBackpack() {
+        this.backpack.setItemNames(this.backpack.getSavedItemNames());
+        this.backpack.setItemsInBackpack(this.backpack.getSavedItems());
     }
 }
 

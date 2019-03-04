@@ -28,7 +28,7 @@ public class SavedCharacter {
         this.weapon = character.getWeapon();
         this.gold = character.getGold();
         this.shieldName = character.getShieldName();
-        this.backpack = character.getBackpack();
+        character.saveBackpack();
     }
 
     public void loadCharacter(Character character) {
@@ -42,6 +42,6 @@ public class SavedCharacter {
         character.setWeapon(this.weapon);
         character.setGold(this.gold);
         character.setShieldName(this.shieldName);
-        character.setBackpack(this.backpack);
+        character.loadBackpack();
     }
 }

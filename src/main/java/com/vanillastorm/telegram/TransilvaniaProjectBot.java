@@ -98,7 +98,7 @@ public class TransilvaniaProjectBot extends TelegramLongPollingBot {
                             if (backpackMessage[0].equals("Use")) {
                                 String[] itemWithoutUse = message_text.split("Use ");
                                 message_text = creatureStory.useItem(itemWithoutUse[1]);
-                                moveWasMade = !message_text.equals("No need to heal, chiiil.");
+                                moveWasMade = !(message_text.equals("No need to heal, chiiil.") || message_text.equals("No need to mana."));
                             }
                         }
                     } else {
