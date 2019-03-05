@@ -83,6 +83,12 @@ public class Character {
         this.hp -= hpDamage;
         this.defencePoints -= armourDamage;
 
+        m = infoAfterAttack();
+        return m;
+    }
+
+    private String infoAfterAttack() {
+        String m = "";
         if (isAlive()) {
             m = "\n-----------------------------------------";
             m += "\n" + this.name + ": " + this.hp + " hp, " + this.mana + " mana";
@@ -108,7 +114,9 @@ public class Character {
             int totalHP = this.hp + medkit.getImpactPoints();
             this.hp = (totalHP > maxHp) ? maxHp : totalHP;
             this.backpack.remove(medkit);
-            return printHealUsage(medkit);
+            String m = printHealUsage(medkit);
+            m += infoAfterAttack();
+            return m;
         } else {
             return "No need to heal, chiiil.";
         }
@@ -119,18 +127,20 @@ public class Character {
             int totalMana = this.mana + manaItem.getImpactPoints();
             this.mana = (totalMana > maxMana) ? maxMana : totalMana;
             this.backpack.remove(manaItem);
-            return this.name + " restores " + "+" + manaItem.getImpactPoints() + " mp(" + this.mana + ") with a " + manaItem.getName() + "."
-                    + "\n";
+            return this.name + " restores " + "+" + manaItem.getImpactPoints() + " mp with a " + manaItem.getName() + "."
+                    + infoAfterAttack();
         } else {
             return "No need to mana.";
         }
     }
 
     public String restoreMana(int manaAmount) {
+        String m = "";
         if (this.mana != this.maxMana) {
             int totalMana = this.mana +manaAmount;
             this.mana = (totalMana > maxMana) ? maxMana : totalMana;
-            return this.name + " restores " + "+" + manaAmount + " mp(" + this.mana + ")." + "\n";
+            m = this.name + " restores " + "+" + manaAmount + " mp" + "." + infoAfterAttack();
+            return m;
         } else {
             return "No need to mana.";
         }
@@ -141,7 +151,8 @@ public class Character {
         if (this.hp != this.maxHp) {
             int totalHP = this.hp + amount;
             this.hp = (totalHP > maxHp) ? maxHp : totalHP;
-            m = this.getName() + " heals " + amount + " hp(" + this.getHp() + ").";
+            m = this.getName() + " heals " + amount + " hp.";
+            m += infoAfterAttack();
         } else {
             m = "No heal.";
         }
@@ -181,8 +192,7 @@ public class Character {
     }
 
     public String printHealUsage(Item medkit) {
-        return this.name + " heals " + "+" + medkit.getImpactPoints() + " hp(" + this.hp + ") with a " + medkit.getName() + "."
-                + "\n";
+        return this.name + " heals " + "+" + medkit.getImpactPoints() + " hp" + ".";
 
     }
 

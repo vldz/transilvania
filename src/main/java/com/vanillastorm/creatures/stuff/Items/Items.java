@@ -6,13 +6,13 @@ import java.util.List;
 public class Items {
     private final static List<Item> items = new ArrayList<Item>() {
         {
-            add(new Item(0, "Bandage", 1, 15));
-            add(new Item(1, "First Aid", 2, 35));
-            add(new Item(2, "Medkit", 3, 50));
+            add(new Item(0, "Bandage", 15));
+            add(new Item(1, "First Aid", 35));
+            add(new Item(2, "Medkit",50));
 
-            add(new Item(3,"Beer", 1, 2));
-            add(new Item(4,"Tequila", 2, 4));
-            add(new Item(5,"Samogon", 3, 6));
+            add(new Item(3,"Beer",  2));
+            add(new Item(4,"Tequila", 4));
+            add(new Item(5,"Samogon", 6));
 
         }
     };

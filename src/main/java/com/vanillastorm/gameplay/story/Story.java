@@ -22,6 +22,7 @@ public class Story {
     private List characters;
     private Character hero;
     private Character currentVillaine;
+
     private SavedCharacter savedCharacter = new SavedCharacter();
     private SavedCharacter savedVillaine = new SavedCharacter();
 
@@ -112,7 +113,7 @@ public class Story {
 
     // Story
     public String characterInfo() {
-        return hero.character() + "to see statistics: /stats\n";
+        return hero.character() + "to see statistics type/press: /stats\n";
     }
 
     public String loadChapterText() {
@@ -121,10 +122,6 @@ public class Story {
 
     public String getOptionName(int buttonNum) {
         return chapters.get(this.chapterNumber).optionText(buttonNum);
-    }
-
-    public int getAmountOfResult() {
-        return chapters.get(this.chapterNumber).getResultsAmount();
     }
 
     public void upadateChapterNumber(String oldMessage) {
@@ -160,13 +157,19 @@ public class Story {
     }
 
     public String restart(String text) {
-        this.savedCharacter.loadCharacter(this.hero);
-        this.savedVillaine.loadCharacter(this.currentVillaine);
+        this.loadCharacters();
         if (text.equals("Yes, i want la revanche!")) {
+            loadCharacters();
+            saveCharacters();
             return "\n" + text + loadChapterText();
         } else {
             return "\nNo, you are a huge pussy!" + "\n" + finish();
         }
+    }
+
+    public void loadCharacters() {
+        this.savedCharacter.loadCharacter(this.hero);
+        this.savedVillaine.loadCharacter(this.currentVillaine);
     }
 
     public String finish() {
@@ -205,6 +208,12 @@ public class Story {
         if (m.equals("\nNot enough mana, chiiil, dude.") || m.equals("No heal.")) {
             m = "\n" + currentVillaine.attack(this.hero);
         }
+
+        return m;
+    }
+
+    public String charactersInfoInFight() {
+        String m = hero.character() + "\n" + currentVillaine.character();
         return m;
     }
 

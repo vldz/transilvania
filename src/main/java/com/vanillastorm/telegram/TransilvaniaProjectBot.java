@@ -72,6 +72,13 @@ public class TransilvaniaProjectBot extends TelegramLongPollingBot {
 
                 keyboard = storyKeyboard(creatureStory);
 
+            } else if (message_text.equals("/charactersStats")) {
+                message_text = creatureStory.charactersInfoInFight();
+
+                message = new SendMessage()
+                        .setChatId(chat_id)
+                        .setText(message_text);
+
             } else {
                 if (creatureStory.checkForFight()) {
                     boolean moveWasMade = false;

@@ -16,24 +16,16 @@ public class Backpack {
     private Map<Item, Integer> savedItems;
     private List<String> savedItemNames;
 
-    private int maxSizeOfBackpack = 10;
-    private int currentSize = 0;
-
     public void addItem(Item item) {
-        int weight = item.getWeight();
-        if (isEnoughSpace(weight)) {
-            Integer current = itemsInBackpack.getOrDefault(item, 0);
-            itemsInBackpack.put(item, current + 1);
-            if (!itemNames.contains(item.getName())) {
-                itemNames.add(item.getName());
-            }
-        } else {
-            System.out.println("Cannot add " + item.getName() + "(" + weight + "), backpack is full.");
+        Integer current = itemsInBackpack.getOrDefault(item, 0);
+        itemsInBackpack.put(item, current + 1);
+        if (!itemNames.contains(item.getName())) {
+            itemNames.add(item.getName());
         }
     }
 
     public String printItems() {
-        int size = getSize();
+        int size = itemsInBackpack.size();
         String s;
         String m = "";
         int maxAmountOfOneTypeItem = 0;
@@ -62,33 +54,20 @@ public class Backpack {
                 ind = "mp";
             }
             s = (entry.getValue() > 1) ? "s" : "";
-            m += "\n* " + entry.getValue() + " " + entry.getKey().getName() + s + "(+"+ Items.getItem(entry.getKey().getName()).getImpactPoints() + ind + ")";
+            m += "\n* " + entry.getValue() + " " + entry.getKey().getName() + s + "(+" + Items.getItem(entry.getKey().getName()).getImpactPoints() + ind + ")";
         }
         m += "\n-----------------------";
-        m += "\nWeight curr(" + currentSize + "), max(" + maxSizeOfBackpack + ")\n";
 
         return m;
     }
 
     public void remove(Item item) {
-        int weight = item.getWeight();
         Integer currentAmount = itemsInBackpack.get(item);
         if (currentAmount != 1) {
             itemsInBackpack.put(item, currentAmount - 1);
-            currentSize -= weight;
         } else {
             itemsInBackpack.remove(item);
             itemNames.remove(item.getName());
-        }
-    }
-
-    private boolean isEnoughSpace(int weightOfItem) {
-        int resultSize = currentSize + weightOfItem;
-        if (resultSize <= maxSizeOfBackpack) {
-            currentSize = resultSize;
-            return true;
-        } else {
-            return false;
         }
     }
 
