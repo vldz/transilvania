@@ -10,6 +10,7 @@
         <weapon>Microscope</weapon>
         <shield>Lab coat</shield>
         <gold>5</gold>
+        <legend>Scientist Mad is a scientist from future world which recovers after apocalypses. Obsessed with his wife life saving. Not very strong but compensates this with his mind.</legend>
     </character>
 
     <character name="Unbeatable Robo-guard" characterID = "1">
@@ -21,5 +22,6 @@
         <weapon>Shocker</weapon>
         <shield>Heavy armour</shield>
         <gold>100</gold>
+        <legend>Robot model: VZ-108. Created to guard a museum with relics which survived apocalypses. Impossible to overcome. Killed humans: 24, others: 1687.</legend>
     </character>
 </characters>

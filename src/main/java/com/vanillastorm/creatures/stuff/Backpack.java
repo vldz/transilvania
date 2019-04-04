@@ -24,6 +24,14 @@ public class Backpack {
         }
     }
 
+    public void addItem(Item item, int amount) {
+        Integer current = itemsInBackpack.getOrDefault(item, 0);
+        itemsInBackpack.put(item, current + amount);
+        if (!itemNames.contains(item.getName())) {
+            itemNames.add(item.getName());
+        }
+    }
+
     public String printItems() {
         int size = itemsInBackpack.size();
         String s;

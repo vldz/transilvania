@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <chapters>
-    <chapter chapterID="0" isFight="false" isRestart="false">
+    <chapter chapterID="0">
         <text>
 Restart?
         </text>
@@ -14,8 +14,10 @@ Restart?
         <result nextChapterID="69">Bad for you:(</result>
     </chapter>
 
-    <chapter chapterID="1" isFight="false" isRestart="false">
+    <chapter chapterID="1">
         <text>
+    CHAPTER 1
+---------------
     3108 year. World of full science progress.
     Scientist Mad came into a room where was a girl.
 - Betty, i didn't get final drug element for your incurable modern for 3108 year disease. There was no S.A.L.O. in Museum of Ancient Stuff... But i grabbed the Vishivanka.
@@ -38,12 +40,13 @@ Restart?
 
     Mad sneaked into museum from backdoor, stealthed between robo-guards and finally maneged to Hall of 21 century Ukraine. Sadly, he could not find S.A.L.O., and robo-guard found Him.
     After robot shocked scientist... with a shocker, fight began.
-    { to see full characters stats type/press: /charactersStats }
+
+to see full characters stats type or press: /charactersStats
         </text>
 
     </chapter>
 
-    <chapter chapterID="3" isFight="false" isRestart="false">
+    <chapter chapterID="3">
         <text>
     Robots surrounded scientist.
     After knockdown, scientist stood up, took first what he could, it was the Vishivanka, and his last chance was to run to the window.
@@ -61,7 +64,7 @@ Restart?
         </result>
     </chapter>
 
-    <chapter chapterID="4" isFight="false" isRestart="false">
+    <chapter chapterID="4">
         <text>
 -... but its ok, i will time travel and whatever it takes get S.A.L.O.. Is our time travel machine still somewhere in the garage?
 - Yes, it is in a garage, but how the Vishivanka will help ypu with that?
@@ -76,13 +79,14 @@ Restart?
         <result nextChapterID="5">- I'm coming, 21 century Ukraine!</result>
     </chapter>
 
-    <chapter  chapterID="5" isFight="false" isRestart="false">
+    <chapter  chapterID="5">
         <text>
-
     ....time traveling pew pew....
     Time machine sad:
 - Welcome to the Transilvania world!
 
+    CHAPTER 2
+---------------
     To be continued...
         </text>
 

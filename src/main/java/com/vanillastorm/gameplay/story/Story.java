@@ -21,10 +21,10 @@ public class Story {
 
     private List characters;
     private Character hero;
-    private Character currentVillaine;
+    private Character currentVillain;
 
     private SavedCharacter savedCharacter = new SavedCharacter();
-    private SavedCharacter savedVillaine = new SavedCharacter();
+    private SavedCharacter savedVillain = new SavedCharacter();
 
     private int checkPoint;
     private int chapterNumber;
@@ -52,8 +52,17 @@ public class Story {
 
                     chapter.setFightChapter(Boolean.parseBoolean(chapterElement.getAttribute("isFight")));
 
+                    chapter.setRequiresPassword(Boolean.parseBoolean(chapterElement.getAttribute("requiresPassword")));
+                    chapter.setPassword(chapterElement.getAttribute("digitPassword"));
+
+                    String openChapterN = chapterElement.getAttribute("opensChapterN");
+                    if (openChapterN != null && !openChapterN.isEmpty()) {
+                        chapter.setOpensChapterN(Integer.parseInt(openChapterN));
+                    }
+
                     NodeList text = chapterElement.getElementsByTagName("text");
                     Element textElement = (Element) text.item(0);
+                    chapter.setImageURL(textElement.getAttribute("imgURL"));
                     chapter.setText(textElement.getTextContent());
 
                     NodeList options = chapterElement.getElementsByTagName("option");
@@ -63,6 +72,7 @@ public class Story {
 
                         option.setResultId(Integer.parseInt(optionElement.getAttribute("resultID")));
                         option.setText(optionElement.getTextContent());
+                        option.setCanBeInactive(Boolean.parseBoolean(optionElement.getAttribute("canBeInactive")));
 
                         chapter.addOption(option);
                     }
@@ -73,6 +83,16 @@ public class Story {
                         Result result = new Result();
                         result.setText(resultElement.getTextContent());
                         result.setNextChapterID(Integer.parseInt(resultElement.getAttribute("nextChapterID")));
+
+                        String itemToTakeName = resultElement.getAttribute("itemToTake");
+                        if (itemToTakeName != null && !itemToTakeName.isEmpty()) {
+                            result.setItemToTake(itemToTakeName);
+                        }
+
+                        String amountOfItems = resultElement.getAttribute("amountOfItems");
+                        if (amountOfItems != null && !amountOfItems.isEmpty()) {
+                            result.setAmountOfItems(Integer.parseInt(amountOfItems));
+                        }
 
                         chapter.addResult(result);
                     }
@@ -89,7 +109,7 @@ public class Story {
     }
 
     public void setStory(String characterName) {
-        if (characterName.equals("Detective Len")) {
+        if (characterName.equals("Detective Leń")) {
             characterName = "detective";
         } else if (characterName.equals("Scientist Mad")) {
             characterName = "scientist";
@@ -101,7 +121,7 @@ public class Story {
         this.characters = HallOfFame.storyCharacters(characterName);
 
         this.hero = (Character) characters.get(0);
-        this.currentVillaine = (Character) characters.get(1);
+        this.currentVillain = (Character) characters.get(1);
 
         try {
             this.chapters = parseChapters(this.characterName + "Story.xml");
@@ -113,7 +133,7 @@ public class Story {
 
     // Story
     public String characterInfo() {
-        return hero.character() + "to see statistics type/press: /stats\n";
+        return hero.character() + "to see statistics type or press: /stats\n";
     }
 
     public String loadChapterText() {
@@ -124,11 +144,24 @@ public class Story {
         return chapters.get(this.chapterNumber).optionText(buttonNum);
     }
 
-    public void upadateChapterNumber(String oldMessage) {
+    public void updateChapterNumber(String oldMessage) {
         this.chapterNumber = chapters.get(this.chapterNumber).getNextChapter(oldMessage);
     }
 
     public String getAnswer(String message) {
+        String item = chapters.get(chapterNumber).getResultsItemToTake(message);
+        int amountOfItem = chapters.get(chapterNumber).getResultsAmountOfItemToTake(message);
+
+        if (item != null) {
+            if (item.equals("Gold")) {
+                System.out.println("gold before: " + hero.getGold());
+                hero.setGold(hero.getGold() + amountOfItem);
+                System.out.println("gold after: " + hero.getGold());
+            } else {
+                hero.addItemInBackPack(item, amountOfItem);
+            }
+        }
+
         return chapters.get(this.chapterNumber).getAnswerResult(message);
     }
 
@@ -152,6 +185,14 @@ public class Story {
         } else return false;
     }
 
+    public boolean checkForPhoto() {
+        return chapters.get(this.chapterNumber).isPhotoChapter();
+    }
+
+    public boolean checkForPassword() {
+        return chapters.get(this.chapterNumber).isPasswordChapter();
+    }
+
     public int getAmountOfOptions() {
         return chapters.get(chapterNumber).getOptionsAmount();
     }
@@ -169,11 +210,36 @@ public class Story {
 
     public void loadCharacters() {
         this.savedCharacter.loadCharacter(this.hero);
-        this.savedVillaine.loadCharacter(this.currentVillaine);
+        this.savedVillain.loadCharacter(this.currentVillain);
     }
 
     public String finish() {
         return chapters.get(chapters.size() - 1).getText();
+    }
+
+    public String getImageURL() {
+        return chapters.get(this.chapterNumber).getImageURL();
+    }
+
+    public void pickUpTheKeyAndSetItToOpenClosedDoor() {
+        int val = this.chapters.get(this.chapterNumber).getOpensChapterN();
+        if (val != 0) {
+            this.chapters.get(val).swapFirstAndLastResults();
+        }
+    }
+
+    public String validatePassword(String message) {
+        if (message.equals(chapters.get(this.chapterNumber).getPassword())) {
+            return "Password was corretto\n"+ loadNextChapter();
+        } else if (message.equals("No, go back!")) {
+            return message;
+        } else {
+            return "Wrong password";
+        }
+    }
+
+    public boolean checkForWasUsed(int buttonNo) {
+        return chapters.get(this.chapterNumber).getOptions().get(buttonNo).wasUsed();
     }
 
     // Fight
@@ -182,47 +248,48 @@ public class Story {
     }
 
     public boolean villainIsAlive() {
-        return currentVillaine.isAlive();
+        return currentVillain.isAlive();
     }
 
     public String loadNextChapter() {
+        hero.setMana(hero.getMaxMana());
         this.chapterNumber++;
         return loadChapterText();
     }
 
     public String simpleAttack() {
-        return hero.attack(this.currentVillaine);
+        return hero.attack(this.currentVillain);
     }
 
     public String villainMove() {
         String m = "\n";
         int rMove = (int) (Math.random() * 100);
         if (rMove <= 50) {
-            m += currentVillaine.attack(this.hero);
+            m += currentVillain.attack(this.hero);
         } else if (rMove > 51 && rMove < 86) {
-            m += currentVillaine.attackWithWeapon(this.hero);
+            m += currentVillain.attackWithWeapon(this.hero);
         } else {
-            m += currentVillaine.healVillaine(10 * currentVillaine.getLevel());
+            m += currentVillain.healVillaine(10 * currentVillain.getLevel());
         }
 
         if (m.equals("\nNot enough mana, chiiil, dude.") || m.equals("No heal.")) {
-            m = "\n" + currentVillaine.attack(this.hero);
+            m = "\n" + currentVillain.attack(this.hero);
         }
 
         return m;
     }
 
     public String charactersInfoInFight() {
-        String m = hero.character() + "\n" + currentVillaine.character();
+        String m = hero.character() + "\n" + currentVillain.character();
         return m;
     }
 
-    public String villaneIsDead() {
-        return "\n" + hero.killed(this.currentVillaine);
+    public String villainIsDead() {
+        return "\n" + hero.killed(this.currentVillain);
     }
 
     public String attackWithWeapon() {
-        return "" + hero.attackWithWeapon(currentVillaine);
+        return "" + hero.attackWithWeapon(currentVillain);
     }
 
     public String getWeaponManaUsage() {
@@ -239,7 +306,7 @@ public class Story {
 
     public void saveCharacters() {
         this.savedCharacter.saveCharacter(this.hero);
-        this.savedVillaine.saveCharacter(this.currentVillaine);
+        this.savedVillain.saveCharacter(this.currentVillain);
     }
 
     //Backpack

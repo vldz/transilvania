@@ -32,7 +32,7 @@ public class HallOfFame {
                 Node node = characterList.item(temp);
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
                     Element characterElement = (Element) characterList.item(temp);
-                    character = new Character();
+                    character = new Character(characterElement.getAttribute("name"));
 
                     character.setName(characterElement.getAttribute("name"));
 
@@ -44,6 +44,7 @@ public class HallOfFame {
                     character.setWeapon(characterElement.getElementsByTagName("weapon").item(0).getTextContent());
                     character.setMaxDefencePointsByShieldName(characterElement.getElementsByTagName("shield").item(0).getTextContent());
                     character.setGold(Integer.parseInt(characterElement.getElementsByTagName("gold").item(0).getTextContent()));
+                    character.setLegend(characterElement.getElementsByTagName("legend").item(0).getTextContent());
 
                     characters.add(character);
                 }

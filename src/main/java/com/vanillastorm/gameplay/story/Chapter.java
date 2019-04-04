@@ -5,9 +5,16 @@ import java.util.*;
 public class Chapter {
     private List<Option> options = new ArrayList<>();
     private List<Result> results = new ArrayList<>();
-
     private String text;
+
     private boolean isFightChapter;
+
+    private String imageURL;
+
+    private int opensChapterN;
+
+    private String password;
+    private boolean requiresPassword;
 
     public void addOption(Option option) {
         this.options.add(option);
@@ -25,6 +32,34 @@ public class Chapter {
         isFightChapter = fightChapter;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setRequiresPassword(boolean requiresPassword) {
+        this.requiresPassword = requiresPassword;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public boolean isPhotoChapter() {
+        return (this.imageURL != null);
+    }
+
+    public boolean isPasswordChapter() {
+        return requiresPassword;
+    }
+
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
+    }
+
     public String getText() {
         return text;
     }
@@ -35,10 +70,6 @@ public class Chapter {
 
     public String optionText(int optionNumber) {
         return this.options.get(optionNumber).getText();
-    }
-
-    public int getResultsAmount() {
-        return this.results.size();
     }
 
     public int getOptionsAmount() {
@@ -58,7 +89,25 @@ public class Chapter {
     }
 
     public String getResultText(int resultId) {
+        if (this.options.get(resultId).canBeInactive()) {
+            this.options.get(resultId).setWasUsed(true);
+        }
         return this.results.get(resultId).getText();
+    }
+
+    public String getResultsItemToTake(String message) {
+        int resultId = getResultIDByOptionText(message);
+        return this.results.get(resultId).getItemToTakeName();
+    }
+
+    public int getResultsAmountOfItemToTake(String message) {
+        int resultId = getResultIDByOptionText(message);
+        return this.results.get(resultId).getAmountOfItems();
+    }
+
+    public void swapFirstAndLastResults() {
+        this.results.get(0).setText(this.results.get(this.results.size() - 1).getText());
+        this.results.get(0).setNextChapterID(this.results.get(this.results.size() - 1).getNextChapterID());
     }
 
     public String getAnswerResult (String message) {
@@ -74,5 +123,15 @@ public class Chapter {
         return results.get(0);
     }
 
+    public int getOpensChapterN() {
+        return opensChapterN;
+    }
 
+    public void setOpensChapterN(int opensChapterN) {
+        this.opensChapterN = opensChapterN;
+    }
+
+    public List<Option> getOptions() {
+        return options;
+    }
 }

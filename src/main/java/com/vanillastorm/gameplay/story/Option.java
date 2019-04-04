@@ -4,6 +4,9 @@ public class Option {
     private String text;
     private int resultId;
 
+    private boolean canBeInactive;
+    private boolean wasUsed;
+
     public void setText(String text) {
         this.text = text;
     }
@@ -14,5 +17,21 @@ public class Option {
 
     public String getText() {
         return text;
+    }
+
+    public boolean canBeInactive() {
+        return canBeInactive;
+    }
+
+    public boolean wasUsed() {
+        return wasUsed;
+    }
+
+    public void setWasUsed(boolean wasUsed) {
+        this.wasUsed = wasUsed;
+    }
+
+    public void setCanBeInactive(boolean canBeInactive) {
+        this.canBeInactive = canBeInactive;
     }
 }

@@ -3,11 +3,14 @@ package com.vanillastorm.telegram;
 import com.vanillastorm.gameplay.story.Story;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,13 +19,15 @@ import java.util.Map;
 public class TransilvaniaProjectBot extends TelegramLongPollingBot {
 
     private Story creatureStory;
-    // save creature before fight
     private Map<Long, Story> stories = new HashMap<>();
 
     private ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
 
     @Override
     public void onUpdateReceived(Update update) {
+        SendMessage message;
+        SendPhoto photoMessage = null;
+
         List<KeyboardRow> keyboard = new ArrayList<>();
 
         String message_text = update.getMessage().getText();
@@ -36,17 +41,14 @@ public class TransilvaniaProjectBot extends TelegramLongPollingBot {
         }
 
         if (update.hasMessage() && update.getMessage().hasText()) {
-            SendMessage message;
-
             if (message_text.equals("/start") || message_text.equals("start new game") || message_text.equals("Characters story list?")) {
                 message = new SendMessage() // Create a message object object
                         .setChatId(chat_id)
                         .setText("Choose story:" +
-                                "\n * Detective Len noir story." +
+                                "\n * Detective Leń noir story." +
                                 "\n * Scientist Mad mathematical story." +
                                 "\n * Ronin Nona Me samurai story."
                         );
-
                 keyboard = charactersKeyboard();
 
             } else if (message_text.equals("/stats")) {
@@ -62,7 +64,7 @@ public class TransilvaniaProjectBot extends TelegramLongPollingBot {
                         .setChatId(chat_id)
                         .setText(message_text);
 
-            } else if (message_text.equals("Detective Len") || message_text.equals("Scientist Mad") || message_text.equals("Ronin Nona Me")) {
+            } else if (message_text.equals("Detective Leń") || message_text.equals("Scientist Mad") || message_text.equals("Ronin Nona Me")) {
                 creatureStory.setStory(message_text);
                 creatureStory.setChapterNumber(1);
 
@@ -129,7 +131,7 @@ public class TransilvaniaProjectBot extends TelegramLongPollingBot {
                             keyboard = fightKeyboard();
                         }
                     } else {
-                        message_text = creatureStory.villaneIsDead();
+                        message_text = creatureStory.villainIsDead();
                         message_text += "\n" + creatureStory.loadNextChapter();
 
                         keyboard = storyKeyboard(creatureStory);
@@ -139,16 +141,35 @@ public class TransilvaniaProjectBot extends TelegramLongPollingBot {
                             .setChatId(chat_id)
                             .setText(message_text); // hero attack + villain attack
 
+                } else if (creatureStory.checkForPassword()) {
+                    message_text = creatureStory.validatePassword(message_text);
+
+                    if (message_text.equals("No, go back!")) {
+                        message_text = creatureStory.getAnswer(message_text); // Back to living room investigation.
+                        creatureStory.updateChapterNumber(message_text);
+                    }
+
+                    message = new SendMessage()
+                            .setChatId(chat_id)
+                            .setText(message_text);
+
+                    keyboard = storyKeyboard(creatureStory);
                 } else {
                     // story goes here
                     String oldMessageText = message_text;
 
-                    message_text = creatureStory.getAnswer(oldMessageText); // after button "option text" pressed - loads (result text)
+                    message_text = creatureStory.getAnswer(oldMessageText); // after button "option text" was pressed - loads (result text)
                     if (creatureStory.getChapterNumber() != 0) {
                         creatureStory.setCheckpoint();
                     }
 
-                    creatureStory.upadateChapterNumber(oldMessageText);
+                    creatureStory.updateChapterNumber(oldMessageText);
+
+                    if (creatureStory.checkForPhoto()) {
+                        photoMessage = new SendPhoto().setChatId(chat_id).setPhoto(new File(ClassLoader.getSystemClassLoader().getResource(creatureStory.getImageURL()).getFile()));
+                    }
+
+                    creatureStory.pickUpTheKeyAndSetItToOpenClosedDoor();
 
                     message = new SendMessage()
                             .setChatId(chat_id)
@@ -168,11 +189,17 @@ public class TransilvaniaProjectBot extends TelegramLongPollingBot {
 
             try {
                 execute(message);
+                if (photoMessage != null) {
+                    try {
+                        execute(photoMessage);
+                    } catch (TelegramApiException ee) {
+                    }
+                }
             } catch (TelegramApiException e) {
-                e.printStackTrace();
             }
 
         }
+
     }
 
     private List<KeyboardRow> restartKeybpard(int i) {
@@ -219,9 +246,11 @@ public class TransilvaniaProjectBot extends TelegramLongPollingBot {
     private List<KeyboardRow> storyKeyboard(Story creatureStory) {
         List<KeyboardRow> keyboard = new ArrayList<>();
         for (int buttonNo = 0; buttonNo < creatureStory.getAmountOfOptions(); buttonNo++) {
-            KeyboardRow row = new KeyboardRow();
-            row.add(creatureStory.getOptionName(buttonNo));
-            keyboard.add(row);
+            if (!creatureStory.checkForWasUsed(buttonNo)) {
+                KeyboardRow row = new KeyboardRow();
+                row.add(creatureStory.getOptionName(buttonNo));
+                keyboard.add(row);
+            }
         }
         return keyboard;
     }
@@ -248,7 +277,7 @@ public class TransilvaniaProjectBot extends TelegramLongPollingBot {
         List<KeyboardRow> keyboard = new ArrayList<>();
 
         KeyboardRow row = new KeyboardRow();
-        row.add("Detective Len");
+        row.add("Detective Leń");
         keyboard.add(row);
 
         row = new KeyboardRow();
@@ -258,7 +287,6 @@ public class TransilvaniaProjectBot extends TelegramLongPollingBot {
         row = new KeyboardRow();
         row.add("Ronin Nona Me ");
         keyboard.add(row);
-
         return keyboard;
     }
 

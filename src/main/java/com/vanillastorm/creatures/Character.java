@@ -20,23 +20,20 @@ public class Character {
     private double strength;
     private int accuracy;
 
+    private String shieldName;
     private double maxDefencePoints;
     private double defencePoints;
 
     private Weapon weapon;
 
     private int gold;
-    private String shieldName;
 
-    private Backpack backpack;
+    private Backpack backpack = new Backpack();
 
-    public Character() {
-        this.backpack = new Backpack();
-        backpack.addItem(Items.getItem(0));
-        backpack.addItem(Items.getItem(0));
-        backpack.addItem(Items.getItem(1));
-        backpack.addItem(Items.getItem(2));
-        backpack.addItem(Items.getItem(3));
+    private String legend;
+
+    public Character(String name) {
+        putFirstItemInBackpack(name);
     }
 
     public String attack(Character character) {
@@ -76,7 +73,7 @@ public class Character {
     }
 
     private String takeDamage(Character character, int damage) {
-        String m = "";
+        String m;
         int hpDamage = (int) (damage * (1 - (character.defencePoints / 150)));
         int armourDamage = damage - hpDamage ;
 
@@ -106,7 +103,7 @@ public class Character {
 
     public String killed(Character character) {
         this.getEnemysGold(character);
-        return character.getName() + " is downed and looted. \n" + this.getName() + " earns " + "+" + character.getGold() + " gold(" + this.getGold() + ").";
+        return character.getName() + " is downed. \n" + this.getName() + " earns " + "+" + character.getGold() + " gold(" + this.getGold() + ").";
     }
 
     public String heal(Item medkit) {
@@ -197,14 +194,16 @@ public class Character {
     }
 
     public String character() {
-        return "---Character INFO---\n" +
+        return "--------------Character INFO--------------\n" +
                 "Name: " + this.getName() + "\n" +
                 "Shield: " + this.getShieldName() + "(" + this.getDefencePoints() + ")" + "\n" +
                 "Hp: " + this.getHp() + "\n" +
                 "Mana: " + this.getMana() + "\n" +
                 "Weapon: " + this.weaponName() + "\n" +
                 "Gold: " + this.getGold() + "\n" +
-                "---Character INFO---\n";
+                "------------------Legend------------------\n" +
+                "" + this.getLegend() + "\n"+
+                "--------------Character INFO--------------\n";
     }
 
     public boolean isAlive() {
@@ -352,6 +351,33 @@ public class Character {
     public void loadBackpack() {
         this.backpack.setItemNames(this.backpack.getSavedItemNames());
         this.backpack.setItemsInBackpack(this.backpack.getSavedItems());
+    }
+
+    public String getLegend() {
+        return legend;
+    }
+
+    public void setLegend(String legend) {
+        this.legend = legend;
+    }
+
+    private void putFirstItemInBackpack(String name) {
+        int itemIndex;
+        if (name.equals("Detective Len")) {
+            itemIndex = 0;
+        } else if (name.equals("Scientist Mad")) {
+            itemIndex = 3;
+        } else {
+            itemIndex = 1;
+        }
+        this.backpack.addItem(Items.getItem(itemIndex));
+    }
+
+    public void addItemInBackPack(String itemName, int amount) {
+        System.out.println("before: " + backpack.printItems());
+        System.out.println(itemName + " added in amount of " + amount);
+        this.backpack.addItem(Items.getItem(itemName), amount);
+        System.out.println("after: " + backpack.printItems());
     }
 }
 
