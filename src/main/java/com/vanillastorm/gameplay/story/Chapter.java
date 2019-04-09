@@ -8,6 +8,7 @@ public class Chapter {
     private String text;
 
     private boolean isFightChapter;
+    private boolean allowedToLose;
 
     private String imageURL;
 
@@ -133,5 +134,13 @@ public class Chapter {
 
     public List<Option> getOptions() {
         return options;
+    }
+
+    public boolean isAllowedToLose() {
+        return allowedToLose;
+    }
+
+    public void setAllowedToLose(boolean allowedToLose) {
+        this.allowedToLose = allowedToLose;
     }
 }

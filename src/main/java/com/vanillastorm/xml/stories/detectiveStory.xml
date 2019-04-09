@@ -19,13 +19,13 @@ Restart?
     CHAPTER 1
 --------------
     1960 year, world of full noir.
-    Detective Leń had his usual nap in his noir cabinet. Suddenly a noir lady came into his noir bureau and screamed:
+Detective Leń had his usual nap in his noir cabinet. Suddenly a noir lady came into his noir bureau and screamed:
 - Detective Leń?
 - Not available now…
 - But i really, reeeally need your help, cos you are the only one...
-    Detective continued to pretend that he was sleeping, but that never stopped that girl:
+Detective continued to pretend that he was sleeping, but that never stopped that girl:
 - Someone is after me, and, he... no, IT ... it is not look like ... human. No one will believe me ...
-    She started to noir cry:
+She started to noir cry:
 - ... help me... please;(
 - Look, this case is not 7/10, even not 5, ...
         </text>
@@ -40,8 +40,8 @@ Restart?
     <!--(Restart point)-->
     <chapter chapterID="2" isRestart="true" >
         <text>
-    After these words, Detective faded out, as he usually did in his Sudden Dream Attacks, but this time it was much worse.
-    Detective woke up in living room in which he never was before, he heard squeak of a woman. He looked up. Fat woman took a cane, she was ready to kick his ass.
+After these words, Detective faded out, as he usually did in his Sudden Dream Attacks, but this time it was much worse.
+Detective woke up in living room in which he never was before, he heard squeak of a woman. He looked up. Fat woman took a cane, she was ready to kick his ass.
 
     *intense music starts*
 
@@ -71,76 +71,61 @@ to see full characters stats type or press: /charactersStats
 
     <chapter chapterID="4">
         <text>
-    Leń is now in the living room.
+Leń is now in the living room.
 He sees:
         </text>
 
-        <option resultID="0" >Body: check the it</option>
-        <option resultID="1" >Wardrobe: search the it</option>
+        <option resultID="0" canBeInactive="true">Body: check the it</option>
+        <option resultID="1" canBeInactive="true">Wardrobe: search the it</option>
         <option resultID="2" >Door: come to it</option>
         <option resultID="3" >Chest: investigate it</option>
 
         <result nextChapterID="5">
 Detective Leń flipped the body.</result>
 
-        <result nextChapterID="7">
+        <result nextChapterID="6">
 Detective Leń looked closer at wardrobe.</result>
 
-        <result nextChapterID="8">
+        <result nextChapterID="7">
 Detective Leń came to the door.</result>
 
-        <result nextChapterID="9">
+        <result nextChapterID="8">
 Detective Leń went to the chest.</result>
     </chapter>
 
     <chapter chapterID="5">
-        <text>
+        <text imgURL="img/note.png">
 - Oh, my ... Her face looks not so good. She was ugly and before, but now, sad for her.
 
-    After this detective saw something in her apron's pocket. Something like a piece of paper.
-
-"Should i take it?"
+After this detective saw something in her apron's pocket. Something like a piece of paper.
+It is a note.
         </text>
 
-        <option resultID="0">Take it</option>
-        <option resultID="1">No, go back</option>
-
-        <result nextChapterID="6">
-It is a note.</result>
+        <option resultID="0">Understandable, go back!</option>
 
         <result nextChapterID="4">
-Back to living room investigation.</result>
+Living room.</result>
     </chapter>
 
     <chapter chapterID="6">
-
-    <text imgURL="img/note.png"></text>
-
-    <option resultID="0">Put it back</option>
-
-    <result nextChapterID="4">
-Back to living room investigation.</result>
-    </chapter>
-
-    <chapter chapterID="7">
         <text>
     There was a lot of glass jars, pots and tins. But wait, whats inside them? Rotten parts of animals, fungus and mold.
 Nothing useful. Wish there was a key...
         </text>
 
-        <option resultID="0">Go back!</option>
+        <option resultID="0">Nothing useful, go back!</option>
 
         <result nextChapterID="4">
-Back to living room investigation.</result>
+Living room.</result>
     </chapter>
 
-    <chapter chapterID="8" requiresKey="true">
+    <chapter chapterID="7" requiresKey="true">
         <text>
 Wooden door with a huge lock on it which leads to the outside.
         </text>
 
         <option resultID="0">Try to open it</option>
-        <option resultID="1">Go back</option>
+        <option resultID="1">Go to Living room</option>
 
         <result nextChapterID="4">
 The door is locked with a lock.
@@ -148,94 +133,118 @@ Lock is in a close mode.
 Detective was sure: he needs a key.</result>
 
         <result nextChapterID="4">
-Back to living room investigation.</result>
+Living room.</result>
 
-        <result nextChapterID="13">
+        <result nextChapterID="12">
 Detective put the lock in an open-mode and got outside.</result>
     </chapter>
 
-    <chapter chapterID="9" requiresPassword="true" digitPassword="3920">
+    <chapter chapterID="8" requiresPassword="true" digitPassword="3920">
         <text>
     Chest has a 4-digit-lock,
 Enter password:
         </text>
 
-        <option resultID="0">No, go back!</option>
+        <option resultID="0">No password, go back!</option>
 
         <result nextChapterID="4">
-Back to living room investigation.</result>
+Living room.</result>
     </chapter>
 
-    <chapter chapterID="10">
+    <chapter chapterID="9">
         <text>
-Detective found in chest:
+Detective could take from the chest:
         </text>
 
         <option resultID="0" canBeInactive="true">Gold</option>
         <option resultID="1" canBeInactive="true">Dirty key</option>
         <option resultID="2" canBeInactive="true">Bandage(1)</option>
-        <option resultID="3">Nothin'</option>
+        <option resultID="3">Nothin' and back to room</option>
 
-        <result nextChapterID="11">
+        <result nextChapterID="10">
 - Thats it? Only 8 coins? Hey you, fat bitch, because of 8 gold coins you need this huge chest?</result>
 
-        <result nextChapterID="12">
-- What a luck or it was a skill? Why did she store a key in a chest?</result>
+        <result nextChapterID="11">
+"What a luck or it was a skill? Why did she store a key in a chest?"</result>
 
-        <result nextChapterID="10" itemToTake="Bandage" amountOfItems="1">
-- Bandage? Noice!</result>
+        <result nextChapterID="9" itemToTake="Bandage" amountOfItems="1">
+"Bandage? Noice!"</result>
 
         <result nextChapterID="4">
-- I need nothing more.</result>
+"I need nothing more."</result>
     </chapter>
 
-    <chapter chapterID="11">
+    <chapter chapterID="10">
         <text>
-    Fat Kat came in consciousness for a moment and said:
+Fat Kat came in consciousness for a moment and said:
 - Please, thats only what left... Dont..Plea...
 She passed out again.
         </text>
 
-        <option resultID="0">Any way take mone</option>
+        <option resultID="0">Any way, take mone</option>
         <option resultID="1">Leave her savings</option>
 
-        <result nextChapterID="10" itemToTake="Gold" amountOfItems="8">
-- I realy need them more for future quests.
+        <result nextChapterID="9" itemToTake="Gold" amountOfItems="8">
+"I realy need them more for future quests."
 Detective tried to convince himself, but it didn't help. He took money from a poor woman.</result>
 
-        <result nextChapterID="10">
-- Ok, bad for me, good for you and my karma.
+        <result nextChapterID="9">
+"Ok, bad for me, good for her and my karma."
 Detective was sure - he did the right thing.</result>
     </chapter>
 
-    <chapter chapterID="12" opensChapterN="8">
+    <chapter chapterID="11" opensChapterN="7">
         <text>
-    Detective cleaned the key from dirt and blood and saw a label with romanian text: "Cheia ușii spre stradă".
+Detective cleaned the key from dirt and blood and saw a label with romanian text: "Cheia ușii spre stradă".
         </text>
 
     <option resultID="0">See what is left in the chest?</option>
     <option resultID="1">Try to find door which he could open?</option>
 
-    <result nextChapterID="10">
+    <result nextChapterID="9">
 Detective is back to loot the chest more.</result>
     <result nextChapterID="4">
 He went back to the living room.</result>
     </chapter>
 
-    <chapter chapterID="13">
+    <chapter chapterID="12">
         <text>
-    Outside.
+He went outside. He saw nothing familiar, strange creatures, such as werewolves, goblins, witches are simply walking around on the streets.
+Everything was clear for Detective Leń now, it was not his noir world anymore, but what did just happen? How did he get here?
+
+He saw a crowd was looking on something in a stupid circle on his left and a Bar with neon shining sign "Crazy wooden leg" on his right.
         </text>
 
-        <option resultID="0">Outside option 1</option>
-        <option resultID="1">Outside option 2</option>
+        <option resultID="0">Stupid circle</option>
+        <option resultID="1">"Crazy wooden leg"</option>
 
-        <result nextChapterID="11">
-Result 1</result>
+        <result nextChapterID="13">
+"What the crowd is going on?"</result>
 
-        <result nextChapterID="11">
-Result 2</result>
+        <result nextChapterID="13">
+"Oh my, its a strange tough event happened to me. I should relax in a bar."</result>
     </chapter>
+
+    <chapter chapterID="13">
+        <text>
+    CHAPTER 2
+---------------
+To be continued...
+        </text>
+
+        <option resultID="0">To the character story list.</option>
+
+        <result nextChapterID="14">...</result>
+    </chapter>
+
+    <!--<chapter chapterID="14">-->
+<!--Bar-->
+        <!--<option resultID="0">Option 1</option>-->
+        <!--<option resultID="1">Option 2</option>-->
+
+        <!--<result nextChapterID="14">Result 1</result>-->
+        <!--<result nextChapterID="15">Result 2</result>-->
+    <!--</chapter>-->
 
     <chapter  chapterID="69">
         <text>

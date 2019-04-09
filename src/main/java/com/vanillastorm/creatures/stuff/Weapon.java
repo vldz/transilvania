@@ -4,24 +4,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Weapon {
+    private int weaponTier;
     private String weaponName;
     private int minusManaAfterUsage;
-    private int damage;
+    private int minDamage;
 
     private final static List<Weapon> weapons = new ArrayList<Weapon>() {
         {
-            add(new Weapon("Microscope", 6, 7));
-            add(new Weapon("Katana", 5, 10));
-            add(new Weapon("Nunchacks", 4, 4));
-            add(new Weapon("Cane", 5, 10));
-            add(new Weapon("Shocker", 0, 50));
+            add(new Weapon(1,"Microscope", 6, 5));
+            add(new Weapon(1,"Katana", 5, 10));
+            add(new Weapon(1,"Nunchacks", 4, 8));
+            add(new Weapon(1,"Cane", 5, 8));
+            add(new Weapon(4,"Shocker", 0, 50));
         }
     };
 
-    private Weapon(String weaponName, int minusManaAfterUsage, int damage) {
+    private Weapon(int weaponTier, String weaponName, int minusManaAfterUsage, int minDamage) {
+        this.weaponTier = weaponTier;
         this.weaponName = weaponName;
         this.minusManaAfterUsage = minusManaAfterUsage;
-        this.damage = damage;
+        this.minDamage = minDamage;
     }
 
     public static Weapon getWeapon (String weaponName) {
@@ -39,12 +41,14 @@ public class Weapon {
     }
 
     public int getDamage() {
-        return damage;
+        return minDamage;
     }
 
     public int getMinusManaAfterUsage() {
         return minusManaAfterUsage;
     }
 
-    // - weapon list
+    public int getWeaponTier() {
+        return weaponTier;
+    }
 }

@@ -51,6 +51,7 @@ public class Story {
                     chapter = new Chapter();
 
                     chapter.setFightChapter(Boolean.parseBoolean(chapterElement.getAttribute("isFight")));
+                    chapter.setAllowedToLose(Boolean.parseBoolean(chapterElement.getAttribute("allowedToLose")));
 
                     chapter.setRequiresPassword(Boolean.parseBoolean(chapterElement.getAttribute("requiresPassword")));
                     chapter.setPassword(chapterElement.getAttribute("digitPassword"));
@@ -62,7 +63,11 @@ public class Story {
 
                     NodeList text = chapterElement.getElementsByTagName("text");
                     Element textElement = (Element) text.item(0);
-                    chapter.setImageURL(textElement.getAttribute("imgURL"));
+
+                    String imageURL = textElement.getAttribute("imgURL");
+                    if (imageURL != null && !imageURL.isEmpty()) {
+                        chapter.setImageURL(imageURL);
+                    }
                     chapter.setText(textElement.getTextContent());
 
                     NodeList options = chapterElement.getElementsByTagName("option");
@@ -185,6 +190,10 @@ public class Story {
         } else return false;
     }
 
+    public boolean checkForPossibilityToLose() {
+        return chapters.get(this.chapterNumber).isAllowedToLose();
+    }
+
     public boolean checkForPhoto() {
         return chapters.get(this.chapterNumber).isPhotoChapter();
     }
@@ -231,7 +240,7 @@ public class Story {
     public String validatePassword(String message) {
         if (message.equals(chapters.get(this.chapterNumber).getPassword())) {
             return "Password was corretto\n"+ loadNextChapter();
-        } else if (message.equals("No, go back!")) {
+        } else if (message.equals("No password, go back!")) {
             return message;
         } else {
             return "Wrong password";
@@ -253,6 +262,7 @@ public class Story {
 
     public String loadNextChapter() {
         hero.setMana(hero.getMaxMana());
+        hero.setHp(hero.getMaxHp());
         this.chapterNumber++;
         return loadChapterText();
     }
@@ -286,6 +296,10 @@ public class Story {
 
     public String villainIsDead() {
         return "\n" + hero.killed(this.currentVillain);
+    }
+
+    public String villainKilledHero() {
+        return "\n" + currentVillain.killed(this.hero);
     }
 
     public String attackWithWeapon() {

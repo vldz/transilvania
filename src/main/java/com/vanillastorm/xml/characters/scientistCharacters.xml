@@ -5,7 +5,7 @@
         <hp>100</hp>
         <mana>15</mana>
         <level>1</level>
-        <strength>15</strength>
+        <strength>5</strength>
         <accuracy>10</accuracy>
         <weapon>Microscope</weapon>
         <shield>Lab coat</shield>

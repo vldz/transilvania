@@ -58,8 +58,11 @@ public class TransilvaniaProjectBot extends TelegramLongPollingBot {
 
                 keyboard = storyKeyboard(creatureStory);
             } else if (message_text.equals("/description")) {
-                message_text = "Transilvania project is a adventure text game.\n" +
-                        "During the story you have to fight different creatures, make dicisions and see where your choices will take you.";
+                message_text = "Transilvania Project is an adventure text game for your imagination.\n" +
+                        "While you progress through one of 3 different thrilling story lines, you have to make crucial choices witch will lead you along your own unique path and story will continue the way you want. \n" +
+                        "Solve quests, fight enemy creatures and enjoy the story with Transilvania Project.\n" +
+                        "Gh hf,\n" +
+                        "Vladyslav Zelinskyi";
                 message = new SendMessage() // Create a message object object
                         .setChatId(chat_id)
                         .setText(message_text);
@@ -115,14 +118,18 @@ public class TransilvaniaProjectBot extends TelegramLongPollingBot {
                         message_text = "\n" + creatureStory.restart(message_text);
                     }
 
-                    if (creatureStory.villainIsAlive()) {
+                    if (creatureStory.villainIsAlive() && creatureStory.heroIsAlive()) {
                         if (moveWasMade) {
                             message_text += "\n" + creatureStory.villainMove();
                         }
 
-                        if (!creatureStory.heroIsAlive()) {
+                        if (!creatureStory.heroIsAlive() && !creatureStory.checkForPossibilityToLose()) {
                             message_text += "\nRestart?";
                             keyboard = restartKeybpard(0);
+                        } else if (!creatureStory.heroIsAlive() && creatureStory.checkForPossibilityToLose()){
+                            message_text = creatureStory.villainKilledHero();
+                            message_text += "\n" + creatureStory.loadNextChapter();
+                            keyboard = storyKeyboard(creatureStory);
                         } else if (openBackpack) {
                             keyboard = backpackKeyboard();
                         } else if (denial) {
@@ -144,7 +151,7 @@ public class TransilvaniaProjectBot extends TelegramLongPollingBot {
                 } else if (creatureStory.checkForPassword()) {
                     message_text = creatureStory.validatePassword(message_text);
 
-                    if (message_text.equals("No, go back!")) {
+                    if (message_text.equals("No password, go back!")) {
                         message_text = creatureStory.getAnswer(message_text); // Back to living room investigation.
                         creatureStory.updateChapterNumber(message_text);
                     }

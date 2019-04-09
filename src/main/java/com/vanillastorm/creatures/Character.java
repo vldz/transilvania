@@ -51,7 +51,7 @@ public class Character {
         String m = "";
         int manaCalc = this.mana - this.weapon.getMinusManaAfterUsage();
         if (manaCalc >= 0) {
-            int fullDamageWithWeapon = damageCalculation(character, 1) + this.weapon.getDamage();
+            int fullDamageWithWeapon = damageCalculation(character, this.weapon.getWeaponTier()) + this.weapon.getDamage();
             int damageWithArmour = (int) (fullDamageWithWeapon * (1 - (character.defencePoints / 150)));
             this.mana -= this.weapon.getMinusManaAfterUsage();
 
@@ -96,7 +96,7 @@ public class Character {
                 m += ", " + (int) this.defencePoints + " shield.";
             }
         } else {
-            m += "\n" + this.name + " is dead.\n";
+            m += "\n" + this.name + " is downed.\n";
         }
         return m;
     }
@@ -156,7 +156,6 @@ public class Character {
         return m;
     }
 
-    //TODO: make usage of different items
     public String useItem(String item) {
         if (Items.getItem(item).isMedicine()) {
             return this.heal(Items.getItem(item));
@@ -166,10 +165,11 @@ public class Character {
     }
 
     public double generateAccuracy(int weaponCoef) {
-        double totalAccuracy = ((Math.random() * 100)) + this.accuracy;
-        // 1 for attacks with weapon
-        if (weaponCoef == 1) {
-            return totalAccuracy / 80;
+        double totalAccuracy = ((Math.random() * 100)) + this.accuracy; //100 * this.accuracy; <-max
+        if (weaponCoef >= 10){
+            return totalAccuracy / 99;
+        } else if (weaponCoef != 0) {
+            return totalAccuracy / (100 - weaponCoef * 10);
         } else {
             return totalAccuracy / 100;
         }
@@ -374,10 +374,14 @@ public class Character {
     }
 
     public void addItemInBackPack(String itemName, int amount) {
-        System.out.println("before: " + backpack.printItems());
-        System.out.println(itemName + " added in amount of " + amount);
+//        System.out.println("before: " + backpack.printItems());
+//        System.out.println(itemName + " added in amount of " + amount);
         this.backpack.addItem(Items.getItem(itemName), amount);
-        System.out.println("after: " + backpack.printItems());
+//        System.out.println("after: " + backpack.printItems());
+    }
+
+    public int getMaxHp() {
+        return maxHp;
     }
 }
 

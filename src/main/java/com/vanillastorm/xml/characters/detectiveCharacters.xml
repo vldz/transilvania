@@ -5,12 +5,12 @@
         <hp>100</hp>
         <mana>10</mana>
         <level>1</level>
-        <strength>200</strength>
-        <accuracy>1</accuracy>
+        <strength>20</strength>
+        <accuracy>3</accuracy>
         <weapon>Nunchacks</weapon>
         <shield>None</shield>
         <gold>0</gold>
-        <legend>Detective Leń(Лень) is a detective from noir world, which he saved once already. He is lazy most of the time, except that moments when ladies involved, or if he is in a good mood, which is usualy noir-bad. He lost a lot people, so he doesn't want to get attached to them.</legend>
+        <legend>Detective Leń(Лень) is a detective from noir-world, which he saved once already. He is lazy most of the time, except that moments when ladies involved, or if he is in a good mood, which is usually noir-bad. He lost a lot of people, so he doesn't want to get attached to them.</legend>
     </character>
 
     <character name="Fatty Kathy" characterID = "1">
