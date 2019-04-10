@@ -7,6 +7,8 @@ public class Option {
     private boolean canBeInactive;
     private boolean wasUsed;
 
+    private int karmaPoints;
+
     public void setText(String text) {
         this.text = text;
     }
@@ -33,5 +35,13 @@ public class Option {
 
     public void setCanBeInactive(boolean canBeInactive) {
         this.canBeInactive = canBeInactive;
+    }
+
+    public int getKarmaPoints() {
+        return karmaPoints;
+    }
+
+    public void setKarmaPoints(int karmaPoints) {
+        this.karmaPoints = karmaPoints;
     }
 }

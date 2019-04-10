@@ -26,8 +26,8 @@ Scientist Mad came into a room where was a girl.
     Tell her...
         </text>
 
-        <option resultID="0">... full museum story.</option>
-        <option resultID="1">... nothing.</option>
+        <option resultID="0" karma="1">... full museum story.</option>
+        <option resultID="1" karma="-1">... nothing.</option>
 
         <result nextChapterID="2">
 OK then. Flashback to museum.</result>
@@ -55,8 +55,8 @@ After knockdown, scientist stood up, took first what he could, it was the Vishiv
 He will run ...
         </text>
 
-        <option resultID="0">Zig-zag style</option>
-        <option resultID="1">Straight forward</option>
+        <option resultID="0" karma="1">Zig-zag style</option>
+        <option resultID="1" karma="-1" canBeInactive="true">Straight forward</option>
 
         <result nextChapterID="4">Robo-guards shot askew, and scientist could escape and run home.</result>
         <result nextChapterID="0">Robo-guards triangulated his way and shot ahead. After first shot in his side, scientist fell down. Robots surrounded him and last thing he could think about was:
@@ -75,7 +75,7 @@ But bad for him he didn't see the bat witch lives in that machine's time and pla
 Any way he entered the machine and the only thing left was to press ready!
         </text>
 
-        <option resultID="0">Ready!</option>
+        <option resultID="0" karma="1">Ready!</option>
 
         <result nextChapterID="5">- I'm coming, 21 century Ukraine!</result>
     </chapter>

@@ -143,4 +143,8 @@ public class Chapter {
     public void setAllowedToLose(boolean allowedToLose) {
         this.allowedToLose = allowedToLose;
     }
+
+    public Option getOption(int n) {
+        return this.options.get(n);
+    }
 }

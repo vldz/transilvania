@@ -31,6 +31,7 @@ public class Character {
     private Backpack backpack = new Backpack();
 
     private String legend;
+    private int karma;
 
     public Character(String name) {
         putFirstItemInBackpack(name);
@@ -200,6 +201,7 @@ public class Character {
                 "Hp: " + this.getHp() + "\n" +
                 "Mana: " + this.getMana() + "\n" +
                 "Weapon: " + this.weaponName() + "\n" +
+                "Karma: " + this.getKarma() + "\n" +
                 "Gold: " + this.getGold() + "\n" +
                 "------------------Legend------------------\n" +
                 "" + this.getLegend() + "\n"+
@@ -382,6 +384,14 @@ public class Character {
 
     public int getMaxHp() {
         return maxHp;
+    }
+
+    public int getKarma() {
+        return karma;
+    }
+
+    public void setKarma(int karma) {
+        this.karma = karma;
     }
 }
 

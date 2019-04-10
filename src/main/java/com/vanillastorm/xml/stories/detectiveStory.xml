@@ -30,8 +30,8 @@ She started to noir cry:
 - Look, this case is not 7/10, even not 5, ...
         </text>
 
-        <option resultID="0">... but ok, tell me how does it look like?</option>
-        <option resultID="1">... sooo, can you leave, please, you've interrupted my noir dream!</option>
+        <option resultID="0" karma="1">... but ok, tell me how does it look like?</option>
+        <option resultID="1" karma="-1">... sooo, can you leave, please, you've interrupted my noir dream!</option>
 
         <result nextChapterID="2">- Detective Leń, you are amazing, i will pay for this, may be not even with money.. -, screamed happy lady.</result>
         <result nextChapterID="2">- No save for me now, it is probably gg... -, and she started to cry.</result>
@@ -48,7 +48,7 @@ Detective woke up in living room in which he never was before, he heard squeak o
 "What the f...? I can jump through the window of fight club this bitch"
         </text>
 
-        <option resultID="0" canBeInactive="true">Pussy jump through the window</option>
+        <option resultID="0" canBeInactive="true" karma="-1">Pussy jump through the window</option>
         <option resultID="1">Fight club this bitch</option>
 
         <result nextChapterID="0">
@@ -101,7 +101,7 @@ After this detective saw something in her apron's pocket. Something like a piece
 It is a note.
         </text>
 
-        <option resultID="0">Understandable, go back!</option>
+        <option resultID="0" karma="1">Understandable, go back!</option>
 
         <result nextChapterID="4">
 Living room.</result>
@@ -181,15 +181,15 @@ Fat Kat came in consciousness for a moment and said:
 She passed out again.
         </text>
 
-        <option resultID="0">Any way, take mone</option>
-        <option resultID="1">Leave her savings</option>
+        <option resultID="0" karma="-1">Any way, take mone</option>
+        <option resultID="1" karma="1">Leave her savings</option>
 
         <result nextChapterID="9" itemToTake="Gold" amountOfItems="8">
 "I realy need them more for future quests."
 Detective tried to convince himself, but it didn't help. He took money from a poor woman.</result>
 
         <result nextChapterID="9">
-"Ok, bad for me, good for her and my karma."
+"Ok, bad for me, good for her and my karmaPoints."
 Detective was sure - he did the right thing.</result>
     </chapter>
 
@@ -198,8 +198,8 @@ Detective was sure - he did the right thing.</result>
 Detective cleaned the key from dirt and blood and saw a label with romanian text: "Cheia ușii spre stradă".
         </text>
 
-    <option resultID="0">See what is left in the chest?</option>
-    <option resultID="1">Try to find door which he could open?</option>
+    <option resultID="0" karma="1">See what is left in the chest?</option>
+    <option resultID="1" karma="1">Try to find door which he could open?</option>
 
     <result nextChapterID="9">
 Detective is back to loot the chest more.</result>
@@ -215,8 +215,8 @@ Everything was clear for Detective Leń now, it was not his noir world anymore, 
 He saw a crowd was looking on something in a stupid circle on his left and a Bar with neon shining sign "Crazy wooden leg" on his right.
         </text>
 
-        <option resultID="0">Stupid circle</option>
-        <option resultID="1">"Crazy wooden leg"</option>
+        <option resultID="0" karma="1">Stupid circle</option>
+        <option resultID="1" karma="-1">"Crazy wooden leg"</option>
 
         <result nextChapterID="13">
 "What the crowd is going on?"</result>

@@ -79,6 +79,13 @@ public class Story {
                         option.setText(optionElement.getTextContent());
                         option.setCanBeInactive(Boolean.parseBoolean(optionElement.getAttribute("canBeInactive")));
 
+                        String karmaPoints = optionElement.getAttribute("karma");
+                        if (karmaPoints != null && !karmaPoints.isEmpty()) {
+                            option.setKarmaPoints(Integer.parseInt(karmaPoints));
+                        } else {
+                            option.setKarmaPoints(0);
+                        }
+
                         chapter.addOption(option);
                     }
 
@@ -166,7 +173,10 @@ public class Story {
                 hero.addItemInBackPack(item, amountOfItem);
             }
         }
+        int chosenOptionNumber = chapters.get(this.chapterNumber).getResultIDByOptionText(message);
 
+        updateKarmaPoints(chapters.get(this.chapterNumber).getOption(chosenOptionNumber).getKarmaPoints());
+        System.out.println(hero.getKarma());
         return chapters.get(this.chapterNumber).getAnswerResult(message);
     }
 
@@ -251,6 +261,10 @@ public class Story {
         return chapters.get(this.chapterNumber).getOptions().get(buttonNo).wasUsed();
     }
 
+    public void updateKarmaPoints(int amountOfKarma) {
+        this.hero.setKarma(hero.getKarma() + amountOfKarma);
+    }
+
     // Fight
     public boolean heroIsAlive() {
         return hero.isAlive();
@@ -263,6 +277,8 @@ public class Story {
     public String loadNextChapter() {
         hero.setMana(hero.getMaxMana());
         hero.setHp(hero.getMaxHp());
+        updateKarmaPoints(1);
+        System.out.println(hero.getKarma());
         this.chapterNumber++;
         return loadChapterText();
     }
@@ -299,6 +315,8 @@ public class Story {
     }
 
     public String villainKilledHero() {
+        updateKarmaPoints(-1);
+        System.out.println(hero.getKarma());
         return "\n" + currentVillain.killed(this.hero);
     }
 
