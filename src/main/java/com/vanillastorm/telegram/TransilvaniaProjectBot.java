@@ -11,6 +11,7 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -173,12 +174,12 @@ public class TransilvaniaProjectBot extends TelegramLongPollingBot {
                     creatureStory.updateChapterNumber(oldMessageText);
 
                     if (creatureStory.checkForPhoto()) {
-                        File photo = new File(ClassLoader.getSystemClassLoader().getResource(creatureStory.getImageURL()).getFile());
-                        String path = photo.getAbsolutePath();
-                        System.out.println(path);
+                        InputStream  photo = ClassLoader.getSystemClassLoader().getResourceAsStream(creatureStory.getImageURL());
+                        //String path = photo.getAbsolutePath();
+                        //System.out.println(path);
                         photoMessage = new SendPhoto()
                                 .setChatId(chat_id)
-                                .setPhoto(photo);
+                                .setPhoto("ss", photo);
                     }
 
                     creatureStory.pickUpTheKeyAndSetItToOpenClosedDoor();
