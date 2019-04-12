@@ -9,6 +9,7 @@
         <accuracy>10</accuracy>
         <weapon>Microscope</weapon>
         <shield>Lab coat</shield>
+        <karma>2</karma>
         <gold>5</gold>
         <legend>Scientist Mad is a scientist from future world which recovers after apocalypses. Obsessed with his wife life saving. Not very strong but compensates this with his mind.</legend>
     </character>
@@ -21,6 +22,7 @@
         <accuracy>20</accuracy>
         <weapon>Shocker</weapon>
         <shield>Heavy armour</shield>
+        <karma>0</karma>
         <gold>100</gold>
         <legend>Robot model: VZ-108. Created to guard a museum with relics which survived apocalypses. Impossible to overcome. Killed humans: 24, others: 1687.</legend>
     </character>

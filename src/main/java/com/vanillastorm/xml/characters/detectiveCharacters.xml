@@ -10,6 +10,7 @@
         <weapon>Nunchacks</weapon>
         <shield>None</shield>
         <gold>0</gold>
+        <karma>0</karma>
         <legend>Detective Leń(Лень) is a detective from noir-world, which he saved once already. He is lazy most of the time, except that moments when ladies involved, or if he is in a good mood, which is usually noir-bad. He lost a lot of people, so he doesn't want to get attached to them.</legend>
     </character>
 
@@ -21,6 +22,7 @@
         <accuracy>5</accuracy>
         <weapon>Cane</weapon>
         <shield>None</shield>
+        <karma>-17</karma>
         <gold>3</gold>
         <legend>Fatty Kathy is a really fat kolkhoz woman. Lost her husband and child, after a werewolf broke into their house at Fullmoon Night. Hates men who brake into her house. Is a member of U.M.H.</legend>
     </character>

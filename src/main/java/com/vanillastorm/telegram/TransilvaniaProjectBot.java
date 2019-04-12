@@ -173,7 +173,12 @@ public class TransilvaniaProjectBot extends TelegramLongPollingBot {
                     creatureStory.updateChapterNumber(oldMessageText);
 
                     if (creatureStory.checkForPhoto()) {
-                        photoMessage = new SendPhoto().setChatId(chat_id).setPhoto(new File(ClassLoader.getSystemClassLoader().getResource(creatureStory.getImageURL()).getFile()));
+                        File photo = new File(ClassLoader.getSystemClassLoader().getResource(creatureStory.getImageURL()).getFile());
+                        String path = photo.getAbsolutePath();
+                        System.out.println(path);
+                        photoMessage = new SendPhoto()
+                                .setChatId(chat_id)
+                                .setPhoto(photo);
                     }
 
                     creatureStory.pickUpTheKeyAndSetItToOpenClosedDoor();

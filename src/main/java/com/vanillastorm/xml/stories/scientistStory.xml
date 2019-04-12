@@ -18,36 +18,79 @@ Restart?
         <text>
     CHAPTER 1
 ---------------
-    3108 year. World of full science progress.
-Scientist Mad came into a room where was a girl.
-- Betty, i didn't get final drug element for your incurable modern for 3108 year disease. There was no S.A.L.O. in Museum of Ancient Stuff... But i grabbed the Vishivanka.
-- What happened with you? Why you are covered in blood? - she said quietly.
-
-    Tell her...
+    3108 year. World of full science progress but very high radiation level.
+Scientist was working on his RotationToPast Machine in his basement. Next to him was his cat in a gas mask too. Doc began to talk to the cat.
+- Hey, Jo, remind me, am i that crazy or animals evolved and really can speak?
+- Eh, yeah, but not all of us, only human's pets and ones who could survive radiation storms. Not everyone got lucky to have a master who made them a gas mask and a breathing device. - sad the cat with an accent similar to Great Britain English.
+- Don't applaud me. - said Doc with a pride.
+- Even if i could, i wouldn't. What take you so long, damn, when you will finish this thing? World won't save itself!
+- Dude, if i finish it, time won't matter.
+- True, but im not immortal...
+After a few moments Doc asked the cat:
+- Hey, You, could you pass me .., wait whaat? how did you fell asleep that fast?
+- Its typical cat feature. What do you need?
         </text>
 
-        <option resultID="0" karma="1">... full museum story.</option>
-        <option resultID="1" karma="-1">... nothing.</option>
+        <option resultID="0" karma="1">Pet the Cat</option>
+        <option resultID="1" karma="-1">Push the Cat</option>
 
         <result nextChapterID="2">
-OK then. Flashback to museum.</result>
-        <result nextChapterID="4">
-- We have no time, Betty, you're dying, so forget...</result>
+*cat purred*
+Now Doc could friendly ask him.</result>
+        <result nextChapterID="3">
+- Why would you do this? - cat now is pissed off.
+*cat hissed(shhhh)*
+Better not to annoy him.</result>
     </chapter>
 
-    <chapter chapterID="2" isFight="true" allowedToLose="true">
+    <chapter chapterID="2">
         <text>
-69 minutes flashbackward.
-
-Mad sneaked into museum from backdoor, stealthed between robo-guards and finally maneged to Hall of 21 century Ukraine. Sadly, he could not find S.A.L.O., and robo-guard found Him.
-After robot shocked scientist... with a shocker, fight began.
-
-to see full characters stats type or press: /charactersStats
+- Cat! Pass me...
         </text>
 
+        <option resultID="0" canBeInactive="true">Screwdriver</option>
+        <option resultID="1" canBeInactive="true">Sandwich flavored pasta</option>
+        <option resultID="2">Atomic battery</option>
+        <option resultID="3" canBeInactive="true">Your mom</option>
+
+        <result nextChapterID="2" >
+- Here you go!- said the cat and with some pushes with its paws screwdriver got to its final destination.
+- Thanks, my Pussy!
+- Wow wow wow, don't say that! C'mon!</result>
+        <result nextChapterID="2">
+- One Sandwich flavored pasta for you and one tuna flavored pasta for me!
+        </result>
+        <result nextChapterID="4">
+- Wait, we don't have any, last battery you took was that one you used to blow up some mutants for fun. I told you not to waste it!</result>
+        <result nextChapterID="2">
+- Realy? That was literally funny thousand years ago!
+        </result>
     </chapter>
 
     <chapter chapterID="3">
+        <text>
+- Cat! Pass me...
+        </text>
+
+        <option resultID="0" canBeInactive="true">Screwdriver</option>
+        <option resultID="1" canBeInactive="true">Sandwich flavored pasta</option>
+        <option resultID="2">Atomic battery</option>
+        <option resultID="3" canBeInactive="true">Your mom</option>
+
+        <result nextChapterID="2" >
+- Aha, sure. Take it by yourself. - replied Cat.
+- You are mad or what? Any way, i don't need it.</result>
+        <result nextChapterID="2">
+Cat took that pasta tube and began fast to squeeze it out and eat it.
+- Sorry, but it was last Sandwich flavored pasta. - Cat mocked Doc and evil laughed.
+- You are a Monster.</result>
+        <result nextChapterID="4">
+- Doc, i'm tired to remind you: you wasted it to blow up mutants. FOR FUN. It was so bad idea, now they hate you more then even i do now.</result>
+        <result nextChapterID="2">
+- WTF. Do you to fight again? Last time we fought you fell in coma for 2 days. So better stop it.</result>
+    </chapter>
+
+    <chapter chapterID="4">
         <text>
 Robots surrounded scientist.
 After knockdown, scientist stood up, took first what he could, it was the Vishivanka, and his last chance was to run to the window.
@@ -65,7 +108,7 @@ Good news: his Creator allows this.
         </result>
     </chapter>
 
-    <chapter chapterID="4">
+    <chapter chapterID="5">
         <text>
 -... but its ok, i will time travel and whatever it takes get S.A.L.O.. Is our time travel machine still somewhere in the garage?
 - Yes, it is in a garage, but how the Vishivanka will help ypu with that?
@@ -80,7 +123,7 @@ Any way he entered the machine and the only thing left was to press ready!
         <result nextChapterID="5">- I'm coming, 21 century Ukraine!</result>
     </chapter>
 
-    <chapter  chapterID="5">
+    <chapter  chapterID="6">
         <text>
 ....time traveling pew pew....
 Time machine sad:

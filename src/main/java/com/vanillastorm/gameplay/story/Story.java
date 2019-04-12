@@ -166,9 +166,7 @@ public class Story {
 
         if (item != null) {
             if (item.equals("Gold")) {
-                System.out.println("gold before: " + hero.getGold());
                 hero.setGold(hero.getGold() + amountOfItem);
-                System.out.println("gold after: " + hero.getGold());
             } else {
                 hero.addItemInBackPack(item, amountOfItem);
             }
@@ -176,7 +174,6 @@ public class Story {
         int chosenOptionNumber = chapters.get(this.chapterNumber).getResultIDByOptionText(message);
 
         updateKarmaPoints(chapters.get(this.chapterNumber).getOption(chosenOptionNumber).getKarmaPoints());
-        System.out.println(hero.getKarma());
         return chapters.get(this.chapterNumber).getAnswerResult(message);
     }
 
@@ -278,7 +275,6 @@ public class Story {
         hero.setMana(hero.getMaxMana());
         hero.setHp(hero.getMaxHp());
         updateKarmaPoints(1);
-        System.out.println(hero.getKarma());
         this.chapterNumber++;
         return loadChapterText();
     }

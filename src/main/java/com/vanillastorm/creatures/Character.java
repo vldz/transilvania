@@ -200,8 +200,8 @@ public class Character {
                 "Shield: " + this.getShieldName() + "(" + this.getDefencePoints() + ")" + "\n" +
                 "Hp: " + this.getHp() + "\n" +
                 "Mana: " + this.getMana() + "\n" +
-                "Weapon: " + this.weaponName() + "\n" +
                 "Karma: " + this.getKarma() + "\n" +
+                "Weapon: " + this.weaponName() + "\n" +
                 "Gold: " + this.getGold() + "\n" +
                 "------------------Legend------------------\n" +
                 "" + this.getLegend() + "\n"+

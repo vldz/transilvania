@@ -43,6 +43,7 @@ public class HallOfFame {
                     character.setAccuracy(Integer.parseInt(characterElement.getElementsByTagName("accuracy").item(0).getTextContent()));
                     character.setWeapon(characterElement.getElementsByTagName("weapon").item(0).getTextContent());
                     character.setMaxDefencePointsByShieldName(characterElement.getElementsByTagName("shield").item(0).getTextContent());
+                    character.setKarma(Integer.parseInt(characterElement.getElementsByTagName("karma").item(0).getTextContent()));
                     character.setGold(Integer.parseInt(characterElement.getElementsByTagName("gold").item(0).getTextContent()));
                     character.setLegend(characterElement.getElementsByTagName("legend").item(0).getTextContent());
 
