@@ -145,7 +145,11 @@ public class Story {
 
     // Story
     public String characterInfo() {
-        return hero.character(); // + "to see statistics type or press: /stats\n";
+        return hero.character();
+    }
+
+    public String villainInfo() {
+        return currentVillain.character();
     }
 
     public String loadChapterText() {
@@ -266,6 +270,10 @@ public class Story {
         return "img/characterPhoto/" + this.characterName + ".png";
     }
 
+    public String villainPhoto() {
+        return "img/villainPhoto/" + currentVillain.getName() + ".png";
+    }
+
     // Fight
     public boolean heroIsAlive() {
         return hero.isAlive();
@@ -302,11 +310,6 @@ public class Story {
             m = "\n" + currentVillain.attack(this.hero);
         }
 
-        return m;
-    }
-
-    public String charactersInfoInFight() {
-        String m = hero.character() + "\n" + currentVillain.character();
         return m;
     }
 

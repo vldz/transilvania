@@ -50,7 +50,7 @@ public class TransilvaniaProjectBot extends TelegramLongPollingBot {
                         );
                 keyboard = charactersKeyboard();
 
-            } else if (message_text.equals("/hero")) {
+            } else if (message_text.equals("/protagonist")) {
                 try {
                     message = new SendMessage()
                             .setChatId(chat_id)
@@ -67,6 +67,31 @@ public class TransilvaniaProjectBot extends TelegramLongPollingBot {
                             .setChatId(chat_id)
                             .setText("Choose character first to see statistics.");
                 }
+
+            } else if (message_text.equals("/antagonist")) {
+                try {
+                    if (creatureStory.checkForFight()) {
+                        message = new SendMessage()
+                                .setChatId(chat_id)
+                                .setText(creatureStory.villainInfo());
+
+//                        String photoUrl = creatureStory.villainPhoto();
+//                        InputStream photo = ClassLoader.getSystemClassLoader().getResourceAsStream(photoUrl);
+//                        photoMessage = new SendPhoto()
+//                                .setChatId(chat_id)
+//                                .setPhoto("-", photo);
+                        keyboard = fightKeyboard();
+                    } else {
+                        message = new SendMessage()
+                                .setChatId(chat_id)
+                                .setText("No villain ... yet.");
+                    }
+                } catch (NullPointerException e) {
+                    message = new SendMessage()
+                            .setChatId(chat_id)
+                            .setText("Choose character to find some villains.");
+                }
+
             } else if (message_text.equals("/description")) {
                 message_text = "Transilvania Project is an adventure text game for your imagination.\n" +
                         "While you progress through one of 3 different thrilling story lines, you have to make crucial choices witch will lead you along your own unique path and story will continue the way you want. \n" +
@@ -86,13 +111,6 @@ public class TransilvaniaProjectBot extends TelegramLongPollingBot {
                         .setText(creatureStory.loadChapterText());
 
                 keyboard = storyKeyboard(creatureStory);
-
-            } else if (message_text.equals("/charactersStats")) {
-                message_text = creatureStory.charactersInfoInFight();
-
-                message = new SendMessage()
-                        .setChatId(chat_id)
-                        .setText(message_text);
 
             } else {
                 if (creatureStory.checkForFight()) {
@@ -136,7 +154,7 @@ public class TransilvaniaProjectBot extends TelegramLongPollingBot {
                         if (!creatureStory.heroIsAlive() && !creatureStory.checkForPossibilityToLose()) {
                             message_text += "\nRestart?";
                             keyboard = restartKeybpard(0);
-                        } else if (!creatureStory.heroIsAlive() && creatureStory.checkForPossibilityToLose()){
+                        } else if (!creatureStory.heroIsAlive() && creatureStory.checkForPossibilityToLose()) {
                             message_text = creatureStory.villainKilledHero();
                             message_text += "\n" + creatureStory.loadNextChapter();
                             keyboard = storyKeyboard(creatureStory);
@@ -183,7 +201,7 @@ public class TransilvaniaProjectBot extends TelegramLongPollingBot {
                     creatureStory.updateChapterNumber(oldMessageText);
 
                     if (creatureStory.checkForPhoto()) {
-                        InputStream  photo = ClassLoader.getSystemClassLoader().getResourceAsStream(creatureStory.getImageURL());
+                        InputStream photo = ClassLoader.getSystemClassLoader().getResourceAsStream(creatureStory.getImageURL());
                         photoMessage = new SendPhoto()
                                 .setChatId(chat_id)
                                 .setPhoto("-", photo);
