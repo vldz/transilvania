@@ -18,15 +18,15 @@ Restart?
         <text>
     CHAPTER 1
 ---------------
-    3108 year. World of full science progress but very high radiation level.
-Scientist was working on his RotationToPast Machine in his basement. Next to him was his cat in a gas mask too. Doc began to talk to the cat.
+    3108 year. World was full of science progress and it caused very high radiation level.
+Scientist was working on his RotationToPast Machine in his basement. Next to him was his cat in a gas mask too. Erwin began to talk to the cat.
 - Hey, Jo, remind me, am i that crazy or animals evolved and really can speak?
-- Eh, yeah, but not all of us, only human's pets and ones who could survive radiation storms. Not everyone got lucky to have a master who made them a gas mask and a breathing device. - sad the cat with an accent similar to Great Britain English.
-- Don't applaud me. - said Doc with a pride.
+- Eh, yeah, but not all of us, only human's pets and ones who could survive radiation storms. Not everyone got lucky to have a master who made them a gas mask and a breathing device. -, said the cat with an accent similar to Great Britain English.
+- Don't applaud me. - said Erwin with a pride.
 - Even if i could, i wouldn't. What take you so long, damn, when you will finish this thing? World won't save itself!
 - Dude, if i finish it, time won't matter.
 - True, but im not immortal...
-After a few moments Doc asked the cat:
+After a few moments scientist asked the cat:
 - Hey, You, could you pass me .., wait whaat? how did you fell asleep that fast?
 - Its typical cat feature. What do you need?
         </text>
@@ -36,10 +36,10 @@ After a few moments Doc asked the cat:
 
         <result nextChapterID="2">
 *cat purred*
-Now Doc could friendly ask him.</result>
+Now scientist could friendly ask him.</result>
         <result nextChapterID="3">
-- Why would you do this? - cat now is pissed off.
 *cat hissed(shhhh)*
+- Why would you do this? -, cat is pissed off now.
 Better not to annoy him.</result>
     </chapter>
 
@@ -54,7 +54,7 @@ Better not to annoy him.</result>
         <option resultID="3" canBeInactive="true">Your mom</option>
 
         <result nextChapterID="2" >
-- Here you go!- said the cat and with some pushes with its paws screwdriver got to its final destination.
+- Here you go! -, said the cat and with some pushes with its paws screwdriver got to its final destination.
 - Thanks, my Pussy!
 - Wow wow wow, don't say that! C'mon!</result>
         <result nextChapterID="2">
@@ -69,7 +69,7 @@ Better not to annoy him.</result>
 
     <chapter chapterID="3">
         <text>
-- Cat! Pass me...
+- Cat! Pass me... FAST!
         </text>
 
         <option resultID="0" canBeInactive="true">Screwdriver</option>
@@ -78,14 +78,14 @@ Better not to annoy him.</result>
         <option resultID="3" canBeInactive="true">Your mom</option>
 
         <result nextChapterID="2" >
-- Aha, sure. Take it by yourself. - replied Cat.
+- Aha, sure. Take it by yourself. -, replied Cat.
 - You are mad or what? Any way, i don't need it.</result>
         <result nextChapterID="2">
 Cat took that pasta tube and began fast to squeeze it out and eat it.
-- Sorry, but it was last Sandwich flavored pasta. - Cat mocked Doc and evil laughed.
+- Sorry, but it was last Sandwich flavored pasta. - Cat mocked Erwin and evil laughed.
 - You are a Monster.</result>
         <result nextChapterID="4">
-- Doc, i'm tired to remind you: you wasted it to blow up mutants. FOR FUN. It was so bad idea, now they hate you more then even i do now.</result>
+- Erwin Josef, i'm tired to remind you: you wasted it to blow up mutants. FOR FUN. It was so bad idea, now they hate you more then even i do now.</result>
         <result nextChapterID="2">
 - WTF. Do you to fight again? Last time we fought you fell in coma for 2 days. So better stop it.</result>
     </chapter>

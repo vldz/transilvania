@@ -205,7 +205,7 @@ public class Character {
                 "Gold: " + this.getGold() + "\n" +
                 "------------------Legend------------------\n" +
                 "" + this.getLegend() + "\n"+
-                "--------------Character INFO--------------\n";
+                "-------------Character  Photo-------------\n";
     }
 
     public boolean isAlive() {

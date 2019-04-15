@@ -9,8 +9,6 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMar
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -47,17 +45,28 @@ public class TransilvaniaProjectBot extends TelegramLongPollingBot {
                         .setChatId(chat_id)
                         .setText("Choose story:" +
                                 "\n * Detective Leń noir story." +
-                                "\n * Scientist Mad mathematical story." +
+                                "\n * Scientist Erwin Josef future-saving story." +
                                 "\n * Ronin Nona Me samurai story."
                         );
                 keyboard = charactersKeyboard();
 
-            } else if (message_text.equals("/stats")) {
-                message = new SendMessage()
-                        .setChatId(chat_id)
-                        .setText(creatureStory.characterInfo());
+            } else if (message_text.equals("/hero")) {
+                try {
+                    message = new SendMessage()
+                            .setChatId(chat_id)
+                            .setText(creatureStory.characterInfo());
 
-                keyboard = storyKeyboard(creatureStory);
+                    String photoUrl = creatureStory.characterPhoto();
+                    InputStream photo = ClassLoader.getSystemClassLoader().getResourceAsStream(photoUrl);
+                    photoMessage = new SendPhoto()
+                            .setChatId(chat_id)
+                            .setPhoto("-", photo);
+                    keyboard = storyKeyboard(creatureStory);
+                } catch (NullPointerException e) {
+                    message = new SendMessage()
+                            .setChatId(chat_id)
+                            .setText("Choose character first to see statistics.");
+                }
             } else if (message_text.equals("/description")) {
                 message_text = "Transilvania Project is an adventure text game for your imagination.\n" +
                         "While you progress through one of 3 different thrilling story lines, you have to make crucial choices witch will lead you along your own unique path and story will continue the way you want. \n" +
@@ -68,13 +77,13 @@ public class TransilvaniaProjectBot extends TelegramLongPollingBot {
                         .setChatId(chat_id)
                         .setText(message_text);
 
-            } else if (message_text.equals("Detective Leń") || message_text.equals("Scientist Mad") || message_text.equals("Ronin Nona Me")) {
+            } else if (message_text.equals("Detective Leń") || message_text.equals("Erwin Josef") || message_text.equals("Ronin Nona Me")) {
                 creatureStory.setStory(message_text);
                 creatureStory.setChapterNumber(1);
 
                 message = new SendMessage()
                         .setChatId(chat_id)
-                        .setText(creatureStory.characterInfo() + creatureStory.loadChapterText());
+                        .setText(creatureStory.loadChapterText());
 
                 keyboard = storyKeyboard(creatureStory);
 
@@ -175,11 +184,9 @@ public class TransilvaniaProjectBot extends TelegramLongPollingBot {
 
                     if (creatureStory.checkForPhoto()) {
                         InputStream  photo = ClassLoader.getSystemClassLoader().getResourceAsStream(creatureStory.getImageURL());
-                        //String path = photo.getAbsolutePath();
-                        //System.out.println(path);
                         photoMessage = new SendPhoto()
                                 .setChatId(chat_id)
-                                .setPhoto("ss", photo);
+                                .setPhoto("-", photo);
                     }
 
                     creatureStory.pickUpTheKeyAndSetItToOpenClosedDoor();
@@ -294,7 +301,7 @@ public class TransilvaniaProjectBot extends TelegramLongPollingBot {
         keyboard.add(row);
 
         row = new KeyboardRow();
-        row.add("Scientist Mad");
+        row.add("Erwin Josef");
         keyboard.add(row);
 
         row = new KeyboardRow();

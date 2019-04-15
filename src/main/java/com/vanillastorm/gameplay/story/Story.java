@@ -123,7 +123,7 @@ public class Story {
     public void setStory(String characterName) {
         if (characterName.equals("Detective Leń")) {
             characterName = "detective";
-        } else if (characterName.equals("Scientist Mad")) {
+        } else if (characterName.equals("Erwin Josef")) {
             characterName = "scientist";
         } else {
             characterName = "ronin";
@@ -145,7 +145,7 @@ public class Story {
 
     // Story
     public String characterInfo() {
-        return hero.character() + "to see statistics type or press: /stats\n";
+        return hero.character(); // + "to see statistics type or press: /stats\n";
     }
 
     public String loadChapterText() {
@@ -260,6 +260,10 @@ public class Story {
 
     public void updateKarmaPoints(int amountOfKarma) {
         this.hero.setKarma(hero.getKarma() + amountOfKarma);
+    }
+
+    public String characterPhoto() {
+        return "img/characterPhoto/" + this.characterName + ".png";
     }
 
     // Fight

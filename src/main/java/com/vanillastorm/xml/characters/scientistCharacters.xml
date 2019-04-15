@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <characters>
-    <character name="Scientist Mad" characterID = "0">
+    <character name="Erwin Josef" characterID = "0">
         <hp>100</hp>
         <mana>15</mana>
         <level>1</level>
@@ -11,7 +11,7 @@
         <shield>Lab coat</shield>
         <karma>2</karma>
         <gold>5</gold>
-        <legend>Scientist Mad is a scientist from future world which recovers after apocalypses. Obsessed with his wife life saving. Not very strong but compensates this with his mind.</legend>
+        <legend>Erwin Josef is a scientist from apocalyptic overpolluted with radiation world. Tries to change future by traveling back in time. Not very tough but compensates it with his inventive mind.</legend>
     </character>
 
     <character name="Unbeatable Robo-guard" characterID = "1">
