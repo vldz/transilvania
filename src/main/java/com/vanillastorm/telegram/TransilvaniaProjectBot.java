@@ -75,11 +75,11 @@ public class TransilvaniaProjectBot extends TelegramLongPollingBot {
                                 .setChatId(chat_id)
                                 .setText(creatureStory.villainInfo());
 
-//                        String photoUrl = creatureStory.villainPhoto();
-//                        InputStream photo = ClassLoader.getSystemClassLoader().getResourceAsStream(photoUrl);
-//                        photoMessage = new SendPhoto()
-//                                .setChatId(chat_id)
-//                                .setPhoto("-", photo);
+                        String photoUrl = creatureStory.villainPhoto();
+                        InputStream photo = ClassLoader.getSystemClassLoader().getResourceAsStream(photoUrl);
+                        photoMessage = new SendPhoto()
+                                .setChatId(chat_id)
+                                .setPhoto("-", photo);
                         keyboard = fightKeyboard();
                     } else {
                         message = new SendMessage()

@@ -271,7 +271,9 @@ public class Story {
     }
 
     public String villainPhoto() {
-        return "img/villainPhoto/" + currentVillain.getName() + ".png";
+        String villainName = currentVillain.getName().toLowerCase().replaceAll("\\s", "");
+        System.out.println(villainName);
+        return "img/villainPhoto/" + villainName + ".png";
     }
 
     // Fight
